@@ -1,0 +1,16 @@
+common: &common
+  adapter: postgresql
+  username: js_games
+  password: strongpass
+
+development:
+  <<: *common
+  database: js_games_dev
+
+test:
+  <<: *common
+  database: js_games_test
+
+production:
+  <<: *common
+  database: js_games_prod
