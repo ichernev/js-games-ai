@@ -1,0 +1,10 @@
+get mercurial
+  yum install mercurial tortoisehg
+
+create .hgrc
+  [ui]
+  username = Firstname Lastname <email@address.com>
+  verbose = True
+
+clone repo (this may change in the future)
+  hg clone http://iskren.info:3001 js_games
