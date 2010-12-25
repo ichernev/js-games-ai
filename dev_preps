@@ -44,7 +44,10 @@ make sure you have the following ruby gems
 try to connect to the database
   rake db:migrate # run from the project root
 
-run server
+setup sass watch (run from separate terminal)
+  sass --watch public/stylesheets/sass:public/stylesheets
+
+run server (run from separate terminal)
   rails server
 
 check it out
