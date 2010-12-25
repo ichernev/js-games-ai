@@ -6,5 +6,46 @@ create .hgrc
   username = Firstname Lastname <email@address.com>
   verbose = True
 
-clone repo (this may change in the future)
-  hg clone http://iskren.info:3001 js_games
+copy own public key to hgroot@iskren.info
+  scp ~/.ssh/id_rsa.pub hgroot@iskren.info:~/.ssh/yourname.id_rsa.pub
+
+cat id_rsa.pub to authorized_keys
+  ssh hgroot@iskren.info
+  cd .ssh
+  cat yourname.id_rsa.pub >> authorized_keys
+
+clone repo
+  hg clone ssh://hgroot@iskren.info/js_games js_games
+
+install postgresql
+  yum install postgresql-server postgresql-devel
+
+initialize database
+  service postgresql initdb
+
+edit /var/lib/pgsql/data/pg_hba.conf
+  replace ident with trust in the bottom 3 lines (not counting comments)
+
+start postgres
+  service postgresql start
+
+prepare db user
+  su postgres # with root
+  psql -c "create role js_games with createdb login password 'strongpass'"
+  psql -c "create database js_games_dev owner js_games"
+  psql -c "create database js_games_test owner js_games"
+  psql -c "create database js_games_prod owner js_games"
+
+make sure you have the following ruby gems
+  gem install actionpack activemodel activerecord activeresource activesupport arel builder bundler erubis haml haml-rails i18n mail mime-types pg polyglot postgres rack rack-mount rack-test rails railties rake thor treetop tzinfo
+
+  !! # run it twice just in case
+
+try to connect to the database
+  rake db:migrate # run from the project root
+
+run server
+  rails server
+
+check it out
+  http://localhost:3000 -> you should see a green big "indexxx" sign

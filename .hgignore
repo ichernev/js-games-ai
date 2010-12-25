@@ -1,6 +1,11 @@
+syntax: glob
+
 .bundle
-db/*.sqlite3
-log/*.log
-tmp/*
 .*.swp
+tmp
 .sass-cache
+
+syntax: regexp
+
+^log/.*\.log$
+^db/.*\.sqlite3$
