@@ -1,0 +1,15 @@
+!!! XML
+!!!
+%html
+  %head
+    %title JsGames
+    = stylesheet_link_tag :all
+    = javascript_include_tag :test1
+    = csrf_meta_tag
+  %body
+    %p.notice= notice
+    %p.alert= alert
+    %ul.user-main-ops
+      %li= render 'devise/menu/registration_items'
+      %li= render 'devise/menu/login_items'
+    = yield

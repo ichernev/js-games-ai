@@ -1,4 +1,4 @@
--- user login/logout
+++ user login/logout
 -- include jquery (see what will be needed)
 -- implement basic H function
 -- implement Event/EventTarget
