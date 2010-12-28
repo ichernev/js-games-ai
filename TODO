@@ -1,0 +1,12 @@
+-- user login/logout
+-- include jquery (see what will be needed)
+-- implement basic H function
+-- implement Event/EventTarget
+-- check how to implement inheritance in js
+-- check how to make unit tests in js
+-- base game class
+-- tictactoe class
+-- base user class
+-- tictactoe localuser class
+-- ui board class
+-- multiple logins (to support 2 users on the same PC)
