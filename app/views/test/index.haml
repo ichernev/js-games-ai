@@ -1,0 +1,16 @@
+!!! XML
+!!!
+%html
+  %head
+    %title JsGames Test Page
+    = stylesheet_link_tag :all
+    = javascript_include_tag :lib
+    = javascript_include_tag 'lib/qunit.js'
+    = javascript_include_tag :src
+    = javascript_include_tag :test
+    = csrf_meta_tag
+  %body
+    %h1#qunit-header QUnit Example
+    %h2#qunit-banner
+    %h2#qunit-userAgent
+    %ol#qunit-tests
