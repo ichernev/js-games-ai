@@ -1,7 +1,7 @@
 ++ user login/logout
 ++ include jquery (see what will be needed)
 ++ check how to make unit tests in js
--- add linting howto
+++ add linting howto
 -- implement basic H function
 -- implement Event/EventTarget
 -- check how to implement inheritance in js
