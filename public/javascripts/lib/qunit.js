@@ -450,7 +450,8 @@ var config = {
 // Expose the API as global variables, unless an 'exports'
 // object exists, in that case we assume we're in CommonJS
 if ( typeof exports === "undefined" || typeof require === "undefined" ) {
-	extend(window, QUnit);
+    // Iskren: I don't want all these names in the global scope.
+	// extend(window, QUnit);
 	window.QUnit = QUnit;
 } else {
 	extend(exports, QUnit);

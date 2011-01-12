@@ -1,8 +1,8 @@
 (function() {
   
-  JSG.Util = {};
+  var U = JSG.Util = {};
 
-  JSG.Util.foreach = function(seq, f) {
+  U.foreach = function(seq, f) {
     var res;
     if ($.isArray(seq)) {
       for (var i = 0, l = seq.length; i < l; ++i) {
@@ -22,6 +22,20 @@
       }
     }
     return res;
+  };
+
+  U.mix = function(a, b) {
+    U.foreach(b, function(val, key) {
+      a[key] = val;
+    });
+    return a;
+  };
+
+  // Creates a new object with prototype proto.
+  U.obj = function(proto) {
+    var F = function() {};
+    F.prototype = proto;
+    return new F;
   };
 
 }());
