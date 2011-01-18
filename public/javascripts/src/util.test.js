@@ -56,4 +56,40 @@
       Q.deepEqual(U.mix({key: "value"}, {key2: "value2"}), {key: "value", key2: "value2"});
     });
   });
+
+  JSG.Test.add(function() {
+    Q.module("Util-extend");
+    Q.test("A inherit B", function () {
+      var A = function() {
+        this.ca = true;
+      };
+      U.mix(A.prototype, {
+        foo:
+        function(bar) {
+          this.a = bar;
+        }
+      });
+
+      var B = function() {
+        B.superclass.constructor.call(this);
+        this.cb = true;
+      };
+      U.extend(B, A);
+      U.mix(B.prototype, {
+        foo:
+        function(bar) {
+          this.b = bar;
+          B.superclass.foo.call(this, bar + 1);
+        }
+      });
+
+      var b = new B();
+      Q.ok(b.ca);
+      Q.ok(b.cb);
+      b.foo(5);
+      Q.strictEqual(b.a, 6);
+      Q.strictEqual(b.b, 5);
+    });
+  });
+               
 }());
