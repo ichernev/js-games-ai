@@ -33,7 +33,8 @@ module JsGames
     # JavaScript files you want as :defaults (application.js is always included).
     config.action_view.javascript_expansions[:defaults] = []
     config.action_view.javascript_expansions[:lib] = [
-      'lib/jquery-1.4.4.js'
+      'lib/jquery-1.4.4.js',
+      'lib/jquery.log.js'
     ]
     config.action_view.javascript_expansions[:src] = [
       'src/init.js',
