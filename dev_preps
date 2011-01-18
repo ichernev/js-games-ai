@@ -70,3 +70,11 @@ prepare the vim plugin for jsl (http://www.vim.org/scripts/script.php?script_id=
 prepare config file for jsl
   cp .jsl.conf ~
   modify ~/.vim/plugin/javaScriptLint.vim (line 19) to have -conf /home/<username>/.jsl.conf in the beginning of the options string
+
+setup node.js
+  go to http://nodejs.org/, download and unpack the latest stable tar.gz
+  # yum install -y openssl-devel
+  $ ./configure --prefix="/opt/node"    # change installation destination
+  $ make
+  # make install
+  $ /opt/node/bin/node test/unit/hello_world_js_server.js  # run a simple server to make sure all is ok
