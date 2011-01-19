@@ -79,3 +79,16 @@ setup node.js
   $ make
   # make install
   $ /opt/node/bin/node test/unit/hello_world_js_server.js  # run a simple server to make sure all is ok
+  # chown -R $USER:$USER /opt/node # take ownership of all node files
+
+setup npm
+  download npm source, untar, cd
+  $ echo 'export PATH=$PATH:/opt/node/bin' >> ~/.bashrc'   # otherwise npm wont work
+  $ . ~/.bashrc
+  $ make
+
+setup socket.io
+  $ npm install socket.io
+  test it by:
+  $ node test/unit/socket_server.js
+  point a browser to test/unit/socket_client.html and check its console
