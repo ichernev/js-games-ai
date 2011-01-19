@@ -91,5 +91,59 @@
       Q.strictEqual(b.b, 5);
     });
   });
+
+  JSG.Test.add(function() {
+    Q.module("Util-erase");
+    Q.test("erase present element", function() {
+      Q.expect(6);
+      var arr = [1, "ala", true];
+      Q.ok(U.erase(arr, "ala"));
+      Q.deepEqual(arr, [1, true]);
+      Q.ok(U.erase(arr, 1));
+      Q.deepEqual(arr, [true]);
+      Q.ok(U.erase(arr, true));
+      Q.deepEqual(arr, []);
+    });
+
+    Q.test("erase nonexistant element", function() {
+      var arr = [1, "ala", true];
+      Q.ok(!U.erase(arr, 10));
+      Q.deepEqual(arr, [1, "ala", true]);
+    });
+  });
+
+  JSG.Test.add(function() {
+    Q.module("Util-Events");
+    Q.test("simple fire", function() {
+      var A = function() {
+        this.ev = new U.Event();
+      };
+      U.mix(A.prototype, {
+        fire:
+        function() {
+          this.ev.fire("foo", 5, "five");
+        }
+      });
+
+      var B = function(a) {
+        this.a = a;
+        this.subscribe(this.a);
+      };
+      U.mix(B.prototype, U.EventTarget);
+      U.mix(B.prototype, {
+        foo:
+        function() {
+          Q.strictEqual(arguments.length, 2);
+          Q.strictEqual(arguments[0], 5);
+          Q.strictEqual(arguments[1], "five");
+        }
+      });
+
+      Q.expect(3);
+      var a = new A();
+      var b = new B(a);
+      a.fire();
+    });
+  });
                
 }());

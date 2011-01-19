@@ -57,4 +57,20 @@
     return r;
   };
 
+  U.toA = function(args) {
+    return Array.prototype.slice.call(args, 0);
+  };
+
+  U.erase = function(arr, obj) {
+    var idx = U.foreach(arr, function(el, i) {
+      if (el === obj) { return i; }
+    });
+    if (idx !== undefined) {
+      // Erasing that index.
+      arr.splice(idx, 1);
+      return true;
+    }
+    return false;
+  };
+
 }());
