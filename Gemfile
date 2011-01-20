@@ -11,6 +11,7 @@ gem "haml"
 gem "devise" # user authentication gem
 gem "hpricot" # this is needed by devise view generation in haml
 gem "ruby_parser" # same here
+gem "foreigner"   # foreign key constraints in migrations
 
 # Use unicorn as the web server
 # gem 'unicorn'

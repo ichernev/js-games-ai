@@ -10,16 +10,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101228213443) do
+ActiveRecord::Schema.define(:version => 20110119225030) do
+
+  create_table "game_instances", :force => true do |t|
+    t.integer "game_id"
+    t.date    "begin"
+    t.integer "duration"
+  end
+
+  create_table "games", :force => true do |t|
+    t.string "name"
+    t.string "display_name"
+  end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                             :default => "", :null => false
-    t.string   "encrypted_password", :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                     :default => "", :null => false
+    t.string   "email",                             :default => "",   :null => false
+    t.string   "encrypted_password", :limit => 128, :default => "",   :null => false
+    t.string   "password_salt",                     :default => "",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_human",                          :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+
+  add_foreign_key "game_instances", "games", :name => "game_instances_game_id_fk"
 
 end
