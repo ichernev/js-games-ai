@@ -1,27 +1,25 @@
 pesho:
   email: pesho@microsoft.com
-  is_human: false
+  game: rocks
   #password: psss
   encrypted_password: $2a$10$L5G89EN/eVVcTY9E0P54QeEYM/9omSmlC3VlVdmDNkTN4GDi.eUoO
   password_salt: $2a$10$L5G89EN/eVVcTY9E0P54Qe
 
 inna:
   email: amycrazystar@galaxy.org
-  is_human: true
   #password: word_pass
   encrypted_password: $2a$10$FrM8W49ARexGPN7ziXSyyObj.m0tX2FpC/nsyhRX1xdGUcWs9Hj0i
   password_salt: $2a$10$FrM8W49ARexGPN7ziXSyyO
 
 mark:
   email: un_mark@the_company.uk
-  is_human: true
   #password: mark_me_or_not
   encrypted_password: $2a$10$w2BewzBQF4gBO7ZnvK5LC.9jU930tU7q3JLoKefaMyLTb88jnIbze 
   password_salt: $2a$10$w2BewzBQF4gBO7ZnvK5LC.
 
 tripio:
   email: kib@org.org
-  is_human: false
+  game: tic_tac_toe
   #password: kiborg
   encrypted_password: $2a$10$gJkdtRWG1EsTxmgtsQShW.kPzet/glmwKTC5ZQmezvjk7bfVcJHDe
   password_salt: $2a$10$gJkdtRWG1EsTxmgtsQShW.

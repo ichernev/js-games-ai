@@ -1,7 +1,7 @@
 tic_tac_toe:
-  name: tic_tac_toe
+  name: TicTacToe
   display_name: Tic Tac Toe
 
 rocks:
-  name: rocks
+  name: Rocks
   display_name: Rocks collection

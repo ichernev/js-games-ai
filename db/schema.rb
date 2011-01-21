@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
   end
 
   create_table "users", :force => true do |t|
-    t.string  "email",                             :default => "",   :null => false
-    t.string  "encrypted_password", :limit => 128, :default => "",   :null => false
-    t.string  "password_salt",                     :default => "",   :null => false
-    t.boolean "is_human",                          :default => true
+    t.integer "game_id"
+    t.string  "email",                             :default => "", :null => false
+    t.string  "encrypted_password", :limit => 128, :default => "", :null => false
+    t.string  "password_salt",                     :default => "", :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -43,5 +43,7 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
 
   add_foreign_key "game_players", "game_instances", :name => "game_players_game_instance_id_fk"
   add_foreign_key "game_players", "users", :name => "game_players_player_id_fk", :column => "player_id"
+
+  add_foreign_key "users", "games", :name => "users_game_id_fk"
 
 end

@@ -6,6 +6,7 @@ class CreateGameInstances < ActiveRecord::Migration
       t.datetime :began, :null => false
       t.integer :duration, :default => 0
     end
+
     add_foreign_key(:game_instances, :games)
   end
 
