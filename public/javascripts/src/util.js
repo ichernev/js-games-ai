@@ -2,6 +2,8 @@
   
   var U = JSG.Util = {};
 
+  // Use this function to iterate over arrays and hashes.
+  // The first argument passed to f is the value, the second is the key (index).
   U.foreach = function(seq, f) {
     var res;
     if ($.isArray(seq)) {
@@ -57,10 +59,14 @@
     return r;
   };
 
+  // Use this function to convert arguments to a real js array.
   U.toA = function(args) {
     return Array.prototype.slice.call(args, 0);
   };
 
+  // Erase the given obj from arr.
+  // -- only the first occurrence is erased
+  // -- returns false if nothing was erased
   U.erase = function(arr, obj) {
     var idx = U.foreach(arr, function(el, i) {
       if (el === obj) { return i; }
@@ -71,6 +77,16 @@
       return true;
     }
     return false;
+  };
+
+  // Returns weather the argument is a string object.
+  U.isString = function(str) {
+    return typeof str === "string";
+  };
+
+  // Returns weather the argument is a DOM object.
+  U.isDOM = function(dom) {
+    return dom.nodeType !== undefined && dom.nextSibling !== undefined;
   };
 
 }());
