@@ -93,6 +93,12 @@ setup socket.io
   $ node test/unit/socket_server.js
   point a browser to test/unit/socket_client.html and check its console
 
+JSON in node.js
+  $ npm install json
+  test it by:
+  $ node node_js/echo_server.js
+  point a browser to localhost:3005?foo=bar
+
 open psql from the project root
   $ psql -U js_games -d js_games_dev
 
