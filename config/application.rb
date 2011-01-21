@@ -39,11 +39,13 @@ module JsGames
     config.action_view.javascript_expansions[:src] = [
       'src/init.js',
       'src/util.js',
-      'src/event.js'
+      'src/event.js',
+      'src/html.js'
     ]
     config.action_view.javascript_expansions[:test] = [
       'src/pre.test.js',
       'src/util.test.js',
+      'src/html.test.js',
       'src/post.test.js'
     ]
 
