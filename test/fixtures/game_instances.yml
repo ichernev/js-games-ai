@@ -1,14 +1,14 @@
 first:
   game: rocks
-  begin: '2009-06-09T10:50:13-0700'
+  began: '2009-06-09T10:50:13-0700'
   duration: 92
 
 second:
   game: tic_tac_toe
-  begin: <%= Date.today %>
+  began: <%= Time.now %>
   duration: 123
 
 third:
   game: rocks
-  begin: <%= 5.day.ago %>
+  began: <%= 5.day.ago %>
   duration: 14

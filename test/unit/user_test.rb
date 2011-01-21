@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test "unique email" do
+    tripio_email = users(:tripio).email
+    u = User.new(:email => tripio_email, :password => "pass")
+    assert_raise(ActiveRecord::RecordNotUnique) { u.save }
   end
 end

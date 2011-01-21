@@ -100,3 +100,8 @@ run all fixtures as superuser
   sudo su postgres
   psql
   alter user js_games superuser ;
+
+test rails code
+  rake db:test:prepare    # prepare once the db for ruby testing
+  ruby unit/user_test.rb  # from test/ directory; run multiple times
+  rake test:units         # or make rake execute all unit tests; slower

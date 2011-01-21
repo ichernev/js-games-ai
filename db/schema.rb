@@ -13,30 +13,28 @@
 ActiveRecord::Schema.define(:version => 20110121155824) do
 
   create_table "game_instances", :force => true do |t|
-    t.integer "game_id"
-    t.date    "begin"
-    t.integer "duration"
+    t.integer  "game_id"
+    t.datetime "began",                   :null => false
+    t.integer  "duration", :default => 0
   end
 
   create_table "game_players", :force => true do |t|
     t.integer "game_instance_id"
     t.integer "player_id"
     t.integer "play_order"
-    t.integer "score"
+    t.integer "score",            :default => 0
   end
 
   create_table "games", :force => true do |t|
-    t.string "name"
+    t.string "name",         :null => false
     t.string "display_name"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                             :default => "",   :null => false
-    t.string   "encrypted_password", :limit => 128, :default => "",   :null => false
-    t.string   "password_salt",                     :default => "",   :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "is_human",                          :default => true
+    t.string  "email",                             :default => "",   :null => false
+    t.string  "encrypted_password", :limit => 128, :default => "",   :null => false
+    t.string  "password_salt",                     :default => "",   :null => false
+    t.boolean "is_human",                          :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

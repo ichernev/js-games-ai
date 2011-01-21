@@ -4,7 +4,7 @@ class CreateGamePlayers < ActiveRecord::Migration
       t.references :game_instance
       t.integer :player_id
       t.integer :play_order
-      t.integer :score
+      t.integer :score, :default => 0
     end
     add_foreign_key(:game_players, :game_instances)
     add_foreign_key(:game_players, :users, :column => :player_id)

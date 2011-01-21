@@ -3,8 +3,8 @@ class CreateGameInstances < ActiveRecord::Migration
     create_table :game_instances do |t|
       t.references :game
 
-      t.date :begin
-      t.integer :duration
+      t.datetime :began, :null => false
+      t.integer :duration, :default => 0
     end
     add_foreign_key(:game_instances, :games)
   end
