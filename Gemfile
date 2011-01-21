@@ -6,12 +6,13 @@ gem 'rails', '3.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # gem 'sqlite3-ruby', :require => 'sqlite3'
-gem "pg"
-gem "haml"
-gem "devise" # user authentication gem
-gem "hpricot" # this is needed by devise view generation in haml
-gem "ruby_parser" # same here
-gem "foreigner"   # foreign key constraints in migrations
+gem 'pg'
+gem 'haml'
+gem 'devise'          # user authentication
+gem 'hpricot'         # this is needed by devise view generation in haml
+gem 'ruby_parser'     # same here
+gem 'foreigner'       # foreign key constraints in migrations
+gem 'json'
 
 # Use unicorn as the web server
 # gem 'unicorn'
