@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password
+  has_many :game_players
 end

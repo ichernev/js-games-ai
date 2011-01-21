@@ -1,1 +1,14 @@
---- !omap
+first:
+  game: rocks
+  begin: '2009-06-09T10:50:13-0700'
+  duration: 92
+
+second:
+  game: tic_tac_toe
+  begin: <%= Date.today %>
+  duration: 123
+
+third:
+  game: rocks
+  begin: <%= 5.day.ago %>
+  duration: 14

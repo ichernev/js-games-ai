@@ -1,9 +1,7 @@
---- !omap
+tic_tac_toe:
+  name: tic_tac_toe
+  display_name: Tic Tac Toe
 
-- tic_tac_toe:
-    name: tic_tac_toe
-    display_name: Tic Tac Toe
-
-- rocks:
-    name: rocks
-    display_name: Rocks collection
+rocks:
+  name: rocks
+  display_name: Rocks collection

@@ -10,12 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110119225030) do
+ActiveRecord::Schema.define(:version => 20110121155824) do
 
   create_table "game_instances", :force => true do |t|
     t.integer "game_id"
     t.date    "begin"
     t.integer "duration"
+  end
+
+  create_table "game_players", :force => true do |t|
+    t.integer "game_instance_id"
+    t.integer "player_id"
+    t.integer "play_order"
+    t.integer "score"
   end
 
   create_table "games", :force => true do |t|
@@ -35,5 +42,8 @@ ActiveRecord::Schema.define(:version => 20110119225030) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
   add_foreign_key "game_instances", "games", :name => "game_instances_game_id_fk"
+
+  add_foreign_key "game_players", "game_instances", :name => "game_players_game_instance_id_fk"
+  add_foreign_key "game_players", "users", :name => "game_players_player_id_fk", :column => "player_id"
 
 end
