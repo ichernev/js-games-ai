@@ -146,4 +146,25 @@
     });
   });
                
+  JSG.Test.add(function() {
+    Q.module("Util-misc");
+    Q.test("isString", function() {
+      Q.ok(U.isString(""));
+      Q.ok(U.isString("foo"));
+      Q.ok(!U.isString({}));
+      Q.ok(!U.isString({foo: "foo"}));
+      Q.ok(!U.isString([]));
+      Q.ok(!U.isString(["foo"]));
+      Q.ok(!U.isString(!function() {}));
+    });
+    Q.test("isDOM", function() {
+      Q.ok(U.isDOM(document.createTextNode("foo is the new bar")));
+      Q.ok(U.isDOM(document.createElement("div")));
+      Q.ok(!U.isDOM($(document.createElement("div"))));
+      Q.ok(!U.isDOM([]));
+      Q.ok(!U.isDOM({}));
+      Q.ok(!U.isDOM("foo"));
+      Q.ok(!U.isDOM(function() {}));
+    });
+  });
 }());
