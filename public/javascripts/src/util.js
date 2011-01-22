@@ -79,6 +79,14 @@
     return false;
   };
 
+  U.startsWith = function(str, pref) {
+    return str.slice(0, pref.length) === pref;
+  };
+
+  U.endsWith = function(str, suff) {
+    return str.slice(str.length - suff.length) === suff;
+  };
+
   // Returns weather the argument is a string object.
   U.isString = function(str) {
     return typeof str === "string";

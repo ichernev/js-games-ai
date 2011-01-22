@@ -148,6 +148,23 @@
                
   JSG.Test.add(function() {
     Q.module("Util-misc");
+    Q.test("startsWith", function() {
+      Q.ok(U.startsWith("alabala", "ala"));
+      Q.ok(U.startsWith("alabala", ""));
+      Q.ok(U.startsWith("alabala", "alabala"));
+      Q.ok(!U.startsWith("alabala", "alabala "));
+      Q.ok(!U.startsWith("", "ala"));
+      Q.ok(!U.startsWith("ala", "ba"));
+    });
+    Q.test("endsWith", function() {
+      Q.ok(U.endsWith("alabala", ""));
+      Q.ok(U.endsWith("alabala", "a"));
+      Q.ok(U.endsWith("alabala", "la"));
+      Q.ok(U.endsWith("alabala", "alabala"));
+      Q.ok(!U.endsWith("alabala", "zala"));
+      Q.ok(!U.endsWith("alabala", " alabala"));
+      Q.ok(!U.endsWith("", "alabala"));
+    });
     Q.test("isString", function() {
       Q.ok(U.isString(""));
       Q.ok(U.isString("foo"));
