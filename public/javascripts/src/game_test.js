@@ -15,30 +15,62 @@
   JSG.Temp.game_test_init = function() {
     var root = H("jsg-main");
     H.empty(root);
-    var button = H.button("ai"), result = H.pre();
+    var result = H.pre();
     var printer = response_handler(result);
-    $(button).bind("click", function() {
-      $.getJSON("http://localhost:3005/game/name/ai.json", printer);
-    });
-    root.appendChild(button);
-    button = H.button("new");
-    $(button).bind("click", function() {
-      // $.post(
-      //     "http://localhost:3005/game/name/new.json",
-      //     // { players: JSON.stringify([1,2,3]) },
-      //     "some-raw_data",
-      //     printer,
-      //     "json");
-      $.ajax({
-        type: 'POST',
-        url: "http://localhost:3005/game/name/new.json",
-        dataType: "json",
-        data: { players: JSON.stringify([1234, 3456]) },
-        // data: "ala=bala",
-        success: printer
-      });
-    });
-    root.appendChild(button);
-    root.appendChild(result);
+    root.appendChild(H([
+      H.button("ai", {
+        onclick: function() {
+          $.getJSON("http://localhost:3005/game/name/ai.json", printer);
+        }
+      }),
+      H.button("new", {
+        onclick: function() {
+          $.ajax({
+            type: 'POST',
+            url: "http://localhost:3005/game/name/new.json",
+            dataType: "json",
+            data: { players: JSON.stringify([1234, 3456]) },
+            success: printer
+          });
+        }
+      }),
+      H.button("play", {
+        onclick: function() {
+          $.getJSON(
+            "http://localhost:3005/game/play.json",
+            {
+              instance_id: "1234"
+            },
+            printer);
+        }
+      }),
+      H.button("finish", {
+        onclick: function() {
+          $.ajax({
+            type: "POST",
+            url: "http://localhost:3005/game/finish.json",
+            dataType: "json",
+            success: printer,
+            data: {
+              game_instance_info: JSON.stringify({
+                instance_id: 1234,
+                game_result: [
+                  {
+                    player_id: 5,
+                    play_order: 1,
+                    score: 1
+                  }, {
+                    player_id: 10,
+                    play_order: 0,
+                    score: 0
+                  }
+                ]
+              })
+            }
+          });
+        }
+      }),
+      result
+    ]));
   };
 }());
