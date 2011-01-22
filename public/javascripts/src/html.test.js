@@ -27,6 +27,30 @@
       Q.strictEqual(jq.css("width"), "50px");
       Q.strictEqual(jq.css("height"), "50px");
     });
+    Q.test("object with event handlers", function() {
+      Q.expect(2);
+      var div = H.div({
+          onclick: function(e) {
+            Q.ok(true);
+          }
+      }),
+          jq = $(div), Obj, obj;
+      jq.trigger("click");
+
+      Obj = function() { this.a = "a"; };
+      U.mix(Obj.prototype, {
+        handler: function(e) {
+          Q.strictEqual(this.a, "a");
+        }
+      });
+      obj = new Obj();
+      div = H.div({
+          context: obj,
+          onclick: obj.handler
+      });
+      jq = $(div);
+      jq.trigger("click");
+    });
     Q.test("object with text node", function() {
       var str = "foo is <div><span>hoo</span></div> ><>> &lt;",
           div = H.div(str),

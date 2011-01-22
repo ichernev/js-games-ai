@@ -52,8 +52,11 @@
           dom.appendChild(arg);
         } else {
           // Assume arg is a hash of attributes.
+          var context = null;
           U.foreach(arg, function(arg_val, arg_key) {
-            if (arg_key === "cls") {
+            if (arg_key === "context") {
+              context = arg_val;
+            } else if (arg_key === "cls") {
               U.foreach(arg_val.split(" "), function(cls) {
                 jq.addClass(cls);
               });
@@ -62,6 +65,8 @@
                 // dom.style[snake2camel(css_key)] = css_val;
                 jq.css(snake2camel(css_key), css_val);
               });
+            } else if (U.startsWith(arg_key, "on")) {
+              jq.bind(arg_key.slice(2), context ? $.proxy(arg_val, null, context) : arg_val);
             } else {
               jq.attr(arg_key, arg_val);
             }
