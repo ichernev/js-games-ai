@@ -1,6 +1,5 @@
 pesho:
   email: pesho@microsoft.com
-  game: rocks
   #password: psss
   encrypted_password: $2a$10$L5G89EN/eVVcTY9E0P54QeEYM/9omSmlC3VlVdmDNkTN4GDi.eUoO
   password_salt: $2a$10$L5G89EN/eVVcTY9E0P54Qe
@@ -20,6 +19,34 @@ mark:
 tripio:
   email: kib@org.org
   game: tic_tac_toe
+  #password: kiborg
+  encrypted_password: $2a$10$gJkdtRWG1EsTxmgtsQShW.kPzet/glmwKTC5ZQmezvjk7bfVcJHDe
+  password_salt: $2a$10$gJkdtRWG1EsTxmgtsQShW.
+
+easy_tic:
+  email: tic_tac_toe_easy
+  game: tic_tac_toe
+  #password: kiborg
+  encrypted_password: $2a$10$gJkdtRWG1EsTxmgtsQShW.kPzet/glmwKTC5ZQmezvjk7bfVcJHDe
+  password_salt: $2a$10$gJkdtRWG1EsTxmgtsQShW.
+
+hard_tic:
+  email: tic_tac_toe_hard
+  game: tic_tac_toe
+  #password: kiborg
+  encrypted_password: $2a$10$gJkdtRWG1EsTxmgtsQShW.kPzet/glmwKTC5ZQmezvjk7bfVcJHDe
+  password_salt: $2a$10$gJkdtRWG1EsTxmgtsQShW.
+
+easy_rocks:
+  email: rocks_easy
+  game: rocks
+  #password: kiborg
+  encrypted_password: $2a$10$gJkdtRWG1EsTxmgtsQShW.kPzet/glmwKTC5ZQmezvjk7bfVcJHDe
+  password_salt: $2a$10$gJkdtRWG1EsTxmgtsQShW.
+
+hard_rocks:
+  email: rocks_hard
+  game: rocks
   #password: kiborg
   encrypted_password: $2a$10$gJkdtRWG1EsTxmgtsQShW.kPzet/glmwKTC5ZQmezvjk7bfVcJHDe
   password_salt: $2a$10$gJkdtRWG1EsTxmgtsQShW.
