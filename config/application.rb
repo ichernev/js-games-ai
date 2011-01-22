@@ -40,7 +40,9 @@ module JsGames
       'src/init.js',
       'src/util.js',
       'src/event.js',
-      'src/html.js'
+      'src/html.js',
+      
+      'src/game_test.js'
     ]
     config.action_view.javascript_expansions[:test] = [
       'src/pre.test.js',
