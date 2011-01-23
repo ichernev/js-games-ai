@@ -18,13 +18,13 @@
     var instance_id;
 
     var handle_new = function(data) {
-      // if (data.status !== "ok") {
-      //   $.log(["error with new game", data]);
-      //   return;
-      // }
-      // instance_id = data.instance_id;
+      if (!data.status) {
+        $.log(["error with new game", data.message]);
+        return;
+      }
+      instance_id = data.instance_id;
       // TODO(iskren): Fix this when backend is fixed.
-      instance_id = data;
+      // instance_id = data;
       $.log("got instance id", instance_id);
     };
     var new_game = function() {
@@ -38,10 +38,10 @@
       });
     };
     var handle_play = function(data) {
-      // if (data.status !== "ok") {
-      //   $.log(["error with play game", data]);
-      //   return;
-      // }
+      if (!data.status) {
+        $.log(["error with play game", data]);
+        return;
+      }
       $.log(["got data for play", data]);
       JSG.GameCore.start_game(data);
     };

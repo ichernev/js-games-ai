@@ -12,8 +12,7 @@ class GameInstance < ActiveRecord::Base
       # TODO (zori): who assigns play order
       # check validness of player_id
       gp = GamePlayer.new :game_instance => gi,
-                          :player_id => p,
-                          :play_order => i + 1
+                          :player_id => p
       gp.save
     end
     gi.save

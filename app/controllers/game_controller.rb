@@ -5,16 +5,16 @@ class GameController < ApplicationController
     game_name = params[:name]
     if Game.exists? :name => game_name then
       game = Game.find_by_name game_name
-      players = JSON request.request_parameters['players']
+      players = JSON request.request_parameters[:players]
       gi = GameInstance.init game, players
       res = {
-        'status' => true,
-        'instance_id' => gi.id
+        :status => true,
+        :instance_id => gi.id
       }
     else
       res = {
-        'status' => false,
-        'message' => 'bad game name'
+        :status => false,
+        :message => 'bad game name'
       }
     end
     render :json => res
@@ -27,29 +27,29 @@ class GameController < ApplicationController
       us = User.where :game_id => game_id 
       ai = us.map do |u|
         {
-          'player_id' => u.id,
-          'display_name' => u.display_name
+          :player_id => u.id,
+          :display_name => u.display_name
         }
       end
       res = {
-        'status' => true,
-        'ai' => ai
+        :status => true,
+        :ai => ai
       }
     else
       res = {
-        'status' => false,
-        'message' => 'bad game name'
+        :status => false,
+        :message => 'bad game name'
       }
     end
     render :json => res
   end
 
   def play
-    instance_id = request.query_parameters['instance_id']
+    instance_id = request.query_parameters[:instance_id]
     if instance_id.nil? then
       res = {
-        'status' => false,
-        'message' => 'expected query parameter "instance_id", got none'
+        :status => false,
+        :message => 'expected query parameter "instance_id", got none'
       }
     else
       instance_id = instance_id.to_i
@@ -59,16 +59,17 @@ class GameController < ApplicationController
         ps = gi.players
         players = players_info ps
         res = {
-          'game_name' => game_name,
-          'instance_id' => instance_id,
-          'players' => players,
+          :status => true,
+          :game_name => game_name,
+          :instance_id => instance_id,
+          :players => players,
         }
         last_game = last_game_result gi, ps
-        res['last_game_result'] = last_game unless last_game.nil?
+        res[:last_game_result] = last_game unless last_game.nil?
       else
         res = {
-          'status' => false,
-          'message' => 'bad instance_id'
+          :status => false,
+          :message => 'bad instance_id'
         }
       end
     end
@@ -76,7 +77,7 @@ class GameController < ApplicationController
   end
 
   def finish
-    game_info = request.request_parameters['game_info']
+    game_info = request.request_parameters[:game_info]
     if game_info.nil? then
       message = 'expected request parameter "game_info", got none'
     else
@@ -91,14 +92,18 @@ class GameController < ApplicationController
         if GameInstance.exists? instance_id then
           gi = GameInstance.find instance_id
           gi.duration = Time.now - gi.began
-          ps = gi.players.sort
-          gr = game_result.map { |p| p['player_id'] }
-          if ps == gr.sort then
-            game_result.each do |gr|
-              p = GamePlayer.find gr['player_id']
+          gr = game_result.keys.map { |gr| gr.to_i }
+          if gi.players.sort == gr.sort then
+            game_result.each do |player_id, val|
+              p = GamePlayer.find(
+                :first,
+                :conditions => {
+                  :player_id => player_id,
+                  :game_instance_id => instance_id
+                })
               # TODO(zori): validate play order and score
-              p.play_order = gr['play_order']
-              p.score = gr['score']
+              p.play_order = val['play_order']
+              p.score = val['score']
               p.save
             end
             message = ''
@@ -113,8 +118,8 @@ class GameController < ApplicationController
     end
     status = message == '' ? true : false
     render :json => {
-      'status' => status,
-      'message' => message
+      :status => status,
+      :message => message
     }
   end
 
@@ -126,9 +131,9 @@ class GameController < ApplicationController
     res = {}
     pl.each do |p|
       res[p.id.to_s] = {
-        'player_id' => p.id,
-        'type' => p.type,
-        'display_name' => p.display_name
+        :player_id => p.id.to_s,
+        :type => p.type,
+        :display_name => p.display_name
       }
     end
     res
@@ -150,9 +155,9 @@ class GameController < ApplicationController
     res = {}
     gp.each do |p|
       res[p.player_id.to_s] = {
-        'player_id' => p.player_id,
-        'play_order' => p.play_order,
-        'score' => p.score
+        :player_id => p.player_id,
+        :play_order => p.play_order,
+        :score => p.score
       }
     end
     res

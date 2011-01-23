@@ -114,7 +114,7 @@
     },
 
     handleFinishResponse: function(data) {
-      if (data.status !== "ok") {
+      if (!data.status) {
         $.log(["error with game finish", data.message]);
         return;
       }

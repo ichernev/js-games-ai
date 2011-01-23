@@ -1,14 +1,6 @@
 require 'test_helper'
 
 class GamePlayerTest < ActiveSupport::TestCase
-  test "unique play_order per game_instance_id" do
-    #u = User.new(:email => "foo@bar")
-    three = game_players(:three)
-    gp = GamePlayer.new(:play_order => three.play_order)
-    gp.game_instance = three.game_instance
-    assert !gp.save
-  end
-
   test "unique player_id per game_instance_id" do
     one = game_players(:one)
     gp = GamePlayer.new
