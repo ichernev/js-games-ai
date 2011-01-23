@@ -45,10 +45,12 @@ module JsGames
       'src/widgets/ma3x.js',
       
       'src/start_game.js',
+      'src/base_game.js',
+      'src/local_user.js',
+
       'src/game_test.js',
 
       'src/games/TicTacToe/game.js',
-      'src/games/TicTacToe/local_user.js',
       'src/games/TicTacToe/board.js',
       'src/games/TicTacToe/board_ui.js'
     ]

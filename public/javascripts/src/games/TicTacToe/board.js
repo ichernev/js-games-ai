@@ -4,10 +4,9 @@
   
   var NS = JSG.Games.TicTacToe = JSG.Games.TicTacToe || {};
 
-  NS.Board = function(parent_dom) {
+  NS.Board = function() {
     this.ui = new NS.BoardUI();
     this.subscribe(this.ui);
-    parent_dom.appendChild(this.ui.dom);
 
     this.locked = true;
 

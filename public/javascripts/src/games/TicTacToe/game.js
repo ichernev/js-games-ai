@@ -5,64 +5,28 @@
   var NS = JSG.Games.TicTacToe = JSG.Games.TicTacToe || {};
 
   NS.Game = function(game_data) {
-    this.dom = H.div({ id: "tictactoe_main" });
-    this.ev = new U.Event();
-    this.board = new NS.Board(this.dom);
-
-    this.instance_id = game_data.instance_id;
-    this.players_info = game_data.players;
-    // this.players_info = {};
-    // U.foreach(game_data.players, function(player) {
-    //   this.players_info[player.player_id] = player;
-    // }, this);
-    this.computePlayOrder(game_data);
-
-    (function() {
-      var players = U.keys(this.players_info);
-      // var players = [];
-      // U.foreach(this.players_info, function(player) {
-      //   players.push(player.player_id);
-      // });
-      players.sort();
-      var tokens = ["circle", "cross"];
-      this.board.token_map = {};
-      U.foreach(players, function(player_id, i) {
-        this.board.token_map[player_id] = tokens[i];
-      }, this);
-    }.call(this));
-
-    this.players = {};
-    U.foreach(this.players_info, function(player) {
-      var user;
-      if (player.type === "LocalUser") {
-        user = new NS.LocalUser(player.player_id, this);
-        user.subscribe(this.board);
-        this.players[player.player_id] = user;
-      } else {
-        throw "Implement me";
-      }
-    }, this);
-
-    this.initGameState();
-
-    this.dom.appendChild(H.span(
-        this.current_player_label = H.span("Current player: "),
-        this.current_player_span = H.span()));
+    NS.Game.superclass.constructor.call(this, game_data);
   };
 
   NS.Game.rows = 3;
   NS.Game.cols = 3;
 
-  U.mix(NS.Game.prototype, U.EventTarget);
+  U.extend(NS.Game, JSG.GameCore.BaseGame);
   U.mix(NS.Game.prototype, {
-    computePlayOrder: function(game_data) {
-      this.play_order = U.keys(game_data.players);
-      this.play_order.sort(this.playOrderSorter(game_data.last_game_result));
-      U.foreach(this.play_order, function(player_id, order) {
-        this.players_info[player_id].play_order = order;
+    boardConstructor: function() { return NS.Board; },
+
+    prepareBoardTokenMap: function() {
+      var players = U.keys(this.players_info);
+      players.sort();
+      var tokens = ["circle", "cross"];
+      var token_map = {};
+      U.foreach(players, function(player_id, i) {
+        token_map[player_id] = tokens[i];
       }, this);
+      return token_map;
     },
 
+    // TODO: Use available sorters (when implemented).
     playOrderSorter: function(last_game_info) {
       if (!last_game_info) {
         return undefined;
@@ -72,84 +36,6 @@
       };
     },
 
-    currentPlayer: function() {
-      return this.players_info[this.play_order[this.current_player_idx]];
-    },
-
-    start: function () {
-      this.current_player_idx = 0;
-      this.prepareNextTurn();
-    },
-
-    finish: function() {
-      var winner_id = null;
-      this.board.lock();
-      U.foreach(this.players_info, function(player, player_id) {
-        if (winner_id === null ||
-            player.score > this.players_info[winner_id].score) {
-          winner_id = player_id;
-        }
-      }, this);
-      H.text(this.current_player_label, "Winner: ");
-      H.text(this.current_player_span,
-          this.players_info[winner_id].display_name);
-      this.reportToBackend();
-    },
-
-    reportToBackend: function() {
-      $.log(["reporting to backend", this.players_info]);
-      $.ajax({
-        type: "POST",
-        url: "http://localhost:3000/game/finish.json",
-        //url: "http://localhost:3005/game/finish.json",
-        dataType: "json",
-        success: $.proxy(this, "handleFinishResponse"),
-        data: {
-          game_info: window.JSON.stringify({
-            instance_id: this.instance_id,
-            game_result: this.players_info // or U.values of this
-          })
-        }
-      });
-    },
-
-    handleFinishResponse: function(data) {
-      if (data.status !== "ok") {
-        $.log(["error with game finish", data.message]);
-        return;
-      }
-      $.log("game result reported successfully to backend");
-    },
-
-    playMove: function(player_id, move) {
-      $.log(["play move", player_id, move]);
-      if (player_id !== this.currentPlayer().player_id) {
-        throw "User not in turn";
-      }
-      if (!this.validMove(move)) {
-        throw "Bad move!";
-      }
-      this.applyMove(move);
-      this.board.displayMove(this.currentPlayer().player_id, move);
-      this.ev.fire("playerMove", this.currentPlayer(), move);
-      this.current_player_idx =
-          (this.current_player_idx + 1) % this.play_order.length;
-      this.prepareNextTurn();
-    },
-
-    prepareNextTurn: function() {
-      if (this.stateIsFinal()) {
-        this.finish();
-        return;
-      }
-      H.text(this.current_player_span, this.currentPlayer().display_name);
-      if (this.currentPlayer().type === "LocalUser") {
-        this.board.unlock();
-      }
-      this.ev.fire("playerTurn", this.currentPlayer());
-    },
-
-    // Game specific.
     initGameState: function() {
       this.state = [];
       var i, j;
@@ -174,63 +60,67 @@
 
     stateIsFinal: function() {
       var i, j;
+      var won = $.proxy(function(idx) {
+        this.recordScore({
+          type: "binary",
+          winner_idx: idx,
+          score: 2
+        });
+      }, null, this);
+      // Test full rows.
       for (i = 0; i < NS.Game.rows; ++i) {
-        for (j = 1; j < NS.Game.cols && this.state[i][j] === this.state[i][0]; ++j) { $.noop(); }
+        for (j = 1; j < NS.Game.cols && this.state[i][j] === this.state[i][0]; ++j) {
+          $.noop();
+        }
         if (j === NS.Game.cols && this.state[i][0] !== -1) {
-          this.won(this.state[i][0]);
+          won(this.state[i][0]);
           return true;
         }
       }
+      // Test full cols.
       for (j = 0; j < NS.Game.cols; ++j) {
-        for (i = 1; i < NS.Game.rows && this.state[i][j] === this.state[0][j]; ++i) { $.noop(); }
+        for (i = 1; i < NS.Game.rows && this.state[i][j] === this.state[0][j]; ++i) {
+          $.noop();
+        }
         if (i === NS.Game.rows && this.state[0][j] !== -1) {
-          this.won(this.state[0][j]);
+          won(this.state[0][j]);
           return true;
         }
       }
       if (NS.Game.rows === NS.Game.cols) {
-        for (i = 1; i < NS.Game.rows && this.state[i][i] === this.state[0][0]; ++i) { $.noop(); }
+        // Test main diagonal.
+        for (i = 1; i < NS.Game.rows && this.state[i][i] === this.state[0][0]; ++i) {
+          $.noop();
+        }
         if (i === NS.Game.rows && this.state[0][0] !== -1) {
-          this.won(this.state[0][0]);
+          won(this.state[0][0]);
           return true;
         }
-        for (i = 1; i < NS.Game.rows && this.state[NS.Game.rows - 1 - i][i] === this.state[NS.Game.rows - 1][0]; ++i) { $.noop(); }
+        // Test second diagonal.
+        for (i = 1; i < NS.Game.rows &&
+            this.state[NS.Game.rows - 1 - i][i] === this.state[NS.Game.rows - 1][0]; ++i) {
+          $.noop();
+        }
         if (i === NS.Game.rows && this.state[NS.Game.rows - 1][0] !== -1) {
-          this.won(this.state[NS.Game.rows - 1][0]);
+          won(this.state[NS.Game.rows - 1][0]);
           return true;
         }
+      }
+      // Test if board is full.
+      for (i = 0; i < NS.Game.rows && $.inArray(-1, this.state[i]) === -1; ++i) {
+        $.noop();
+      }
+      if (i === NS.Game.rows) {
+        this.recordScore({
+          type: "draw",
+          score: 1
+        });
+        return true;
       }
 
       return false;
-    },
-
-    won: function(player_idx) {
-      var winner_id = this.play_order[player_idx];
-      U.foreach(this.players_info, function(player) {
-        player.score = (player.player_id === winner_id ? 1 : 0);
-      });
     }
 
   });
-
-  NS.Game._test = function() {
-    var game = new NS.Game({
-      instance_id: 123,
-      players: {
-        "222": {
-          player_id: "222",
-          display_name: "Gosho",
-          type: "LocalUser"
-        },
-        "333": {
-          player_id: "333",
-          display_name: "Pesho",
-          type: "LocalUser"
-        }
-      }
-    });
-    H("jsg-main").appendChild(game.dom);
-    game.start();
-  };
 
 }());

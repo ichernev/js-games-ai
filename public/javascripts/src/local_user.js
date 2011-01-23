@@ -1,7 +1,7 @@
 (function() {
   var U = JSG.Util;
 
-  var NS = JSG.Games.TicTacToe = JSG.Games.TicTacToe || {};
+  var NS = JSG.GameCore;
 
   NS.LocalUser = function(player_id, game) {
     this.player_id = player_id;

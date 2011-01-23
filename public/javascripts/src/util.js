@@ -113,4 +113,12 @@
     return dom.nodeType !== undefined && dom.nextSibling !== undefined;
   };
 
+  U.iota = function(length) {
+    var res = [];
+    for (var i = 0; i < length; ++i) {
+      res.push(i);
+    }
+    return res;
+  };
+
 }());

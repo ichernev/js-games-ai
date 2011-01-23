@@ -148,6 +148,28 @@
                
   JSG.Test.add(function() {
     Q.module("Util-misc");
+    Q.test("keys", function() {
+      var obj = {
+        key1: "val1",
+        key2: "val2"
+      };
+      Q.deepEqual(U.keys(obj), ["key1", "key2"]);
+      Q.deepEqual(U.keys({}), []);
+      Q.deepEqual(U.keys({1: "a"})[0], "1");
+    });
+    Q.test("vals", function() {
+      var obj0, obj = {
+        key1: "val1",
+        key2: obj0 = { key3: "val3" }
+      };
+      Q.deepEqual(U.vals(obj), ["val1", obj0]);
+      Q.deepEqual(U.vals({}), []);
+    });
+    Q.test("iota", function() {
+      Q.deepEqual(U.iota(0), []);
+      Q.deepEqual(U.iota(1), [0]);
+      Q.deepEqual(U.iota(5), [0, 1, 2, 3, 4]);
+    });
     Q.test("startsWith", function() {
       Q.ok(U.startsWith("alabala", "ala"));
       Q.ok(U.startsWith("alabala", ""));
