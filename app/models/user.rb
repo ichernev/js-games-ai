@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   has_many :game_players
 
   def is_human?
-    return self.game_id.nil?
+    self.game_id.nil?
+  end
+
+  def display_name
+    self.email
   end
 end

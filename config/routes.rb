@@ -7,6 +7,12 @@ JsGames::Application.routes.draw do
   match 'test' => 'test#qunit_test'
   match 'gametest' => 'test#game_test'
   match 'uitest' => 'test#ui_test'
+
+  match 'game/:name/ai.json' => 'game#ai'
+  match 'game/:name/new.json' => 'game#new'
+  match 'game/play.json' => 'game#play'
+  match 'game/finish.json' => 'game#finish'
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

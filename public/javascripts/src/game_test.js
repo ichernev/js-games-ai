@@ -26,10 +26,11 @@
       H.button("new", {
         onclick: function() {
           $.ajax({
-            type: 'POST',
+            type: "POST",
+            //url: "http://localhost:3000/game/Rocks/new.json",
             url: "http://localhost:3005/game/name/new.json",
             dataType: "json",
-            data: { players: JSON.stringify([1234, 3456]) },
+            data: { players: JSON.stringify([590696008, 619222619]) },
             success: printer
           });
         }
@@ -37,9 +38,10 @@
       H.button("play", {
         onclick: function() {
           $.getJSON(
-            "http://localhost:3005/game/play.json",
+            "http://localhost:3000/game/play.json",
+            //"http://localhost:3005/game/play.json",
             {
-              instance_id: "1234"
+              game_instance_id: "908005749"
             },
             printer);
         }
@@ -48,19 +50,20 @@
         onclick: function() {
           $.ajax({
             type: "POST",
-            url: "http://localhost:3005/game/finish.json",
+            url: "http://localhost:3000/game/finish.json",
+            //url: "http://localhost:3005/game/finish.json",
             dataType: "json",
             success: printer,
             data: {
-              game_instance_info: JSON.stringify({
-                instance_id: 1234,
+              game_info: JSON.stringify({
+                game_instance_id: 908005749,
                 game_result: [
                   {
-                    player_id: 5,
+                    player_id: 590696008,
                     play_order: 1,
                     score: 1
                   }, {
-                    player_id: 10,
+                    player_id: 619222619,
                     play_order: 0,
                     score: 0
                   }
