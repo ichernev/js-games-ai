@@ -98,6 +98,27 @@
 
     reportToBackend: function() {
       $.log(["reporting to backend", this.players_info]);
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/game/finish.json",
+        //url: "http://localhost:3005/game/finish.json",
+        dataType: "json",
+        success: $.proxy(this, "handleFinishResponse"),
+        data: {
+          game_info: window.JSON.stringify({
+            instance_id: this.instance_id,
+            game_result: this.players_info // or U.values of this
+          })
+        }
+      });
+    },
+
+    handleFinishResponse: function(data) {
+      if (data.status !== "ok") {
+        $.log(["error with game finish", data.message]);
+        return;
+      }
+      $.log("game result reported successfully to backend");
     },
 
     playMove: function(player_id, move) {

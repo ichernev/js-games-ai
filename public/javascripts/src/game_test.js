@@ -12,6 +12,66 @@
     };
   };
 
+  var game_play = function(game_name) {
+    game_name = game_name || "TicTacToe";
+    var player_ids = [645198450, 619222619];
+    var instance_id;
+
+    var handle_new = function(data) {
+      // if (data.status !== "ok") {
+      //   $.log(["error with new game", data]);
+      //   return;
+      // }
+      // instance_id = data.instance_id;
+      // TODO(iskren): Fix this when backend is fixed.
+      instance_id = data;
+      $.log("got instance id", instance_id);
+    };
+    var new_game = function() {
+      $.ajax({
+          type: "POST",
+          url: "http://localhost:3000/game/" + game_name + "/new.json",
+          //url: "http://localhost:3005/game/name/new.json",
+          dataType: "json",
+          data: { players: JSON.stringify(player_ids) },
+          success: handle_new
+      });
+    };
+    var handle_play = function(data) {
+      // if (data.status !== "ok") {
+      //   $.log(["error with play game", data]);
+      //   return;
+      // }
+      $.log(["got data for play", data]);
+      JSG.GameCore.start_game(data);
+    };
+    var play_game = function() {
+      if (!instance_id) {
+        $.log("no instance id, use new first");
+        return;
+      }
+
+      $.getJSON(
+          "http://localhost:3000/game/play.json",
+          //"http://localhost:3005/game/play.json",
+          {
+            instance_id: instance_id
+          },
+          handle_play);
+    };
+    return {
+      new_game: new_game,
+      play_game: play_game
+    };
+  };
+
+  JSG.Temp.test_game_cycle = function() {
+    var root = H("jsg-main");
+    var game_ops = game_play();
+    $(H.button("new")).click(game_ops.new_game).appendTo(root);
+    $(H.button("play")).click(game_ops.play_game).appendTo(root);
+  };
+
   JSG.Temp.game_test_init = function() {
     var root = H("jsg-main");
     H.empty(root);
