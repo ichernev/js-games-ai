@@ -2,6 +2,7 @@ syntax: glob
 
 .bundle
 .*.swp
+*.orig
 tmp
 .sass-cache
 
