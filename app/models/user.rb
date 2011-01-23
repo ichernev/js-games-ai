@@ -8,11 +8,21 @@ class User < ActiveRecord::Base
   belongs_to :game
   has_many :game_players
 
-  def is_human?
+  def human?
     self.game_id.nil?
   end
 
   def display_name
     self.email
+  end
+
+  # "AI", "RemoteUser", "LocalUser"
+  def type
+    if self.human? then
+      # TODO (zori)
+      return "LocalUser"
+    else
+      return "AI"
+    end
   end
 end
