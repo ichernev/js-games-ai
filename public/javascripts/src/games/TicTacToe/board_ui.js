@@ -29,7 +29,6 @@
     },
 
     cellClicked: function(m, pos) {
-      $.log("got click");
       this.ev.fire("cellClicked", pos);
     }
   });

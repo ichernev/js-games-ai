@@ -10,18 +10,19 @@
     this.board = new NS.Board(this.dom);
 
     this.instance_id = game_data.instance_id;
-    // this.players_info = game_data.players;
-    this.players_info = {};
-    U.foreach(game_data.players, function(player) {
-      this.players_info[player.player_id] = player;
-    }, this);
+    this.players_info = game_data.players;
+    // this.players_info = {};
+    // U.foreach(game_data.players, function(player) {
+    //   this.players_info[player.player_id] = player;
+    // }, this);
     this.computePlayOrder(game_data);
 
     (function() {
-      var players = [];
-      U.foreach(this.players_info, function(player) {
-        players.push(player.player_id);
-      });
+      var players = U.keys(this.players_info);
+      // var players = [];
+      // U.foreach(this.players_info, function(player) {
+      //   players.push(player.player_id);
+      // });
       players.sort();
       var tokens = ["circle", "cross"];
       this.board.token_map = {};
@@ -56,7 +57,7 @@
   U.mix(NS.Game.prototype, {
     computePlayOrder: function(game_data) {
       this.play_order = U.keys(game_data.players);
-      this.play_order.sort(this.playOrderSorter(game_data.last_game_info));
+      this.play_order.sort(this.playOrderSorter(game_data.last_game_result));
       U.foreach(this.play_order, function(player_id, order) {
         this.players_info[player_id].play_order = order;
       }, this);

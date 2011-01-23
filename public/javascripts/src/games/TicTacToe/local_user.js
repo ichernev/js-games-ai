@@ -16,8 +16,6 @@
         window.setTimeout($.proxy(function() {
             this.game.playMove(this.player_id, move);
         }, null, this), 0);
-      } else {
-        $.log("got move from board but wasn't my turn");
       }
     }
   });
