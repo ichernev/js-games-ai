@@ -47,7 +47,7 @@
       U.foreach(U.toA(arguments), function(arg) {
         // TODO(iskren): Support function & array arguments.
         if (U.isString(arg)) {
-          dom.appendChild(document.createTextNode(arg));
+          dom.appendChild(H.txt_node(arg));
         } else if (U.isDOM(arg)) {
           dom.appendChild(arg);
         } else {
@@ -78,6 +78,10 @@
     };
   });
 
+  H.txt_node = function(text) {
+    return document.createTextNode(text);
+  };
+
   H.remove = function(dom) {
     dom.parentNode.removeChild(dom);
   };
@@ -91,4 +95,8 @@
     }
   };
 
+  H.text = function(dom, text) {
+    H.empty(dom);
+    dom.appendChild(H.txt_node(text));
+  };
 }());

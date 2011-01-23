@@ -4,11 +4,11 @@
 
   // Use this function to iterate over arrays and hashes.
   // The first argument passed to f is the value, the second is the key (index).
-  U.foreach = function(seq, f) {
+  U.foreach = function(seq, f, context) {
     var res;
     if ($.isArray(seq)) {
       for (var i = 0, l = seq.length; i < l; ++i) {
-        res = f(seq[i], i);
+        res = f.call(context, seq[i], i);
         if (res !== undefined) {
           break;
         }
@@ -16,7 +16,7 @@
     } else {
       for (var key in seq) {
         if (seq.hasOwnProperty(key)) {
-          res = f(seq[key], key);
+          res = f.call(context, seq[key], key);
           if (res !== undefined) {
             break;
           }
@@ -32,6 +32,22 @@
       a[key] = val;
     });
     return a;
+  };
+
+  U.keys = function(obj) {
+    var keys = [];
+    U.foreach(obj, function(_, key) {
+      keys.push(key);
+    });
+    return keys;
+  };
+
+  U.vals = function(obj) {
+    var vals = [];
+    U.foreach(obj, function(val) {
+      vals.push(val);
+    });
+    return vals;
   };
 
   // Creates a new object with prototype proto.

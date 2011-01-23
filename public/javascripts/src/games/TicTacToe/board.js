@@ -4,10 +4,10 @@
   
   var NS = JSG.Games.TicTacToe = JSG.Games.TicTacToe || {};
 
-  NS.Board = function() {
+  NS.Board = function(parent_dom) {
     this.ui = new NS.BoardUI();
     this.subscribe(this.ui);
-    H("jsg-main").appendChild(this.ui.dom);
+    parent_dom.appendChild(this.ui.dom);
 
     this.locked = true;
 
@@ -29,6 +29,10 @@
     cellClicked: function(pos) {
       if (this.locked) { return; }
       this.ev.fire("boardMove", pos);
+    },
+
+    displayMove: function(who, move) {
+      this.ui.set_img(move, this.token_map[who]);
     }
 
   });
