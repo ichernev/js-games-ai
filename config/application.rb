@@ -41,6 +41,8 @@ module JsGames
       'src/util.js',
       'src/event.js',
       'src/html.js',
+
+      'src/widgets/ma3x.js',
       
       'src/game_test.js'
     ]
@@ -48,6 +50,7 @@ module JsGames
       'src/pre.test.js',
       'src/util.test.js',
       'src/html.test.js',
+      'src/widgets/ma3x.test.js',
       'src/post.test.js'
     ]
 

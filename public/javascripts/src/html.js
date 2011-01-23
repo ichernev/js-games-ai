@@ -30,7 +30,7 @@
       "ol", "ul", "li",
       "dl", "dt", "dd",
       "pre",
-      "table", "thead", "tr", "td", "tfoot", "col"
+      "table", "thead", "tbody", "tfoot", "th", "tr", "td", "col"
   ];
 
   var snake2camel = function(name) {
