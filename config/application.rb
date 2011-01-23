@@ -44,7 +44,8 @@ module JsGames
 
       'src/widgets/ma3x.js',
       
-      'src/game_test.js'
+      'src/game_test.js',
+      'src/games/TicTacToe/board_ui.js'
     ]
     config.action_view.javascript_expansions[:test] = [
       'src/pre.test.js',

@@ -8,4 +8,8 @@ class TestController < ApplicationController
     render
   end
 
+  def ui_test
+    render
+  end
+
 end
