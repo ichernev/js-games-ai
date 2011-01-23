@@ -2,7 +2,6 @@
   var U = JSG.Util;
   var H = U.HTML;
 
-  JSG.Games = JSG.Games || {};
   var NS = JSG.Games.TicTacToe = JSG.Games.TicTacToe || {};
   var css_pref = "tictactoe_";
   var img_root = "/images/TicTacToe/";
