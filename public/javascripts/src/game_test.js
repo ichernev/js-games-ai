@@ -42,7 +42,7 @@
             "http://localhost:3000/game/play.json",
             //"http://localhost:3005/game/play.json",
             {
-              instance_id: "908005749"
+              instance_id: "908005739"
             },
             printer);
         }
@@ -57,7 +57,7 @@
             success: printer,
             data: {
               game_info: JSON.stringify({
-                instance_id: 908005749,
+                instance_id: 908005739,
                 game_result: [
                   {
                     player_id: 590696008,
