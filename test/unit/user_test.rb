@@ -10,7 +10,7 @@ class UserTest < ActiveSupport::TestCase
   test "human have nil game_id" do
     u = User.new(:email => "my@mail.com", :password => "pass")
     assert_nil u.game_id
-    assert u.is_human?
+    assert u.human?
     assert u.save
   end
 
@@ -18,7 +18,19 @@ class UserTest < ActiveSupport::TestCase
     u = User.new(:email => "placeholder", :password => "dummy_pass")
     u.game = games(:tic_tac_toe)
     assert_not_nil u.game_id
-    assert !u.is_human?
+    assert !u.human?
     assert u.save
+  end
+
+  test "AI type" do
+    u = users :tripio
+    assert !u.human?
+    assert_equal "AI", u.type
+  end
+
+  test "LocalUser type" do
+    u = users :inna
+    assert u.human?
+    assert_equal "LocalUser", u.type
   end
 end

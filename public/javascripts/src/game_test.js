@@ -20,15 +20,16 @@
     root.appendChild(H([
       H.button("ai", {
         onclick: function() {
-          $.getJSON("http://localhost:3005/game/name/ai.json", printer);
+          $.getJSON("http://localhost:3000/game/Rocks/ai.json", printer);
+          //$.getJSON("http://localhost:3005/game/name/ai.json", printer);
         }
       }),
       H.button("new", {
         onclick: function() {
           $.ajax({
             type: "POST",
-            //url: "http://localhost:3000/game/Rocks/new.json",
-            url: "http://localhost:3005/game/name/new.json",
+            url: "http://localhost:3000/game/Rocks/new.json",
+            //url: "http://localhost:3005/game/name/new.json",
             dataType: "json",
             data: { players: JSON.stringify([590696008, 619222619]) },
             success: printer
@@ -41,7 +42,7 @@
             "http://localhost:3000/game/play.json",
             //"http://localhost:3005/game/play.json",
             {
-              game_instance_id: "908005749"
+              instance_id: "908005749"
             },
             printer);
         }
@@ -56,7 +57,7 @@
             success: printer,
             data: {
               game_info: JSON.stringify({
-                game_instance_id: 908005749,
+                instance_id: 908005749,
                 game_result: [
                   {
                     player_id: 590696008,
