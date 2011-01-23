@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   # "AI", "RemoteUser", "LocalUser"
   def type
     if self.human? then
-      # TODO (zori)
+      # TODO(zori): "RemoteUser"?
       return "LocalUser"
     else
       return "AI"
