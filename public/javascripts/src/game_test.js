@@ -24,6 +24,7 @@
       }
       instance_id = data.instance_id;
       $.log("got instance id", instance_id);
+      play_game();
     };
     var new_game = function() {
       $.ajax({
@@ -66,12 +67,10 @@
   JSG.Temp.test_game_cycle = function() {
     var root = H("jsg-main");
     var game_ops = game_play();
-    $(H.button("new TicTacToe")).click(game_ops.new_game).appendTo(root);
-    $(H.button("play TicTacToe")).click(game_ops.play_game).appendTo(root);
+    $(H.button("TicTacToe")).click(game_ops.new_game).appendTo(root);
 
     var game_rocks = game_play("Rocks");
-    $(H.button("new Rocks")).click(game_rocks.new_game).appendTo(root);
-    $(H.button("play Rocks")).click(game_rocks.play_game).appendTo(root);
+    $(H.button("Rocks")).click(game_rocks.new_game).appendTo(root);
   };
 
   JSG.Temp.game_test_init = function() {
