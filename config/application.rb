@@ -52,7 +52,11 @@ module JsGames
 
       'src/games/TicTacToe/game.js',
       'src/games/TicTacToe/board.js',
-      'src/games/TicTacToe/board_ui.js'
+      'src/games/TicTacToe/board_ui.js',
+
+      'src/games/Rocks/game.js',
+      'src/games/Rocks/board.js',
+      'src/games/Rocks/board_ui.js'
     ]
     config.action_view.javascript_expansions[:test] = [
       'src/pre.test.js',

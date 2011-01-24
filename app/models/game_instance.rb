@@ -8,9 +8,8 @@ class GameInstance < ActiveRecord::Base
   def self.init game, players
     gi = GameInstance.new :began => Time.now
     gi.game = game
-    players.each_with_index do |p, i|
-      # TODO (zori): who assigns play order
-      # check validness of player_id
+    players.each do |p|
+      # TODO(zori): check validness of player_id
       gp = GamePlayer.new :game_instance => gi,
                           :player_id => p
       gp.save

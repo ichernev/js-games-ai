@@ -31,7 +31,7 @@
     },
 
     displayMove: function(who, move) {
-      this.ui.set_img(move, this.token_map[who]);
+      this.ui.setImg(move, this.token_map[who]);
     }
 
   });
