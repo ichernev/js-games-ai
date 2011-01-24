@@ -12,13 +12,12 @@
     this.dom = H.div(this.ma3x.dom);
     $(this.dom).addClass(css_pref + "board");
     // Put rocks in every cell.
-    var i = 0;
-    for (; i < NS.Game.rocks; ++i) {
+    var i;
+    for (i = 0; i < NS.Game.rocks; ++i) {
       this.setImg(i, "unselected_rock");
     }
     // Put a button to play the current move.
-    $.log(["this is ", this]);
-    this.dom.appendChild(H.button("play this move", {
+    this.dom.appendChild(this.button = H.button("play this move", {
       context: this,
       onclick: this.buttonClicked
     }));

@@ -10,6 +10,7 @@
 
     this.locked = true;
     this.move = [];
+    this.ui.button.disabled = true;
 
     this.ev = new U.Event();
   };
@@ -28,7 +29,7 @@
     // Events from BoardUI.
     cellClicked: function(pos) {
       if (this.locked) { return; }
-      if (0 !== pos[0]) {
+      if (pos[0] !== 0) {
         throw "Illegal board click";
       }
       var erased = U.erase(this.move, pos[1]);
@@ -38,11 +39,18 @@
         this.move.push(pos[1]);
         this.ui.setImg(pos[1], "selected_rock");
       }
+      this.recalcButtonState();
+    },
+
+    recalcButtonState: function() {
+      var enable = this.game.validMove(this.move);
+      this.ui.button.disabled = !enable;
     },
 
     buttonClicked: function() {
       this.ev.fire("boardMove", this.move);
       this.move = [];
+      this.recalcButtonState();
     },
 
     displayMove: function(_, move) {
