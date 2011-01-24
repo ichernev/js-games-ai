@@ -8,7 +8,7 @@
     return function(res) {
       H.empty(result);
       $.log(res);
-      result.appendChild(document.createTextNode(JSON.stringify(res, null, 4)));
+      result.appendChild(H.txtNode(JSON.stringify(res, null, 4)));
     };
   };
 
@@ -23,8 +23,6 @@
         return;
       }
       instance_id = data.instance_id;
-      // TODO(iskren): Fix this when backend is fixed.
-      // instance_id = data;
       $.log("got instance id", instance_id);
     };
     var new_game = function() {
@@ -68,8 +66,12 @@
   JSG.Temp.test_game_cycle = function() {
     var root = H("jsg-main");
     var game_ops = game_play();
-    $(H.button("new")).click(game_ops.new_game).appendTo(root);
-    $(H.button("play")).click(game_ops.play_game).appendTo(root);
+    $(H.button("new TicTacToe")).click(game_ops.new_game).appendTo(root);
+    $(H.button("play TicTacToe")).click(game_ops.play_game).appendTo(root);
+
+    var game_rocks = game_play("Rocks");
+    $(H.button("new Rocks")).click(game_rocks.new_game).appendTo(root);
+    $(H.button("play Rocks")).click(game_rocks.play_game).appendTo(root);
   };
 
   JSG.Temp.game_test_init = function() {
