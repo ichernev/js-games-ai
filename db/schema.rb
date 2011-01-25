@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
   create_table "games", :force => true do |t|
     t.string "name",         :null => false
     t.string "display_name"
+    t.text   "description"
   end
 
   create_table "users", :force => true do |t|

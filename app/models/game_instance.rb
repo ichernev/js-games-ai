@@ -6,8 +6,7 @@ class GameInstance < ActiveRecord::Base
   # a classmethod that creates a game instance and registers the corresponding
   # game players in the database
   def self.init game, players
-    gi = GameInstance.new :began => Time.now
-    gi.game = game
+    gi = GameInstance.new :game => game, :began => Time.now
     players.each do |p|
       # TODO(zori): check validness of player_id
       gp = GamePlayer.new :game_instance => gi,

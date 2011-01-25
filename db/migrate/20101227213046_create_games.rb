@@ -3,6 +3,7 @@ class CreateGames < ActiveRecord::Migration
     create_table :games do |t|
       t.string :name, :null => false
       t.string :display_name
+      t.text :description
     end
   end
 
