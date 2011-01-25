@@ -13,7 +13,7 @@ class GamePlayerTest < ActiveSupport::TestCase
     gp = GamePlayer.new(:play_order => 3)
     gp.game_instance = game_players(:five).game_instance
     gp.player = users(:inna)
-    assert_equal 0, gp.score 
+    assert_equal gp.score, 0
     assert gp.save
   end
 end

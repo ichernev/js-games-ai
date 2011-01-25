@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
     t.string  "email",                             :default => "", :null => false
     t.string  "encrypted_password", :limit => 128, :default => "", :null => false
     t.string  "password_salt",                     :default => "", :null => false
+    t.string  "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

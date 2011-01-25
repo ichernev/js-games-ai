@@ -34,12 +34,12 @@ class GameInstanceTest < ActiveSupport::TestCase
 
   test "correct players returned" do
     game = games :rocks
-    players = users :pesho, :mark, :easy_tic
+    players = users :pesho, :mark, :tripio
     players.collect! { |p| p.id }
     gi = GameInstance.init game, players
-    assert_equal 3, players.size
+    assert_equal players.size, 3
     gip = gi.players
-    assert_equal 3, gip.size
+    assert_equal gip.size, 3
     assert_equal players.sort, gip.sort
   end
 end

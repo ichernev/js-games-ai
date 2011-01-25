@@ -33,4 +33,11 @@ class UserTest < ActiveSupport::TestCase
     assert u.human?
     assert_equal "LocalUser", u.type
   end
+
+  test "display name" do
+    inna = users :inna
+    assert_equal inna.display_name, inna.name
+    tripio = users :tripio
+    assert_equal tripio.display_name, tripio.email
+  end
 end

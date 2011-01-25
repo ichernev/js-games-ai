@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password
+  attr_accessible :email, :name, :password
   belongs_to :game
   has_many :game_players
 
@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    self.email
+    self.human? ? self.name : self.email
   end
 
   # "AI", "RemoteUser", "LocalUser"
