@@ -35,7 +35,7 @@ class GameInstanceTest < ActiveSupport::TestCase
   test "correct players returned" do
     game = games :rocks
     players = users :pesho, :mark, :tripio
-    players.collect! { |p| p.id }
+    players.map! { |p| p.id }
     gi = GameInstance.init game, players
     assert_equal players.size, 3
     gip = gi.players

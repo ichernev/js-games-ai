@@ -6,4 +6,4 @@ tic_tac_toe:
 rocks:
   name: Rocks
   display_name: Rocks collection
-  description: "The two players take turns picking either one, or two adjacent of the rocks. The last person to be able to pick rocks wins the game."
+  description: "The two players take turns picking either one or two adjacent rocks. The last person to be able to make a valid move wins the game."

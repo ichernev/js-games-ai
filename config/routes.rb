@@ -4,14 +4,35 @@ JsGames::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  # tests
   match 'test' => 'test#qunit_test'
   match 'gametest' => 'test#game_test'
   match 'uitest' => 'test#ui_test'
 
+  # game controller
   match 'game/:name/ai.json' => 'game#ai'
   match 'game/:name/new.json' => 'game#new'
   match 'game/play.json' => 'game#play'
   match 'game/finish.json' => 'game#finish'
+
+  # info
+  match 'info/games.json' => 'info#games'
+
+  # statistics
+  match 'stats/most_games.json' => 'info#most_games'
+  match 'stats/:name/most_games.json' => 'info#most_games'
+
+  match 'stats/best_total_score.json' => 'info#best_total_score'
+  match 'stats/:name/best_total_score.json' => 'info#best_total_score'
+
+  match 'stats/best_avg_score.json' => 'info#best_avg_score'
+  match 'stats/:name/best_avg_score.json' => 'info#best_avg_score'
+
+  match 'stats/max_time_played.json' => 'info#max_time_played'
+  match 'stats/:name/max_time_played.json' => 'info#max_time_played'
+
+  match 'stats/fastest_players_avg.json' => 'info#fastest_players_avg'
+  match 'stats/:name/fastest_players_avg.json' => 'info#fastest_players_avg'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

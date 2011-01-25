@@ -138,4 +138,20 @@
       result
     ]));
   };
+
+  JSG.Temp.get_request = function() {
+    var root = H("jsg-main");
+    H.empty(root);
+    var result = H.pre();
+    var printer = response_handler(result);
+    root.appendChild(H([
+      H.button("test get request", {
+        onclick: function() {
+          $.getJSON("http://localhost:3000/info/games.json", printer);
+        }
+      }),
+      result
+    ]));
+  };
+
 }());

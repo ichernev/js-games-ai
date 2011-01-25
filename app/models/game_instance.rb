@@ -24,6 +24,6 @@ class GameInstance < ActiveRecord::Base
   # returns a list of ids of the users playing this instance
   def players
     gp = GamePlayer.where :game_instance_id => self.id
-    gp.collect { |p| p.player_id }
+    gp.map { |p| p.player_id }
   end
 end
