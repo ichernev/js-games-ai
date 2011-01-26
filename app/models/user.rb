@@ -3,10 +3,10 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable and :lockable
   devise :database_authenticatable, :registerable, :timeoutable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :password
   belongs_to :game
   has_many :game_players
+  validates_uniqueness_of :email
 
   def human?
     self.game_id.nil?

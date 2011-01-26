@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   test "unique email" do
     tripio_email = users(:tripio).email
     u = User.new(:email => tripio_email, :password => "pass")
-    assert_raise(ActiveRecord::RecordNotUnique) { u.save }
+    assert !u.save
   end
 
   test "human have nil game_id" do
