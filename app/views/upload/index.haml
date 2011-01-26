@@ -1,0 +1,7 @@
+%h1 Game package upload
+= form_tag 'upload/get_game', :multipart => true
+%p
+  = label 'package_upload', 'Select the game package'
+  = file_field_tag :package
+%br/
+= submit_tag 'Upload'
