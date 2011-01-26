@@ -5,6 +5,6 @@
     %i Wanna play alone?
     -# %br/
     = link_to 'Get rid of ' + session[:second_user].name,
-      :action => 'logout_second'
+      :controller => 'welcome', :action => 'logout_second'
   - else
     = link_to 'Login second user', :action => 'login_second'
