@@ -14,6 +14,7 @@ JsGames::Application.routes.draw do
   match 'uitest' => 'test#ui_test'
 
   # game controller
+  match 'game/users.json' => 'game#users'
   match 'game/:name/ai.json' => 'game#ai'
   match 'game/:name/new.json' => 'game#new'
   match 'game/play.json' => 'game#play'

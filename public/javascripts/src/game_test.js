@@ -14,9 +14,22 @@
 
   var game_play = function(game_name) {
     game_name = game_name || "TicTacToe";
-    var player_ids = [645198450, 619222619];
+    var player_ids;
+    //var player_ids = [645198450, 619222619];
     var instance_id;
 
+    var get_users = function() {
+      $.getJSON("http://localhost:3000/game/users.json", handle_users);
+    };
+    var handle_users = function(data) {
+      if (!data.status) {
+        $.log(["error with get users", data.message]);
+        return;
+      }
+      player_ids = data.player_ids;
+      $.log("got player ids", player_ids);
+      new_game();
+    };
     var new_game = function() {
       $.ajax({
           type: "POST",
@@ -58,7 +71,7 @@
       $.log(["got data for play", data]);
       JSG.GameCore.start_game(data);
     };
-    return new_game;
+    return get_users;
   };
 
   JSG.Temp.test_game_cycle = function() {

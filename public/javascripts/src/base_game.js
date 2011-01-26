@@ -15,7 +15,8 @@
 
     // TODO(iskren): Remove this. Only for testing!
     // Change one of the players to AI to test it.
-    this.players_info[U.keys(this.players_info)[0]].type = "AI";
+    // NOTE(zori): very funny, iskren :)!
+    //this.players_info[U.keys(this.players_info)[0]].type = "AI";
 
     this.board.token_map = this.prepareBoardTokenMap();
     this.players = {};

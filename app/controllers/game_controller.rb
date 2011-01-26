@@ -1,6 +1,27 @@
 require 'json'
 
 class GameController < ApplicationController
+
+  def users
+    player_ids = []
+    if user_signed_in? then
+      player_ids.push current_user.id
+      if session.has_key? :second_user then
+        player_ids.push session[:second_user].id
+      end
+      res = {
+        :status => true,
+        :player_ids => player_ids
+      }
+    else
+      res = {
+        :status => false,
+        :message => 'nobody is logged in'
+      }
+    end
+    render :json => res
+  end
+
   def new
     game_name = params[:name]
     if Game.exists? :name => game_name then
@@ -127,13 +148,13 @@ class GameController < ApplicationController
 
   # receives a list of user id's and returns a hash with info on each of them
   def players_info players
-    pl = User.find players
+    us = User.find players
     res = {}
-    pl.each do |p|
-      res[p.id.to_s] = {
-        :player_id => p.id.to_s,
-        :type => p.type,
-        :display_name => p.display_name
+    us.each do |u|
+      res[u.id.to_s] = {
+        :player_id => u.id.to_s,
+        :type => u.type,
+        :display_name => u.display_name
       }
     end
     res

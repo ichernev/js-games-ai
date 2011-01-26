@@ -25,4 +25,5 @@ class User < ActiveRecord::Base
       return "AI"
     end
   end
+
 end
