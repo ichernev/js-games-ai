@@ -17,15 +17,6 @@
     var player_ids = [645198450, 619222619];
     var instance_id;
 
-    var handle_new = function(data) {
-      if (!data.status) {
-        $.log(["error with new game", data.message]);
-        return;
-      }
-      instance_id = data.instance_id;
-      $.log("got instance id", instance_id);
-      play_game();
-    };
     var new_game = function() {
       $.ajax({
           type: "POST",
@@ -36,13 +27,14 @@
           success: handle_new
       });
     };
-    var handle_play = function(data) {
+    var handle_new = function(data) {
       if (!data.status) {
-        $.log(["error with play game", data]);
+        $.log(["error with new game", data.message]);
         return;
       }
-      $.log(["got data for play", data]);
-      JSG.GameCore.start_game(data);
+      instance_id = data.instance_id;
+      $.log("got instance id", instance_id);
+      play_game();
     };
     var play_game = function() {
       if (!instance_id) {
@@ -58,19 +50,24 @@
           },
           handle_play);
     };
-    return {
-      new_game: new_game,
-      play_game: play_game
+    var handle_play = function(data) {
+      if (!data.status) {
+        $.log(["error with play game", data]);
+        return;
+      }
+      $.log(["got data for play", data]);
+      JSG.GameCore.start_game(data);
     };
+    return new_game;
   };
 
   JSG.Temp.test_game_cycle = function() {
     var root = H("jsg-main");
     var game_ops = game_play();
-    $(H.button("TicTacToe")).click(game_ops.new_game).appendTo(root);
+    $(H.button("TicTacToe")).click(game_ops).appendTo(root);
 
     var game_rocks = game_play("Rocks");
-    $(H.button("Rocks")).click(game_rocks.new_game).appendTo(root);
+    $(H.button("Rocks")).click(game_rocks).appendTo(root);
   };
 
   JSG.Temp.game_test_init = function() {
