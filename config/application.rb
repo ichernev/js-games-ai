@@ -53,6 +53,7 @@ module JsGames
       'src/games/TicTacToe/game.js',
       'src/games/TicTacToe/board.js',
       'src/games/TicTacToe/board_ui.js',
+      'src/games/TicTacToe/perfect_ai.js',
 
       'src/games/Rocks/game.js',
       'src/games/Rocks/board.js',

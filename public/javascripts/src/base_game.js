@@ -13,6 +13,10 @@
     this.players_info = game_data.players;
     this.computePlayOrder(game_data);
 
+    // TODO(iskren): Remove this. Only for testing!
+    // Change one of the players to AI to test it.
+    this.players_info[U.keys(this.players_info)[0]].type = "AI";
+
     this.board.token_map = this.prepareBoardTokenMap();
     this.players = {};
     U.foreach(this.players_info, function(player) {
@@ -21,8 +25,10 @@
         user = new NS.LocalUser(player.player_id, this);
         user.subscribe(this.board);
         this.players[player.player_id] = user;
+      } else if (player.type === "RemoteUser") {
+        throw "implement me";
       } else {
-        throw "Implement me";
+        this.createPlayer(player);
       }
     }, this);
 
