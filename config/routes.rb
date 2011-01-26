@@ -1,12 +1,17 @@
 JsGames::Application.routes.draw do
   devise_for :users
 
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
+
+  # second user
   match 'login_second' => 'welcome#login_second'
   match 'authenticate_second' => 'welcome#authenticate_second'
   match 'logout_second' => 'welcome#logout_second'
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  # game package upload
+  match 'upload' => 'upload#index'
+  match 'upload/get_game' => 'upload#get_game'
 
   # tests
   match 'test' => 'test#qunit_test'
