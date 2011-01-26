@@ -205,5 +205,64 @@
       Q.ok(!U.isDOM("foo"));
       Q.ok(!U.isDOM(function() {}));
     });
+    Q.test("randElement", function() {
+      var tests = 100000;
+      var arr = U.iota(10);
+      var freq = U.fill([], 0, 10);
+      for (var i = 0; i < tests; ++i) {
+        ++ freq[U.randElement(arr)];
+      }
+      var maxEl = U.maxElement(freq),
+          minEl = U.minElement(freq);
+      var bad = (maxEl - minEl) / minEl;
+      Q.ok(bad < 0.1);
+    });
+    Q.test("minElement", function() {
+      Q.strictEqual(U.minElement([1,2,3]), 1);
+      Q.strictEqual(U.minElement([3,2,1]), 1);
+      Q.strictEqual(U.minElement([]), undefined);
+      Q.strictEqual(U.minElement([2,1,3]), 1);
+      Q.strictEqual(U.minElement([1]), 1);
+      Q.strictEqual(U.minElement([1, 1]), 1);
+    });
+    Q.test("maxElement", function() {
+      Q.strictEqual(U.maxElement([1,2,3]), 3);
+      Q.strictEqual(U.maxElement([3,2,1]), 3);
+      Q.strictEqual(U.maxElement([]), undefined);
+      Q.strictEqual(U.maxElement([2,1,3]), 3);
+      Q.strictEqual(U.maxElement([1]), 1);
+      Q.strictEqual(U.maxElement([1, 1]), 1);
+    });
+    Q.test("fill:standard", function() {
+      Q.deepEqual(U.fill([], 4, 3), [4, 4, 4]);
+      Q.deepEqual(U.fill([1,2,3,4], 0, 2), [0, 0, 3, 4]);
+      Q.deepEqual(U.fill([1,2], 0, 4), [0, 0, 0, 0]);
+    });
+    Q.test("fill:same array returned", function() {
+      var arr = [1,2,3];
+      Q.strictEqual(U.fill(arr, 0, 5), arr);
+      arr = [];
+      Q.strictEqual(U.fill(arr, 0, 5), arr);
+      arr = U.iota(10);
+      Q.strictEqual(U.fill(arr, 0, 5), arr);
+    });
+  });
+
+  JSG.Test.add(function() {
+    Q.module("Util-math");
+    Q.test("pow", function() {
+      Q.strictEqual(U.pow(5, 0), 1);
+      Q.strictEqual(U.pow(5, 1), 5);
+      Q.strictEqual(U.pow(5, 2), 25);
+      Q.strictEqual(U.pow(2, 10), 1024);
+      Q.strictEqual(U.pow(2, 13), 8192);
+    });
+    Q.test("div", function() {
+      Q.strictEqual(U.div(5, 2), 2);
+      Q.strictEqual(U.div(4, 2), 2);
+      Q.strictEqual(U.div(5, 1), 5);
+      Q.strictEqual(U.div(14, 5), 2);
+      Q.strictEqual(U.div(15, 5), 3);
+    });
   });
 }());

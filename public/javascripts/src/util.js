@@ -121,4 +121,67 @@
     return res;
   };
 
+  U.count = function(arr, el) {
+    var res = 0;
+    U.foreach(arr, function(ael) {
+      res += ael === el ? 1 : 0;
+    });
+    return res;
+  };
+
+  U.pow = function(base, power) {
+    if (power === 0) {
+      return 1;
+    }
+    return power % 2 ? U.pow(base, power - 1) * base :
+        U.pow(base * base, power / 2);
+  };
+
+  U.div = function(nom, den) {
+    return (nom - (nom % den)) / den;
+  };
+
+  U.randElement = function(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  };
+
+  U.fill = function(arr, el, len) {
+    len = len === undefined ? arr.length : len;
+    var nopushlen = U.min(len, arr.length);
+    var i;
+    for (i = 0; i < nopushlen; ++i) {
+      arr[i] = el;
+    }
+    for (i = nopushlen; i < len; ++i) {
+      arr.push(el);
+    }
+    return arr;
+  };
+
+  U.max = function(a, b) {
+    return a > b ? a : b;
+  };
+
+  U.min = function(a, b) {
+    return a < b ? a : b;
+  };
+
+  U.minElement = function(arr) {
+    if (arr.length === 0) { return undefined; }
+    var min = arr[0];
+    U.foreach(arr, function(el) {
+      min = U.min(min, el);
+    });
+    return min;
+  };
+
+  U.maxElement = function(arr) {
+    if (arr.length === 0) { return undefined; }
+    var max = arr[0];
+    U.foreach(arr, function(el) {
+      max = U.max(max, el);
+    });
+    return max;
+  };
+
 }());
