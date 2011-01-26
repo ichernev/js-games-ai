@@ -1,6 +1,10 @@
 JsGames::Application.routes.draw do
   devise_for :users
 
+  match 'login_second' => 'welcome#login_second'
+  match 'authenticate_second' => 'welcome#authenticate_second'
+  match 'logout_second' => 'welcome#logout_second'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
