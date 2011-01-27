@@ -20,6 +20,7 @@
 
     this.board.token_map = this.prepareBoardTokenMap();
     this.players = {};
+    var has_remote = false;
     U.foreach(this.players_info, function(player) {
       var user;
       if (player.type === "LocalUser") {
@@ -27,11 +28,15 @@
         user.subscribe(this.board);
         this.players[player.player_id] = user;
       } else if (player.type === "RemoteUser") {
-        throw "implement me";
+        has_remote = true;
       } else {
         this.createPlayer(player);
       }
     }, this);
+    if (has_remote) {
+      $.log("creating remote gateway");
+      this.remote_gateway = new NS.RemoteGateway(this.players_info, this);
+    }
 
     this.initGameState();
 
@@ -42,7 +47,12 @@
   U.mix(NS.BaseGame.prototype, {
     computePlayOrder: function(game_data) {
       this.play_order = U.keys(game_data.players);
-      this.play_order.sort(this.playOrderSorter(game_data.last_game_result));
+      if (game_data.last_game_result) {
+        this.play_order.sort(this.playOrderSorter(game_data.last_game_result));
+      } else {
+        // passing undefine is NOT an option.
+        this.play_order.sort();
+      }
       U.foreach(this.play_order, function(player_id, order) {
         this.players_info[player_id].play_order = order;
       }, this);

@@ -3,6 +3,7 @@
   var U = JSG.Util;
   var H = U.HTML;
   var JSON = window.JSON;
+  var socket;
 
   var response_handler = function(result) {
     return function(res) {
@@ -15,8 +16,8 @@
   var game_play = function(game_name) {
     game_name = game_name || "TicTacToe";
     var player_ids;
-    //var player_ids = [645198450, 619222619];
     var instance_id;
+    var active;
 
     var get_users = function() {
       $.getJSON("http://localhost:3000/game/users.json", handle_users);
@@ -28,13 +29,49 @@
       }
       player_ids = data.player_ids;
       $.log("got player ids", player_ids);
-      new_game();
+      // TODO(iskren): Fix for more users.
+      if (player_ids.length === 2) {
+        new_game();
+      } else if (player_ids.length === 1) {
+        // TODO(iskren): Add AI.
+        $.log("assuming remote user");
+        socket = new io.Socket("localhost", { port: 3006 });
+        socket.on("connect", function() {
+          $.log("subscribing to channel " + game_name);
+          socket.send({
+            _type: "subscribe", 
+            _channel_id: game_name,
+            _player_id: player_ids[0]
+          });
+        });
+        socket.on("message", function(data) {
+          $.log(["got message from socket", data]);
+          if (data._type === "clients" && data._clients.length === 2) {
+            data._clients.sort();
+            if (data._clients[0] === player_ids[0]) {
+              $.log("we are active");
+              active = true;
+              player_ids = data._clients;
+              new_game();
+            } else {
+              $.log("we are passive");
+              active = false;
+            }
+          } else if (!active && data.instance_id) {
+            $.log(["got instance id from active player", data.instance_id]);
+            instance_id = data.instance_id;
+            socket.disconnect();
+            play_game();
+          }
+        });
+        socket.connect();
+      }
     };
     var new_game = function() {
+      $.log(["sending new game with player_ids", player_ids]);
       $.ajax({
           type: "POST",
           url: "http://localhost:3000/game/" + game_name + "/new.json",
-          //url: "http://localhost:3005/game/name/new.json",
           dataType: "json",
           data: { players: JSON.stringify(player_ids) },
           success: handle_new
@@ -46,7 +83,15 @@
         return;
       }
       instance_id = data.instance_id;
-      $.log("got instance id", instance_id);
+      if (active) {
+        $.log("sending instance_id to passive player", socket);
+        socket.send({
+          instance_id: instance_id
+        });
+        // TODO(iskren): I really don't know what.
+        // socket.disconnect();
+      }
+      $.log("got instance id", instance_id, active);
       play_game();
     };
     var play_game = function() {
@@ -57,7 +102,6 @@
 
       $.getJSON(
           "http://localhost:3000/game/play.json",
-          //"http://localhost:3005/game/play.json",
           {
             instance_id: instance_id
           },

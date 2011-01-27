@@ -47,6 +47,7 @@ module JsGames
       'src/start_game.js',
       'src/base_game.js',
       'src/local_user.js',
+      'src/remote_gateway.js',
 
       'src/game_test.js',
 
