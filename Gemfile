@@ -8,12 +8,12 @@ gem 'rails', '3.0.3'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'pg'
 gem 'haml'
-gem 'devise'          # user authentication
-gem 'hpricot'         # this is needed by devise view generation in haml
-gem 'ruby_parser'     # same here
-gem 'foreigner'       # foreign key constraints in migrations
+gem 'devise'                # user authentication
+gem 'hpricot'               # this is needed by devise view generation in haml
+gem 'ruby_parser'           # same here
+gem 'foreigner'             # foreign key constraints in migrations
 gem 'json'
-gem 'archive-tar-minitar'
+gem 'archive-tar-minitar'   # gem for managing tar archives in ruby
 
 # Use unicorn as the web server
 # gem 'unicorn'

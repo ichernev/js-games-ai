@@ -116,3 +116,6 @@ JSON in ruby
   # gem install json
   $ bundle install        # after gem 'json' was added to project Gemfile
   require 'json'          # to use in ruby
+
+Install Minitar archive manager gem
+  # gem install vendor/archive-tar-minitar-0.5.2.gem
