@@ -1,5 +1,7 @@
 if (JSG === undefined) {
-  var JSG = {};
-  JSG.Games = {};
-  JSG.GameCore = {};
+  var JSG = {
+    UI: {},
+    Games: {},
+    GameCore: {}
+  };
 }

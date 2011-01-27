@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
 
   def index
-    @name = "indexxx"
+    @name = "Game List"
   end
 
   def authenticate_second

@@ -44,12 +44,15 @@
       var dom = document.createElement(tag);
       var jq = $(dom);
 
-      U.foreach(U.toA(arguments), function(arg) {
-        // TODO(iskren): Support function & array arguments.
+      var processArgument = function(arg) {
         if (U.isString(arg)) {
           dom.appendChild(H.txtNode(arg));
         } else if (U.isDOM(arg)) {
           dom.appendChild(arg);
+        } else if ($.isArray(arg)) {
+          U.foreach(arg, processArgument);
+        } else if ($.isFunction(arg)) {
+          processArgument(arg());
         } else {
           // Assume arg is a hash of attributes.
           var context = null;
@@ -72,9 +75,20 @@
             }
           });
         }
-      });
+      };
+      U.foreach(U.toA(arguments), processArgument);
 
       return dom;
+    };
+  });
+
+  var tags_c_shortcut = [ "div", "span" ];
+  U.foreach(tags_c_shortcut, function(tag) {
+    H["c" + tag] = function() {
+      var args = U.toA(arguments);
+      var cls = args[0];
+      args[0] = { cls: cls };
+      return H[tag].apply(H, args);
     };
   });
 

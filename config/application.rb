@@ -42,14 +42,16 @@ module JsGames
       'src/event.js',
       'src/html.js',
 
+      'src/game_list.js',
       'src/widgets/ma3x.js',
       
       'src/start_game.js',
+      'src/game_manager.js',
       'src/base_game.js',
       'src/local_user.js',
       'src/remote_gateway.js',
 
-      'src/game_test.js',
+      # 'src/game_test.js',
 
       'src/games/TicTacToe/game.js',
       'src/games/TicTacToe/board.js',
