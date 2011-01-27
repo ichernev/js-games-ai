@@ -1,29 +1,29 @@
 one:
-  game_instance: second
+  instance: second
   player: inna
   play_order: 2
   score: 16
 
 two:
-  game_instance: second
+  instance: second
   player: mark
   play_order: 1
   score: 11
 
 three:
-  game_instance: second
+  instance: second
   player: pesho
   play_order: 3
   score: 23
 
 four:
-  game_instance: third
+  instance: third
   player: pesho
   play_order: 1
   score: 7
 
 five:
-  game_instance: third
+  instance: third
   player: tripio
   play_order: 2
   score: 62

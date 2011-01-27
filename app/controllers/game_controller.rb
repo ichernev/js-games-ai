@@ -27,7 +27,7 @@ class GameController < ApplicationController
     if Game.exists? :name => game_name then
       game = Game.find_by_name game_name
       players = JSON request.request_parameters[:players]
-      gi = GameInstance.init game, players
+      gi = Instance.init game, players
       res = {
         :status => true,
         :instance_id => gi.id
@@ -74,8 +74,8 @@ class GameController < ApplicationController
       }
     else
       instance_id = instance_id.to_i
-      if GameInstance.exists? instance_id then
-        gi = GameInstance.find instance_id
+      if Instance.exists? instance_id then
+        gi = Instance.find instance_id
         game_name = gi.game.name
         ps = gi.players
         players = players_info ps
@@ -110,8 +110,8 @@ class GameController < ApplicationController
       elsif game_result.nil? then
         message = 'no "game_result" in "game_info"'
       else
-        if GameInstance.exists? instance_id then
-          gi = GameInstance.find instance_id
+        if Instance.exists? instance_id then
+          gi = Instance.find instance_id
           gi.duration = Time.now - gi.began
           gr = game_result.keys.map { |gr| gr.to_i }
           if gi.players.sort == gr.sort then
@@ -120,7 +120,7 @@ class GameController < ApplicationController
                 :first,
                 :conditions => {
                   :player_id => player_id,
-                  :game_instance_id => instance_id
+                  :instance_id => instance_id
                 })
               # TODO(zori): validate play order and score
               p.play_order = val['play_order']
@@ -176,7 +176,7 @@ class GameController < ApplicationController
   # returns {player_id => {player_id, play_order, score}, {..}} iff the
   # players played the same game before
   def last_game_result gi, players
-    instances = GameInstance.where :game_id => gi.game_id
+    instances = Instance.where :game_id => gi.game_id
     players.sort!
     filtered = instances.select do |gi|
       gi.finished? and players == gi.players.sort 
@@ -185,7 +185,7 @@ class GameController < ApplicationController
       return
     end
     sorted = filtered.sort_by { |gi| gi.began }
-    gp = Player.where :game_instance_id => sorted.last.id
+    gp = Player.where :instance_id => sorted.last.id
     res = {}
     gp.each do |p|
       res[p.player_id.to_s] = {

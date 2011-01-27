@@ -12,23 +12,23 @@
 
 ActiveRecord::Schema.define(:version => 20110121155824) do
 
-  create_table "game_instances", :force => true do |t|
-    t.integer  "game_id"
-    t.datetime "began",                   :null => false
-    t.integer  "duration", :default => 0
-  end
-
   create_table "games", :force => true do |t|
     t.string "name",         :null => false
     t.string "display_name"
     t.text   "description"
   end
 
+  create_table "instances", :force => true do |t|
+    t.integer  "game_id"
+    t.datetime "began",                   :null => false
+    t.integer  "duration", :default => 0
+  end
+
   create_table "players", :force => true do |t|
-    t.integer "game_instance_id"
+    t.integer "instance_id"
     t.integer "player_id"
     t.integer "play_order"
-    t.integer "score",            :default => 0
+    t.integer "score",       :default => 0
   end
 
   create_table "users", :force => true do |t|
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
-  add_foreign_key "game_instances", "games", :name => "game_instances_game_id_fk"
+  add_foreign_key "instances", "games", :name => "instances_game_id_fk"
 
-  add_foreign_key "players", "game_instances", :name => "players_game_instance_id_fk"
+  add_foreign_key "players", "instances", :name => "players_instance_id_fk"
   add_foreign_key "players", "users", :name => "players_player_id_fk", :column => "player_id"
 
   add_foreign_key "users", "games", :name => "users_game_id_fk"

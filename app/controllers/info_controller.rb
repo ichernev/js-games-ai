@@ -38,7 +38,7 @@ class InfoController < ApplicationController
   # Users sorted by time spend playing games, descending.
   def max_time_played
     options = {
-      :select => 'sum(game_instances.duration) as total_time',
+      :select => 'sum(instances.duration) as total_time',
       :order => 'total_time DESC'
     }
 
@@ -48,7 +48,7 @@ class InfoController < ApplicationController
   # Users sorted by average time spent playing a game, ascending.
   def fastest_players_avg
     options = {
-      :select => 'avg(game_instances.duration) as avg_time',
+      :select => 'avg(instances.duration) as avg_time',
       :order => 'avg_time ASC'
     }
 
@@ -62,7 +62,7 @@ class InfoController < ApplicationController
       :select => 'users.id, users.name, users.email, users.game_id, ' + opts[:select],
       :joins => [
         'JOIN players ON players.player_id = users.id',
-        'JOIN game_instances ON players.game_instance_id = game_instances.id'
+        'JOIN instances ON players.instance_id = instances.id'
     ],
       :group => 'users.id, users.name, users.email, users.game_id',
       :order => opts[:order]
@@ -70,7 +70,7 @@ class InfoController < ApplicationController
 
     if !game_name.nil? then
       game_id = Game.find_by_name(game_name).id
-      options[:conditions] = ['game_instances.game_id = ?', game_id]
+      options[:conditions] = ['instances.game_id = ?', game_id]
     end
 
     users = User.find :all, options
