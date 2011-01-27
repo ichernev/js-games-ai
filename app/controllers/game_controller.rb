@@ -146,6 +146,19 @@ class GameController < ApplicationController
 
   # ##################################################################
 
+  # "AI", "RemoteUser", "LocalUser"
+  def user_type u
+    if u.human? then
+      if user_signed_in? and current_user.id === u.id then
+        return 'LocalUser'
+      else
+        return 'RemoteUser'
+      end
+    else
+      return 'AI'
+    end
+  end
+
   # receives a list of user id's and returns a hash with info on each of them
   def players_info players
     us = User.find players
@@ -153,7 +166,7 @@ class GameController < ApplicationController
     us.each do |u|
       res[u.id.to_s] = {
         :player_id => u.id.to_s,
-        :type => u.type,
+        :type => (user_type u),
         :display_name => u.display_name
       }
     end
