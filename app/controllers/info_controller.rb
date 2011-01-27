@@ -18,7 +18,7 @@ class InfoController < ApplicationController
   # Users sorted by total score.
   def best_total_score
     options = {
-      :select => 'sum(game_players.score) as total_score',
+      :select => 'sum(players.score) as total_score',
       :order => 'total_score DESC'
     }
 
@@ -28,7 +28,7 @@ class InfoController < ApplicationController
   # Users sorted by best average score.
   def best_avg_score
     options = {
-      :select => 'avg(game_players.score) as avg_score',
+      :select => 'avg(players.score) as avg_score',
       :order => 'avg_score DESC'
     }
 
@@ -61,8 +61,8 @@ class InfoController < ApplicationController
     options = {
       :select => 'users.id, users.name, users.email, users.game_id, ' + opts[:select],
       :joins => [
-        'JOIN game_players ON game_players.player_id = users.id',
-        'JOIN game_instances ON game_players.game_instance_id = game_instances.id'
+        'JOIN players ON players.player_id = users.id',
+        'JOIN game_instances ON players.game_instance_id = game_instances.id'
     ],
       :group => 'users.id, users.name, users.email, users.game_id',
       :order => opts[:order]

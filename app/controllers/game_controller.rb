@@ -116,7 +116,7 @@ class GameController < ApplicationController
           gr = game_result.keys.map { |gr| gr.to_i }
           if gi.players.sort == gr.sort then
             game_result.each do |player_id, val|
-              p = GamePlayer.find(
+              p = Player.find(
                 :first,
                 :conditions => {
                   :player_id => player_id,
@@ -185,7 +185,7 @@ class GameController < ApplicationController
       return
     end
     sorted = filtered.sort_by { |gi| gi.began }
-    gp = GamePlayer.where :game_instance_id => sorted.last.id
+    gp = Player.where :game_instance_id => sorted.last.id
     res = {}
     gp.each do |p|
       res[p.player_id.to_s] = {

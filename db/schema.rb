@@ -18,17 +18,17 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
     t.integer  "duration", :default => 0
   end
 
-  create_table "game_players", :force => true do |t|
-    t.integer "game_instance_id"
-    t.integer "player_id"
-    t.integer "play_order"
-    t.integer "score",            :default => 0
-  end
-
   create_table "games", :force => true do |t|
     t.string "name",         :null => false
     t.string "display_name"
     t.text   "description"
+  end
+
+  create_table "players", :force => true do |t|
+    t.integer "game_instance_id"
+    t.integer "player_id"
+    t.integer "play_order"
+    t.integer "score",            :default => 0
   end
 
   create_table "users", :force => true do |t|
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
 
   add_foreign_key "game_instances", "games", :name => "game_instances_game_id_fk"
 
-  add_foreign_key "game_players", "game_instances", :name => "game_players_game_instance_id_fk"
-  add_foreign_key "game_players", "users", :name => "game_players_player_id_fk", :column => "player_id"
+  add_foreign_key "players", "game_instances", :name => "players_game_instance_id_fk"
+  add_foreign_key "players", "users", :name => "players_player_id_fk", :column => "player_id"
 
   add_foreign_key "users", "games", :name => "users_game_id_fk"
 

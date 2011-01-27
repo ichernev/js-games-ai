@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :name, :password
   belongs_to :game
-  has_many :game_players
+  has_many :players
   validates_uniqueness_of :email
 
   def human?

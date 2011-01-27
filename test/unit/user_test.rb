@@ -22,18 +22,6 @@ class UserTest < ActiveSupport::TestCase
     assert u.save
   end
 
-  test "AI type" do
-    u = users :tripio
-    assert !u.human?
-    assert_equal "AI", u.type
-  end
-
-  test "LocalUser type" do
-    u = users :inna
-    assert u.human?
-    assert_equal "LocalUser", u.type
-  end
-
   test "display name" do
     inna = users :inna
     assert_equal inna.display_name, inna.name
