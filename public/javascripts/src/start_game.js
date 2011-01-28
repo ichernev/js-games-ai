@@ -8,7 +8,9 @@
     // TODO(iskren): Dynamic loading here!
     var GameConstructor = JSG.Games[game_data.game_name].Game;
     var game = new GameConstructor(game_data);
-    H("jsg-main").appendChild(game.dom);
+    var main_box = H("main-box");
+    H.empty(main_box);
+    main_box.appendChild(game.dom);
     game.start();
   };
 }());

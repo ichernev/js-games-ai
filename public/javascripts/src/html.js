@@ -45,6 +45,10 @@
       var jq = $(dom);
 
       var processArgument = function(arg) {
+        if (arg === null || arg === undefined) {
+          // Skip null & undefined.
+          return;
+        }
         if (U.isString(arg)) {
           dom.appendChild(H.txtNode(arg));
         } else if (U.isDOM(arg)) {
