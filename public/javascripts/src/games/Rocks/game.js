@@ -17,6 +17,16 @@
   U.mix(NS.Game.prototype, {
     boardConstructor: function() { return NS.Board; },
 
+    createPlayer: function(player) {
+      if (player.type === "AI") {
+        var user = new NS.PerfectAI(player.player_id, this);
+        user.subscribe(this.board);
+        this.players[player.player_id] = user;
+      } else {
+        throw "Unsupported player type " + player.type;
+      }
+    },
+
     // TODO(zori): remove from base class
     prepareBoardTokenMap: function() {
       return undefined;
