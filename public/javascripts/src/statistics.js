@@ -35,7 +35,7 @@
               H.td(user.display_name),
               H.td(user.field)));
         });
-        var main_box = H("main-box");
+        var main_box = H("stat-box");
         H.empty(main_box);
         main_box.appendChild(table);
       };

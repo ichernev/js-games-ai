@@ -9,7 +9,7 @@
       $.log("continuing with game start");
       var GameConstructor = JSG.Games[game_data.game_name].Game;
       var game = new GameConstructor(game_data);
-      var main_box = H("main-box");
+      var main_box = H("play-box");
       H.empty(main_box);
       main_box.appendChild(game.dom);
       game.start();

@@ -97,6 +97,15 @@
     };
   });
 
+  U.foreach(tags_c_shortcut, function(tag) {
+    H["i" + tag] = function() {
+      var args = U.toA(arguments);
+      var id = args[0];
+      args[0] = { id: id };
+      return H[tag].apply(H, args);
+    };
+  });
+
   H.txtNode = function(text) {
     return document.createTextNode(text);
   };

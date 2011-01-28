@@ -9,18 +9,39 @@
   var NS = JSG.UI;
 
   NS.init = function() {
-    var game_list = NS.GameList({
+    H("jsg-main").appendChild(
+      H.idiv("tabs-main",
+        H.ul(
+          H.li(H.a({ href: "#tab-play" }, "play")),
+          H.li(H.a({ href: "#tab-stats" }, "stats"))),
+        H.idiv("tab-play"),
+        H.idiv("tab-stats")));
+
+    $("#tabs-main").tabs();
+
+    NS.GameList({
       has_desc: true,
       include_global: false,
       //include_global: true,
       bottom: NS.playButtons()
       //bottom: NS.statistics()
-    }, game_list_complete);
+    }, play_game_list_complete);
+
+    NS.GameList({
+      has_desc: false,
+      include_global: true,
+      bottom: NS.statistics()
+    }, stat_game_list_complete);
   };
 
-  var game_list_complete = function(dom) {
-    H("jsg-main").appendChild(dom);
-    H("jsg-main").appendChild(H.div({ id: "main-box" }));
+  var play_game_list_complete = function(dom) {
+    H("tab-play").appendChild(dom);
+    H("tab-play").appendChild(H.div({ id: "play-box" }));
+  };
+
+  var stat_game_list_complete = function(dom) {
+    H("tab-stats").appendChild(dom);
+    H("tab-stats").appendChild(H.div({ id: "stat-box" }));
   };
 
 }());

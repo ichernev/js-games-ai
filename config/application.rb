@@ -34,7 +34,9 @@ module JsGames
     config.action_view.javascript_expansions[:defaults] = []
     config.action_view.javascript_expansions[:lib] = [
       'lib/jquery-1.4.4.js',
-      'lib/jquery.log.js'
+      'lib/jquery.log.js',
+
+      'lib/jquery-ui-1.8.9.custom.min.js'
     ]
     config.action_view.javascript_expansions[:src] = [
       'src/init.js',
