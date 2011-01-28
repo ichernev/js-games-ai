@@ -44,6 +44,7 @@ module JsGames
 
       'src/main_ui.js',
       'src/game_list.js',
+      'src/statistics.js',
       'src/widgets/ma3x.js',
       
       'src/start_game.js',
