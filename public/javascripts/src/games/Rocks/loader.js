@@ -3,7 +3,8 @@
       "Rocks", [
         "game.js",
         "board.js",
-        "board_ui.js"
+        "board_ui.js",
+        "perfect_ai.js"
       ], [
         "board.css"
       ], [
