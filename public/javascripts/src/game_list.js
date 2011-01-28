@@ -51,7 +51,7 @@
         };
       }
 
-      var dom = H.cdiv("#game-list",
+      var dom = H.div({ id: "game-list" },
           games.map(function(game) {
             return H.cdiv("game",
                 H.cspan("title", game.display_name),
