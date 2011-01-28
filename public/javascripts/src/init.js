@@ -12,7 +12,7 @@ if (JSG === undefined) {
   // JSG.Data.NODE_PORT = 50006;
   
   JSG.Data.DOMAIN = "localhost";
-  JSG.Data.RAILS = "http://localhost:3005/";
+  JSG.Data.RAILS = "http://localhost:3000/";
   JSG.Data.NODE_PORT = 3006;
 
   JSG.completeInit = function() {
