@@ -1,3 +1,4 @@
+// All urls in this file are relative to the 'public' directory of the project.
 (function() {
   
   var U = JSG.Util = {};
@@ -211,8 +212,8 @@
       cb();
       return;
     }
-    // TODO(zori)
-    var loader_url = "/javascripts/src/games/" + game_name + "/loader.js";
+    // Like public/games/Rocks/js/loader.js
+    var loader_url = "/games/" + game_name + "/js/loader.js";
     $.log("loading loader " + loader_url);
     $.getScript(loader_url);
     var listener = {
@@ -228,15 +229,17 @@
     JSG.ev.subscribe(listener);
   };
 
-  // TODO(zori)
   U.loadGameData = function(game_name, js, css, img) {
     var resource_url_for = function(res) {
       if (res === "js") {
-        return function(fn) { return "/javascripts/src/games/" + game_name + "/" + fn; };
+        // Like public/games/Rocks/js/board.js
+        return function(fn) { return "/games/" + game_name + "/js/" + fn; };
       } else if (res === "css") {
-        return function(fn) { return "/stylesheets/games/" + game_name + "/" + fn; };
+        // Like public/games/Rocks/css/board.css
+        return function(fn) { return "/games/" + game_name + "/css/" + fn; };
       } else if (res === "img") {
-        return function(fn) { return "/images/" + game_name + "/" + fn; };
+        // Like public/games/Rocks/images/selected_rock.png
+        return function(fn) { return "/games/" + game_name + "/images/" + fn; };
       }
     };
     U.getManyScripts(

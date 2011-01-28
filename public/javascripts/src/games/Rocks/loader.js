@@ -11,6 +11,7 @@
         "selected_rock.png",
         "unselected_rock.png"
       ]);
+
   // var game_name = "Rocks";
   // var dir_builder = function(resource, fn) {
   //   return "/" + resource + (resource !== "images" ? "/games/" : "/") + game_name + "/" + fn;
