@@ -149,7 +149,7 @@ class GameController < ApplicationController
   # "AI", "RemoteUser", "LocalUser"
   def user_type u
     if u.human? then
-      if user_signed_in? and current_user.id === u.id then
+      if user_signed_in?
         return 'LocalUser'
       else
         return 'RemoteUser'
