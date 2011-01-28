@@ -28,7 +28,7 @@ class InfoController < ApplicationController
   # Users sorted by best average score.
   def best_avg_score
     options = {
-      :select => "to_char(avg(players.score), '9999990.99')  as field",
+      :select => "to_char(avg(players.score), '99999990.99')  as field",
       :order => 'field DESC'
     }
 
@@ -48,7 +48,7 @@ class InfoController < ApplicationController
   # Users sorted by average time spent playing a game, ascending.
   def fastest_players_avg
     options = {
-      :select => "to_char(avg(instances.duration), '9999990.99')  as field",
+      :select => "to_char(avg(instances.duration), '99999990.99')  as field",
       :order => 'field ASC'
     }
 

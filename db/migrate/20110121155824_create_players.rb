@@ -6,8 +6,8 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :play_order
       t.integer :score, :default => 0
     end
-    add_foreign_key(:players, :instances)
-    add_foreign_key(:players, :users, :column => :player_id)
+    add_foreign_key :players, :instances
+    add_foreign_key :players, :users, :column => :player_id
   end
 
   def self.down

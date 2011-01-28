@@ -7,7 +7,7 @@ class CreateInstances < ActiveRecord::Migration
       t.integer :duration, :default => 0
     end
 
-    add_foreign_key(:instances, :games)
+    add_foreign_key :instances, :games
   end
 
   def self.down
