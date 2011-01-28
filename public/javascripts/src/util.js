@@ -184,4 +184,75 @@
     return max;
   };
 
+  U.getCSS = function(url) {
+    $("head").append(JSG.Util.HTML.link({
+      href: url,
+      type: "test/css",
+      rel: "stylesheet"
+    }));
+  };
+
+  U.getManyScripts = function(urls, cb) {
+    var script_count = urls.length;
+    var script_loaded = function() {
+      -- script_count;
+      if (script_count === 0) {
+        cb();
+      }
+    };
+    U.foreach(urls, function(url) {
+      $.getScript(url, script_loaded);
+    });
+  };
+
+  U.loadGame = function(game_name, cb) {
+    if (JSG.Games[game_name]) {
+      $.log("game " + game_name + " already loaded");
+      cb();
+      return;
+    }
+    var loader_url = "/javascripts/src/games/" + game_name + "/loader.js";
+    $.log("loading loader " + loader_url);
+    $.getScript(loader_url);
+    var listener = {
+      gameFilesLoaded: function(loaded_game_name) {
+        $.log("got sources for: " + loaded_game_name);
+        if (loaded_game_name === game_name) {
+          $.log("notifying callback");
+          cb();
+          JSG.ev.unsubscribe(listener);
+        }
+      }
+    };
+    JSG.ev.subscribe(listener);
+  };
+
+  U.loadGameData = function(game_name, js, css, img) {
+    var resource_url_for = function(res) {
+      if (res === "js") {
+        return function(fn) { return "/javascripts/src/games/" + game_name + "/" + fn; };
+      } else if (res === "css") {
+        return function(fn) { return "/stylesheets/games/" + game_name + "/" + fn; };
+      } else if (res === "img") {
+        return function(fn) { return "/images/" + game_name + "/" + fn; };
+      }
+    };
+    U.getManyScripts(
+        js.map(resource_url_for("js")),
+        function() {
+          JSG.ev.fire("gameFilesLoaded", game_name);
+        });
+    U.foreach(
+        css.map(resource_url_for("css")),
+        U.getCSS);
+    U.foreach(
+        img.map(resource_url_for("img")),
+        (function() {
+          var img_obj = new window.Image();
+          return function(fn) {
+            img_obj.src = fn;
+          };
+        }()));
+  };
+
 }());
