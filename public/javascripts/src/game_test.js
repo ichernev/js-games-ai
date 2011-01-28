@@ -21,7 +21,7 @@
     var active;
 
     var get_users = function() {
-      $.getJSON("http://localhost:3000/game/users.json", handle_users);
+      $.getJSON(JSG.Data.RAILS + "game/users.json", handle_users);
     };
     var handle_users = function(data) {
       if (!data.status) {
@@ -36,7 +36,7 @@
       } else if (player_ids.length === 1) {
         // TODO(iskren): Add AI.
         $.log("assuming remote user");
-        socket = new io.Socket("localhost", { port: 3006 });
+        socket = new io.Socket(JSG.Data.DOMAIN, { port: JSG.Data.NODE_PORT });
         socket.on("connect", function() {
           $.log("subscribing to channel " + game_name);
           socket.send({
@@ -78,7 +78,7 @@
       type = "remote";
       game_name = game_name_;
       // Find a remote user.
-      socket = new io.Socket("localhost", { port: 3006 });
+      socket = new io.Socket(JSG.Data.DOMAIN, { port: JSG.Data.NODE_PORT });
       socket.on("connect", function() {
         $.log("subscribing to channel " + game_name);
         socket.send({
@@ -113,7 +113,7 @@
       game_name = game_name_;
       player_ids = [player_id];
       if (ai_player_id === undefined) {
-        $.getJSON("http://localhost:3000/game/" + game_name + "/ai.json", handleAI);
+        $.getJSON(JSG.Data.RAILS + "game/" + game_name + "/ai.json", handleAI);
       } else {
         player_ids.push(ai_player_id);
         newGame();
@@ -136,7 +136,7 @@
       $.log(["sending new game with player_ids", player_ids]);
       $.ajax({
           type: "POST",
-          url: "http://localhost:3000/game/" + game_name + "/new.json",
+          url: JSG.Data.RAILS + "game/" + game_name + "/new.json",
           dataType: "json",
           data: { players: JSON.stringify(player_ids) },
           success: handleNew
@@ -166,7 +166,7 @@
       }
 
       $.getJSON(
-          "http://localhost:3000/game/play.json",
+          JSG.Data.RAILS + "game/play.json",
           {
             instance_id: instance_id
           },
@@ -200,16 +200,14 @@
     root.appendChild(H([
       H.button("ai", {
         onclick: function() {
-          $.getJSON("http://localhost:3000/game/Rocks/ai.json", printer);
-          //$.getJSON("http://localhost:3005/game/name/ai.json", printer);
+          $.getJSON(JSG.Data.RAILS + "game/Rocks/ai.json", printer);
         }
       }),
       H.button("new", {
         onclick: function() {
           $.ajax({
             type: "POST",
-            url: "http://localhost:3000/game/Rocks/new.json",
-            //url: "http://localhost:3005/game/name/new.json",
+            url: JSG.Data.RAILS + "game/Rocks/new.json",
             dataType: "json",
             data: { players: JSON.stringify([590696008, 619222619]) },
             success: printer
@@ -219,8 +217,7 @@
       H.button("play", {
         onclick: function() {
           $.getJSON(
-            "http://localhost:3000/game/play.json",
-            //"http://localhost:3005/game/play.json",
+            JSG.Data.RAILS + "game/play.json",
             {
               instance_id: "908005739"
             },
@@ -231,8 +228,7 @@
         onclick: function() {
           $.ajax({
             type: "POST",
-            url: "http://localhost:3000/game/finish.json",
-            //url: "http://localhost:3005/game/finish.json",
+            url: JSG.Data.RAILS + "game/finish.json",
             dataType: "json",
             success: printer,
             data: {
@@ -266,7 +262,7 @@
     root.appendChild(H([
       H.button("test get request", {
         onclick: function() {
-          $.getJSON("http://localhost:3000/info/games.json", printer);
+          $.getJSON(JSG.Data.RAILS + "info/games.json", printer);
         }
       }),
       result

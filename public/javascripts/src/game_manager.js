@@ -22,7 +22,7 @@
       type = "remote";
       game_name = game_name_;
       // Find a remote user.
-      socket = new io.Socket("localhost", { port: 3006 });
+      socket = new io.Socket(JSG.Data.DOMAIN, { port: JSG.Data.NODE_PORT });
       socket.on("connect", function() {
         $.log("subscribing to channel " + game_name);
         socket.send({
@@ -58,7 +58,7 @@
       game_name = game_name_;
       player_ids = [player_id];
       if (ai_player_id === undefined) {
-        $.getJSON("http://localhost:3000/game/" + game_name + "/ai.json", handleAI);
+        $.getJSON(JSG.Data.RAILS + "game/" + game_name + "/ai.json", handleAI);
       } else {
         player_ids.push(ai_player_id);
         newGame();
@@ -83,7 +83,7 @@
       $.log(["sending new game with player_ids", player_ids]);
       $.ajax({
           type: "POST",
-          url: "http://localhost:3000/game/" + game_name + "/new.json",
+          url: JSG.Data.RAILS + "game/" + game_name + "/new.json",
           dataType: "json",
           data: { players: JSON.stringify(player_ids) },
           success: handleNew
@@ -115,7 +115,7 @@
       }
 
       $.getJSON(
-          "http://localhost:3000/game/play.json",
+          JSG.Data.RAILS + "game/play.json",
           {
             instance_id: instance_id
           },

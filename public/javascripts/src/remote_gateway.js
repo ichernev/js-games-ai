@@ -17,7 +17,8 @@
   U.mix(NS.RemoteGateway.prototype, {
 
     createGameConnection: function(instance_id) {
-      this.socket = new io.Socket("localhost", { port: 3006 });
+      this.socket = new io.Socket(
+          JSG.Data.DOMAIN, { port: JSG.Data.NODE_PORT });
       this.socket.on("connect", $.proxy(this, "connected"));
       this.socket.on("message", $.proxy(this, "receivedRawData"));
       this.socket.on("disconnect", $.proxy(this, "disconnected"));

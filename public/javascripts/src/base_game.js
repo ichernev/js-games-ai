@@ -108,8 +108,7 @@
       $.log(["reporting to backend", this.players_info]);
       $.ajax({
         type: "POST",
-        url: "http://localhost:3000/game/finish.json",
-        //url: "http://localhost:3005/game/finish.json",
+        url: JSG.Data.RAILS + "game/finish.json",
         dataType: "json",
         success: $.proxy(this, "handleFinishResponse"),
         data: {

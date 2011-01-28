@@ -9,8 +9,9 @@ var server = http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Hello World\n');
 });
-server.listen(3006, 'localhost');
-Y.log("NodeJS remote gateway running at http://localhost:3006");
+server.listen(JSG.Data.NODE_PORT, JSG.Data.DOMAIN);
+Y.log("NodeJS remote gateway running at " +
+    JSG.Data.DOMAIN + " on port " + JSG.Data.NODE_PORT);
 
 var socket = io.listen(server);
 
