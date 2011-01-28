@@ -53,17 +53,17 @@ module JsGames
       'src/local_user.js',
       'src/remote_gateway.js',
 
-      'src/finish_init.js',
+      'src/finish_init.js'
       # 'src/game_test.js',
 
-      'src/games/TicTacToe/game.js',
-      'src/games/TicTacToe/board.js',
-      'src/games/TicTacToe/board_ui.js',
-      'src/games/TicTacToe/perfect_ai.js',
+      # 'src/games/TicTacToe/game.js',
+      # 'src/games/TicTacToe/board.js',
+      # 'src/games/TicTacToe/board_ui.js',
+      # 'src/games/TicTacToe/perfect_ai.js',
 
-      'src/games/Rocks/game.js',
-      'src/games/Rocks/board.js',
-      'src/games/Rocks/board_ui.js'
+      # 'src/games/Rocks/game.js',
+      # 'src/games/Rocks/board.js',
+      # 'src/games/Rocks/board_ui.js'
     ]
     config.action_view.javascript_expansions[:test] = [
       'src/pre.test.js',
