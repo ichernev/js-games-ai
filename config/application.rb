@@ -34,7 +34,9 @@ module JsGames
     config.action_view.javascript_expansions[:defaults] = []
     config.action_view.javascript_expansions[:lib] = [
       'lib/jquery-1.4.4.js',
-      'lib/jquery.log.js'
+      'lib/jquery.log.js',
+
+      'lib/jquery-ui-1.8.9.custom.min.js'
     ]
     config.action_view.javascript_expansions[:src] = [
       'src/init.js',
@@ -54,17 +56,17 @@ module JsGames
       'src/local_user.js',
       'src/remote_gateway.js',
 
-      'src/finish_init.js',
+      'src/finish_init.js'
       # 'src/game_test.js',
 
-      'src/games/TicTacToe/game.js',
-      'src/games/TicTacToe/board.js',
-      'src/games/TicTacToe/board_ui.js',
-      'src/games/TicTacToe/perfect_ai.js',
+      # 'src/games/TicTacToe/game.js',
+      # 'src/games/TicTacToe/board.js',
+      # 'src/games/TicTacToe/board_ui.js',
+      # 'src/games/TicTacToe/perfect_ai.js',
 
-      'src/games/Rocks/game.js',
-      'src/games/Rocks/board.js',
-      'src/games/Rocks/board_ui.js'
+      # 'src/games/Rocks/game.js',
+      # 'src/games/Rocks/board.js',
+      # 'src/games/Rocks/board_ui.js'
     ]
     config.action_view.javascript_expansions[:test] = [
       'src/pre.test.js',

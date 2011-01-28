@@ -30,7 +30,8 @@
       "ol", "ul", "li",
       "dl", "dt", "dd",
       "pre",
-      "table", "thead", "tbody", "tfoot", "th", "tr", "td", "col"
+      "table", "thead", "tbody", "tfoot", "th", "tr", "td", "col",
+      "link"
   ];
 
   var snake2camel = function(name) {
@@ -92,6 +93,15 @@
       var args = U.toA(arguments);
       var cls = args[0];
       args[0] = { cls: cls };
+      return H[tag].apply(H, args);
+    };
+  });
+
+  U.foreach(tags_c_shortcut, function(tag) {
+    H["i" + tag] = function() {
+      var args = U.toA(arguments);
+      var id = args[0];
+      args[0] = { id: id };
       return H[tag].apply(H, args);
     };
   });
