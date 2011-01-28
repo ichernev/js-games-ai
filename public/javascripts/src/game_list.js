@@ -12,20 +12,17 @@
             H.button("play locally", {
                 onclick: function() {
                   JSG.ev.fire("playGame", game_name, "local");
-                  // play("local", game_name);
                 }
             }));
       } else if (users.length === 1) {
         return H.cdiv("ctl",
             H.button("play vs AI", {
                 onclick: function() {
-                  // play("ai", game_name);
                   JSG.ev.fire("playGame", game_name, "ai");
                 }
             }),
             H.button("play remotely", {
                 onclick: function() {
-                  // play("remote", game_name);
                   JSG.ev.fire("playGame", game_name, "remote");
                 }
             }));
@@ -44,7 +41,7 @@
     var users;
 
     var loadGames = function() {
-      $.getJSON("http://localhost:3000/info/games.json", handleGames);
+      $.getJSON(JSG.Data.RAILS + "info/games.json", handleGames);
     };
 
     var handleGames = function(games_) {
@@ -54,7 +51,7 @@
     };
 
     var loadUsers = function() {
-      $.getJSON("http://localhost:3000/game/users.json", handleUsers);
+      $.getJSON(JSG.Data.RAILS + "game/users.json", handleUsers);
     };
 
     var handleUsers = function(users_) {
@@ -70,13 +67,12 @@
     var displayGamesList = function() {
 
       var global_game = {
-        name: "_global",
         display_name: "All Games",
         description: "Meta Game used in stats"
       };
       var all_games = ops.include_global ? [global_game].concat(games) : games;
       var dom = H.div({ id: "game-list" },
-          games.map(function(game) {
+          all_games.map(function(game) {
             return H.cdiv("game",
                 H.cspan("title", game.display_name),
                 (ops.has_desc ? H.cspan("desc", game.description) : null),
@@ -85,7 +81,6 @@
       
 
       cb(dom);
-      // H("jsg-main").appendChild(dom);
     };
 
     // var play = function(type, game_name) {
