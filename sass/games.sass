@@ -18,7 +18,7 @@ body
       float: left
       margin-right: 0.3em
 
-#user-ops
+@mixin cool
   max-width: 300px
   float: right
   background: #EEE
@@ -27,16 +27,21 @@ body
   margin-bottom: 20px
   font-size: 13pt
   text-align: right
-  #second-user-ops
-    .greeting
-      color: black
-      font-weight: bold
-    .info
-      font-style: italic
-      font-weight: 200
-    .nav
-      color: blue
-      text-decoration: none
+  
+
+#user-ops
+  @include cool
+#more-ops
+  @include cool
+  .greeting
+    color: black
+    font-weight: bold
+  .info
+    font-style: italic
+    font-weight: 200
+  .nav
+    color: blue
+    text-decoration: none
 
 #add-game
   text-align: right
