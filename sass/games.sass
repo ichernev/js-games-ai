@@ -4,7 +4,7 @@
 
 body
   padding: 10px !important
-  font-size: 62%
+  font-size: 80%
 
 .notice
   border: 2px solid red
@@ -13,17 +13,25 @@ body
   background-color: #f0f0f0
   font: bold smaller sans-serif
 
-#second-user-ops
+#user-ops
+  max-width: 300px
+  float: right
+  background: #EEE
+  border: 1px solid #999
+  padding: 10px
+  margin-bottom: 20px
+  font-size: 13pt
   text-align: right
-  .greeting
-    color: red
-    font-size: 13pt
-  .info
-    font-style: italic
-    font-weight: 200
-  .nav
-    color: blue
-    text-decoration: none
+  #second-user-ops
+    .greeting
+      color: black
+      font-weight: bold
+    .info
+      font-style: italic
+      font-weight: 200
+    .nav
+      color: blue
+      text-decoration: none
 
 #add-game
   text-align: right
@@ -111,3 +119,19 @@ body
       width: 200px
     // width: 70px
 
+#second-user-login, .formz
+  font-size: 1.2em
+  background-color: #EEE
+  border: 1px solid #BBB
+  width: 400px
+  float: left
+  margin: 10px auto
+  h2
+    margin: 10px
+    font-size: 1.4em
+  p
+    margin: 10px
+    label
+      margin-bottom: 5px
+    input[type=file]
+      margin-top: 5px
