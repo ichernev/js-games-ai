@@ -1,10 +1,17 @@
 - if user_signed_in?
-  %p= "Hello, #{current_user.display_name}"
-  - if session.has_key? :second_user
-    %i= session[:second_user].display_name + ' is also logged. '
-    %i Wanna play alone?
-    -# %br/
-    = link_to 'Get rid of ' + session[:second_user].name,
-      :controller => 'welcome', :action => 'logout_second'
-  - else
-    = link_to 'Login second user', :action => 'login_second'
+  #second-user-ops
+    .greeting= "Hello, #{current_user.display_name}"
+    - if session.has_key? :second_user
+      %span.info
+        = session[:second_user].display_name + ' is also logged. '
+        Wanna play alone?
+      -# %br/
+      %span.nav
+        = link_to 'Get rid of ' + session[:second_user].name,
+          :controller => 'welcome', :action => 'logout_second'
+    - else
+      %span.info
+        Bored playing alone?
+      %span.nav
+        = link_to 'Login second user',
+          :controller => 'welcome', :action => 'login_second'

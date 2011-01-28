@@ -9,8 +9,10 @@
     = javascript_include_tag "http://localhost:3006/socket.io/socket.io.js"
     = csrf_meta_tag
   %body
-    %p.notice= notice
-    %p.alert= alert
+    - if flash[:notice]
+      %p.notice= notice
+    - if flash[:alert]
+      %p.alert= alert
     %ul.user-main-ops
       = render 'devise/menu/registration_items'
       = render 'devise/menu/login_items'
