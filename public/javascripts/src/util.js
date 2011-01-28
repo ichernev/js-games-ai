@@ -211,6 +211,7 @@
       cb();
       return;
     }
+    // TODO(zori)
     var loader_url = "/javascripts/src/games/" + game_name + "/loader.js";
     $.log("loading loader " + loader_url);
     $.getScript(loader_url);
@@ -227,6 +228,7 @@
     JSG.ev.subscribe(listener);
   };
 
+  // TODO(zori)
   U.loadGameData = function(game_name, js, css, img) {
     var resource_url_for = function(res) {
       if (res === "js") {
