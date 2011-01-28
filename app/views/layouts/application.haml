@@ -7,6 +7,7 @@
     = javascript_include_tag :lib
     = javascript_include_tag :src
     -# TODO(zori): Change to the NodeJS domain in production code.
+    -# = javascript_include_tag "http://iskren.info:50006/socket.io/socket.io.js"
     = javascript_include_tag "http://localhost:3006/socket.io/socket.io.js"
     = csrf_meta_tag
   %body
@@ -14,9 +15,11 @@
       %p.notice= notice
     - if flash[:alert]
       %p.alert= alert
-    %ul.user-main-ops
-      = render 'devise/menu/registration_items'
-      = render 'devise/menu/login_items'
-    = render 'welcome/second_user_items'
-    = render 'upload/add_game'
+    #user-ops.ui-corner-all
+      %ul.user-main-ops
+        = render 'devise/menu/registration_items'
+        = render 'devise/menu/login_items'
+      = render 'welcome/second_user_items'
+      = render 'upload/add_game'
+    %br{:clear => "both"}
     = yield

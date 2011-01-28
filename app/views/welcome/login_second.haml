@@ -1,13 +1,14 @@
 #content
-  = form_for(:user,
-    :url => { :controller => 'welcome',
-              :action => 'authenticate_second' }) do |f|
-    %p
-      = f.label :email
-      %br/
-      = f.text_field :email
-    %p
-      = f.label :password
-      %br/
-      = f.password_field :password
-    %p= f.submit 'Sign in second'
+  #second-user-login.ui-corner-all
+    = form_for(:user,
+      :url => { :controller => 'welcome',
+                :action => 'authenticate_second' }) do |f|
+      %p
+        = f.label :email
+        %br/
+        = f.text_field :email
+      %p
+        = f.label :password
+        %br/
+        = f.password_field :password
+      %p= f.submit 'Sign in second'

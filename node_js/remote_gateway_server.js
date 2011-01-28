@@ -5,6 +5,9 @@ var sys = require("sys");
 var Y; require("yui3").YUI().use("*", function(ZZ) { Y = ZZ; });
 var each = Y.Array.each;
 
+var JSG = { Data: { DOMAIN: "iskren.info", NODE_PORT: 50006 } };
+// var JSG = { Data: { DOMAIN: "localhost", NODE_PORT: 3006 } };
+
 var server = http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Hello World\n');
