@@ -12,9 +12,19 @@
     = csrf_meta_tag
   %body
     - if flash[:notice]
-      %p.notice= notice
+      -# %p.notice= notice
+      .ui-widget.notice
+        .ui-state-highlight.ui-corner-all
+          %p
+            %span.ui-icon.ui-icon-info.icon
+            = notice
     - if flash[:alert]
-      %p.alert= alert
+      -# %p.alert= alert
+      .ui-widget.alert
+        .ui-state-error.ui-corner-all
+          %p
+            %span.ui-icon.ui-icon-alert.icon
+            = alert
     #user-ops.ui-corner-all
       %ul.user-main-ops
         = render 'devise/menu/registration_items'
