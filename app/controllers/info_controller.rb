@@ -8,8 +8,8 @@ class InfoController < ApplicationController
   # Users sorted by number of games played, descending.
   def most_games
     options = {
-      :select => 'count(*) as num_games',
-      :order => 'num_games DESC'
+      :select => 'count(*) as field',
+      :order => 'field DESC'
     }
 
     render_users params[:name], options
@@ -18,8 +18,8 @@ class InfoController < ApplicationController
   # Users sorted by total score.
   def best_total_score
     options = {
-      :select => 'sum(players.score) as total_score',
-      :order => 'total_score DESC'
+      :select => 'sum(players.score) as field',
+      :order => 'field DESC'
     }
 
     render_users params[:name], options
@@ -28,8 +28,8 @@ class InfoController < ApplicationController
   # Users sorted by best average score.
   def best_avg_score
     options = {
-      :select => 'avg(players.score) as avg_score',
-      :order => 'avg_score DESC'
+      :select => 'avg(players.score) as field',
+      :order => 'field DESC'
     }
 
     render_users params[:name], options
@@ -38,8 +38,8 @@ class InfoController < ApplicationController
   # Users sorted by time spend playing games, descending.
   def max_time_played
     options = {
-      :select => 'sum(instances.duration) as total_time',
-      :order => 'total_time DESC'
+      :select => 'sum(instances.duration) as field',
+      :order => 'field DESC'
     }
 
     render_users params[:name], options
@@ -48,8 +48,8 @@ class InfoController < ApplicationController
   # Users sorted by average time spent playing a game, ascending.
   def fastest_players_avg
     options = {
-      :select => 'avg(instances.duration) as avg_time',
-      :order => 'avg_time ASC'
+      :select => 'avg(instances.duration) as field',
+      :order => 'field ASC'
     }
 
     render_users params[:name], options
@@ -58,13 +58,14 @@ class InfoController < ApplicationController
   # ##################################################################
 
   def render_users game_name, opts
+    select = 'users.name, users.email, users.game_id'
     options = {
-      :select => 'users.id, users.name, users.email, users.game_id, ' + opts[:select],
+      :select => select + ', ' + opts[:select],
       :joins => [
         'JOIN players ON players.player_id = users.id',
         'JOIN instances ON players.instance_id = instances.id'
     ],
-      :group => 'users.id, users.name, users.email, users.game_id',
+      :group => select,
       :order => opts[:order]
     }
 
