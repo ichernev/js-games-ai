@@ -11,9 +11,10 @@
   NS.init = function() {
     var game_list = NS.GameList({
       has_desc: true,
-      include_global: true,
-      //bottom: NS.playButtons()
-      bottom: NS.statistics()
+      include_global: false,
+      //include_global: true,
+      bottom: NS.playButtons()
+      //bottom: NS.statistics()
     }, game_list_complete);
   };
 

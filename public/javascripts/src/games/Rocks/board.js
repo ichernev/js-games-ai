@@ -32,6 +32,9 @@
       if (pos[0] !== 0) {
         throw "Illegal board click";
       }
+      if (this.game.state[pos[1]] === 0) {
+        return;
+      }
       var erased = U.erase(this.move, pos[1]);
       if (erased) {
         this.ui.setImg(pos[1], "unselected_rock");
