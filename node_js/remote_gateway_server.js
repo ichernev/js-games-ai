@@ -119,6 +119,12 @@ socket.on('connection', function(client) {
       } else if (msg._type === "unsubscribe") {
         channel_manager.unsubscribe(client, msg._channel_id);
         return;
+      } else if (msg._type === "disconnect") {
+        Y.log("got disconnect request - sending it back to client");
+        client.send({ _type: "disconnect" });
+        // client.close();
+        // client.emit("disconnect");
+        // channel_manager.unsubscribeAll(client);
       }
     }
     catch (e) {

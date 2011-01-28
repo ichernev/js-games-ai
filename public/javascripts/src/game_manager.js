@@ -44,12 +44,18 @@
             $.log("we are passive");
             active = false;
           }
+        } else if (data._type === "disconnect") {
+          // Now it is safe to disconnect.
+          socket.disconnect();
         } else if (!active && data.instance_id) {
           $.log(["got instance id from active player", data.instance_id]);
           instance_id = data.instance_id;
           socket.disconnect();
           playGame();
         }
+      });
+      socket.on("disconnect", function() {
+        $.log("yeey - disconnected from socket");
       });
       socket.connect();
     };
@@ -102,6 +108,9 @@
           instance_id: instance_id
         });
         // TODO(iskren): I really don't know what.
+        socket.send({
+          _type: "disconnect"
+        });
         // socket.disconnect();
       }
       $.log("got instance id", instance_id, active);
