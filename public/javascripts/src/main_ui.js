@@ -36,12 +36,14 @@
 
   var play_game_list_complete = function(dom) {
     H("tab-play").appendChild(dom);
-    H("tab-play").appendChild(H.div({ id: "play-box" }));
+    H("tab-play").appendChild(H.div({ id: "play-box", cls: "ui-state-default" }));
+    H("tab-play").appendChild(H.br({ clear: "both" }));
   };
 
   var stat_game_list_complete = function(dom) {
     H("tab-stats").appendChild(dom);
-    H("tab-stats").appendChild(H.div({ id: "stat-box" }));
+    H("tab-stats").appendChild(H.div({ id: "stat-box", cls: "ui-state-default" }));
+    H("tab-stats").appendChild(H.br({ clear: "both" }));
   };
 
 }());

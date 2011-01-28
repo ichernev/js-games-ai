@@ -30,7 +30,7 @@
       "ol", "ul", "li",
       "dl", "dt", "dd",
       "pre",
-      "table", "thead", "tbody", "tfoot", "th", "tr", "td", "col",
+      "table", "colgroup", "thead", "tbody", "tfoot", "th", "tr", "td", "col",
       "link"
   ];
 

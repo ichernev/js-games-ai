@@ -5,9 +5,13 @@
   var NS = JSG.GameCore;
 
   NS.BaseGame = function(game_data) {
-    this.dom = H.div({ id: game_data.game_name.toLowerCase() + "_main" });
+    this.dom = H.div({
+      id: game_data.game_name.toLowerCase() + "_main",
+      cls: "game-main"
+    });
     this.ev = new U.Event();
     this.board = new (this.boardConstructor())();
+    this.name = game_data.game_name;
 
     this.instance_id = game_data.instance_id;
     this.players_info = game_data.players;
@@ -59,10 +63,11 @@
     },
 
     fillDom: function() {
+      this.dom.appendChild(H.cdiv("game-title ui-widget-header", this.name));
       this.dom.appendChild(this.board.ui.dom);
-      this.dom.appendChild(H.span(
-          this.current_player_label = H.span("Current player: "),
-          this.current_player_span = H.span()));
+      this.dom.appendChild(H.cdiv("game-turn-info ui-state-highlight",
+          this.current_player_label = H.cspan("turn-label", "Current player: "),
+          this.current_player_span = H.cspan("turn-user")));
     },
 
     currentPlayer: function() {

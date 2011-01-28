@@ -73,7 +73,7 @@
       var all_games = ops.include_global ? [global_game].concat(games) : games;
       var dom = H.div({ id: "game-list" },
           all_games.map(function(game) {
-            return H.cdiv("game",
+            return H.cdiv("game ui-corner-all ui-state-default",
                 H.cspan("title", game.display_name),
                 (ops.has_desc ? H.cspan("desc", game.description) : null),
                 ops.bottom(game.name));

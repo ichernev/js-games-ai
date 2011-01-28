@@ -4,6 +4,7 @@
 
 body
   padding: 10px !important
+  font-size: 62%
 
 .notice
   border: 2px solid red
@@ -28,10 +29,11 @@ body
   text-align: right
 
 #game-list
+  float: left
   .game
     width: 300px
-    background: rgb(255, 255, 125)
-    border: 2px solid blue
+    // background: rgb(255, 255, 125)
+    // border: 2px solid blue
     padding: 5px 10px
     margin-bottom: 5px
     .title
@@ -44,25 +46,68 @@ body
     .desc
       display: block
       color: gray
-      font-size: 11pt
+      font-size: 10pt
       margin-bottom: 2px
     .ctl
       text-align: right
+      font-size: 9pt
       button
         margin: 5px 2px
       a
         text-decoration: underline
+        cursor: pointer
+
+        &:hover
+          color: black
+
+#tab-play
+  #game-list, #play-box
+    float: left
+  #play-box
+    min-width: 400px
+    // min-height: 200px
+
+#play-box, #stat-box
+  margin-left: 20px
+
+#tab-stats
+  #game-list, #stat-box
+    float: left
+
+.game-main
+  .game-title
+    font-size: 12pt
+    text-align: center
+  .game-turn-info
+    font-size: 11pt
+    text-align: center
+    .turn-label
+      color: black
+    .turn-user
+      color: blue
 
 #statistics
+  float: left
   table, td, th
-    border: 3px solid green
-    padding: 15px
-    width: 210px
+    border: 1px solid gray
+    padding: 10px 10px
+    // width: 210px
   th
-    background:  rgb(100, 240, 170)
+    background:  #EB8F00
     color: white
-    height: 25px
+    font-size: 1.2em
+    font-weight: bold
+    // height: 25px
   td
     color: black
-    width: 70px
+
+  th, td
+    &.rank
+      width: 30px
+      text-align: right
+    &.name
+      width: 150px
+    &.data
+      width: 200px
+    // width: 70px
 

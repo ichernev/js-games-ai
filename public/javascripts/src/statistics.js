@@ -31,9 +31,9 @@
         
         U.foreach(stat, function(user, ix) {
             table.appendChild(H.tr(
-              H.td((ix + 1).toString()),
-              H.td(user.display_name),
-              H.td(user.field)));
+              H.td((ix + 1).toString(), { cls: "rank" }),
+              H.td(user.display_name, { cls: "name" }),
+              H.td(user.field, { cls: "data" })));
         });
         var main_box = H("stat-box");
         H.empty(main_box);
