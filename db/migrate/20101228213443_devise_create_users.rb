@@ -1,7 +1,9 @@
 class DeviseCreateUsers < ActiveRecord::Migration
+
   def self.up
     create_table :users do |t|
       t.references :game, :default => nil
+      
       t.database_authenticatable :null => false
       t.string :name
     end
@@ -13,4 +15,5 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def self.down
     drop_table :users
   end
+
 end

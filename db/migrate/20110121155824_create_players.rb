@@ -1,11 +1,12 @@
 class CreatePlayers < ActiveRecord::Migration
+  
   def self.up
     create_table :players do |t|
       t.references :instance
       t.references :user
-      #t.integer :player_id
-      t.integer :play_order
-      t.integer :score, :default => 0
+      
+      t.integer   :play_order
+      t.integer   :score,         :default => 0
     end
 
     #add_foreign_key :players, :instances
@@ -15,4 +16,5 @@ class CreatePlayers < ActiveRecord::Migration
   def self.down
     drop_table :players
   end
+  
 end
