@@ -1,0 +1,314 @@
+
+\documentclass[a4paper]{article}
+\usepackage{ucs}  % unicode
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[bulgarian]{babel}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage[usenames,dvipsnames]{color}
+\setlength{\headheight}{12.51453pt}
+
+%%%%%%%%%%%%%% Pygments header.
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\def\PY@tok@gd{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\def\PY@tok@gu{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\def\PY@tok@gt{\def\PY@tc##1{\textcolor[rgb]{0.00,0.25,0.82}{##1}}}
+\def\PY@tok@gs{\let\PY@bf=\textbf}
+\def\PY@tok@gr{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\def\PY@tok@cm{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\def\PY@tok@vg{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@m{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@mh{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@go{\def\PY@tc##1{\textcolor[rgb]{0.50,0.50,0.50}{##1}}}
+\def\PY@tok@ge{\let\PY@it=\textit}
+\def\PY@tok@vc{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@il{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@cs{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\def\PY@tok@cp{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\def\PY@tok@gi{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\def\PY@tok@gh{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\def\PY@tok@ni{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\def\PY@tok@nl{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\def\PY@tok@nn{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\def\PY@tok@no{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\def\PY@tok@na{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\def\PY@tok@nb{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@nc{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\def\PY@tok@nd{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\def\PY@tok@ne{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\def\PY@tok@nf{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\def\PY@tok@si{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\def\PY@tok@s2{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@vi{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@nt{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@nv{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@s1{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@sh{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@sc{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@sx{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@bp{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@c1{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\def\PY@tok@kc{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@c{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\def\PY@tok@mf{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@err{\def\PY@bc##1{\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{##1}}}
+\def\PY@tok@kd{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@ss{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@sr{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\def\PY@tok@mo{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@kn{\let\PY@bf=\textbf\dthod of a LatexFormatter returns a string containing \def commands ef\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@mi{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@gp{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\def\PY@tok@o{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@kr{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@s{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@kp{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@w{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\def\PY@tok@kt{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\def\PY@tok@ow{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\def\PY@tok@sb{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@k{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@se{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\def\PY@tok@sd{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+%%%%%%%%%%%%%% Pygments header end.
+
+
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+
+\cfoot{\thepage\ от \pageref{LastPage}}
+
+\addto\captionsbulgarian{%
+  \def\abstractname{%
+    Цел на проекта} %\cyr\CYRA\cyrs\cyrt\cyrr\cyra\cyrk\cyrt}}%
+}
+
+% Custom defines:
+\def\js{JsGames}
+\def\jsurl{http://iskren.info:50005/}
+
+% TODO remove colorlinks before printing
+\usepackage[unicode,colorlinks]{hyperref}   % this has to be the _last_ command in the preambule, or else - no work
+\hypersetup{urlcolor=blue}
+\hypersetup{citecolor=PineGreen}
+
+ \begin{document}
+
+\title{\js}
+\author{
+Зорница Атанасова Костадинова, 4 курс, КН, фн: 80227, \\
+Искрен Ивов Чернев, 4 курс, КН, фн: 80246
+}
+\date{\today}
+\maketitle
+
+%\includegraphics[scale=0.1]{drop}
+
+\begin{abstract}
+Настоящият документ е курсова работа към проекта ``\js'' по предмета ``WWW Технологии''. Описали сме задачата която си поставихме с този проект, решението, базата данни (схема, описание на таблиците и релациите между тях), интерфейса и възможностите за разширяване на проекта. Обяснили сме методите и основните архитектурни принципи залегнали в разработката на проекта, както и използваните технологии.
+\end{abstract}
+\newpage
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+\newpage
+
+\section{Описание на проекта}
+
+Проект: cайт с javascript игри.\footnote{Проектът се хоства на \jsurl.}
+
+- сайта ще поддържа потребители със следната информация за тях:
+-- email;
+-- парола;
+-- nickname.
+
+- информация за игра:
+-- име;
+-- кратко описание;
+-- пълно обяснение на правилата.
+
+- за всяка изиграна игра ще се пази следната информация:
+-- коя е играта;
+-- потребители играли играта (може някой да са компютри, в такъв случай се пази трудността на компютъра);
+-- резултат;
+-- продължителност на играта;
+-- ако играта не бъде изиграна до 1 ден ще се изтрива информацията за нея.
+
+- възможност за изкарване на класиране:
+-- най-много изиграни игри - общо за всички игри или за конкретна игра;
+-- най-много изкарани точки - общо точки или средно аритметично, общо и за конкретна игра;
+-- най-дълго прекарано време в игри - общо време или средно аритметично, общо или за конкретна игра.
+
+- ще има възможност за динамично добавяне, редактиране, изтриване на горепосочените данни където това има смисъл
+
+- допълнителни пояснения за игрите:
+-- игрите ще бъдат имплементирани на javascript;
+-- всички игри ще имат изкуствен ителект (имплементиран като javascript клиент) с поне една степен на трудност;
+-- сървърът ще поддържа комуникация между различни javascript клиенти (при игра на няколко души) за да се обменят изиграните ходове;
+-- ще може да се играе и само от един клиент (браузър) ако единия играч е човек, а другия компютър (изкуствен ителект).
+
+% TODO
+%\texttt{http://drupal.org}.
+
+\section{Използвани технологии}
+
+  \subsection{Haml}
+  Haml е \cite{haml}
+  Haml is a markup language that’s used to cleanly and simply describe the XHTML of any web document, without the use of inline code. Haml functions as a replacement for inline page templating systems such as PHP, ERB, and ASP. However, Haml avoids the need for explicitly coding XHTML into the template, because it is actually an abstract description of the XHTML, with some code to generate dynamic content.
+
+  \subsection{Sass}
+  Sass \cite{sass} -> Css \cite{css}
+  Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more. It’s translated to well-formatted, standard CSS using the command line tool or a web-framework plugin.
+
+Sass has two syntaxes. The new main syntax (as of Sass 3) is known as “SCSS” (for “Sassy CSS”), and is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. SCSS files use the extension .scss.
+
+The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported. Files in the indented syntax use the extension .sass.
+
+  \subsection{Ruby on Rails Framework}
+    
+  \subsection{NodeJs}
+    
+  \subsection{jQuery}
+
+  \subsection{Документация}
+  %Документацията на Drupal е автоматично генерирана с помощта на системата Doxygen \cite{doxygen}. Тя директно се извлича от кода, което значително улеснява поддържането й.
+
+  \subsection{Yui3 library}
+
+  \subsection{Mercurial}
+
+  \subsection{Zero CSS}
+
+  \subsection{Ruby Gems}
+
+  \subsubsection{База от данни}
+  PostgreSQL \cite{postgresql}
+
+  \subsection{Статистика за проекта}
+  \begin{itemize}
+    \item Използвани езици за програмиране \\
+    
+    \item Редове код от началото на проекта \\
+
+    % TODO: this is how to add IMAGES: 
+    % \includegraphics[scale=0.65]{lines_of_code} \\
+
+    \item Брой тестове \\
+
+    \item Брой commits в системата за контрол на версиите \\
+  \end{itemize}
+
+  \subsection{Цел}
+
+\section{Реализация}
+
+\subsection{Програмен език}
+
+Ruby \cite{ruby} and Javascript \cite{javascript}.
+Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
+
+\subsubsection{Уеб сървъри}
+
+За работата на продукта е нужен web server \cite{webServer}.
+
+Използваме:
+\begin{itemize}
+  \item \texttt{Webrick \cite{webrick}} - web server който се ...
+  WEBrick is a Ruby library providing simple HTTP web server services. The server also provides code for simple server services other than HTTP.
+It is used by the Ruby on Rails framework to test applications in a development environment.
+  \item \texttt{NodeJs \cite{node}} - web server ...
+\end{itemize}
+
+
+\subsubsection{База от данни}
+
+За коректна работа, Drupal се нуждае от релационна база от данни. Връзката с БД става чрез модул който имплементира определено API. Това позволява независимост на избора на БД от останалите компоненти на продукта. В момента се поддържат две от най-известните бази с отворен код - PostgreSQL \cite{postgresql}.
+
+\subsection{Дизайн} 
+Спазени са основните принципи на Обектно Ориентираното Програмиране \cite{oop} - капсулиране, полиморфизъм, наследяване, абстракция, обекти.
+
+\subsubsection{Шаблони за дизайн}
+Следните шаблони за дизайн (design patterns) са използвани в \js: 
+
+\begin{itemize}
+  \item \texttt{singleton} - Ако разглеждаме модулите и темите като обекти, то всички те реализират the singleton pattern. 
+  \item \texttt{model-view-controller} - ...
+  \item \texttt{event-driven approach} - ...
+\end{itemize}
+
+% TODO: Routing
+
+\paragraph{NodeJs}
+Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
+
+This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use.
+
+\paragraph{User}
+
+\paragraph{View}
+
+\section{Инсталация}
+
+\subsection{Инсталиране на зависимости}
+
+За да разработим \js си инсталирахме:
+\begin{enumerate}
+  \item ruby
+  \item rails
+  \item node
+  \item socket.io
+  \item npm
+  \item PostgreSQL
+  \item yui3
+  \item jsLint
+  \item Mercurial
+  \item more ... :)
+\end{enumerate}
+
+\subsection{Заключение}
+
+\newpage
+
+\begin{thebibliography}{99}
+  \bibitem{haml} \url{http://haml-lang.com/}
+  \bibitem{sass} \url{http://sass-lang.com/}
+  \bibitem{css} \url{http://en.wikipedia.org/wiki/Css}
+  \bibitem{webServer} \url{http://en.wikipedia.org/wiki/Web\_server}
+  %\bibitem{apache} \url{http://httpd.apache.org/}
+  \bibitem{ruby} \url{http://www.ruby-lang.org/en/}
+  \bibitem{javascript} \url{http://en.wikipedia.org/wiki/ECMAScript}
+  \bibitem{webrick} \url{http://en.wikipedia.org/wiki/WEBrick}
+  \bibitem{node} \url{http://nodejs.org/}
+  \bibitem{postgresql} \url{http://www.postgresql.org/}
+  %\bibitem{doxygen} \url{http://www.stack.nl/~dimitri/doxygen/}
+  \bibitem{oop} \url{http://en.wikipedia.org/wiki/Object-oriented\_programming}
+  %\bibitem{htmlTags} \url{http://www.w3schools.com/html/html\_primary.asp}
+  %\bibitem{routing} \url{http://acquia.com/node/693074}
+\end{thebibliography}
+
+\end{document}
