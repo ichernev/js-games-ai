@@ -13,11 +13,6 @@ JsGames::Application.routes.draw do
   match 'upload' => 'upload#index'
   match 'upload/get_game' => 'upload#get_game'
 
-  # tests
-  match 'test' => 'test#qunit_test'
-  match 'gametest' => 'test#game_test'
-  match 'uitest' => 'test#ui_test'
-
   # game controller
   match 'game/users.json' => 'game#users'
   match 'game/:name/ai.json' => 'game#ai'
@@ -43,6 +38,14 @@ JsGames::Application.routes.draw do
 
   match 'stats/fastest_players_avg.json' => 'info#fastest_players_avg'
   match 'stats/:name/fastest_players_avg.json' => 'info#fastest_players_avg'
+
+  # tests
+  match 'test' => 'test#qunit_test'
+  match 'gametest' => 'test#game_test'
+  match 'uitest' => 'test#ui_test'
+
+  # admin tasks
+  match 'admin/delete/:name' => 'admin#delete_game'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

@@ -1,13 +1,14 @@
 require 'test_helper'
 
 class InstanceTest < ActiveSupport::TestCase
+
   test "began time required" do
     gi = Instance.new
     gi.game = games :tic_tac_toe 
     assert !gi.save
   end
 
-  test "game id required" do
+  test "game required" do
     gi = Instance.new :began => Time.now
     assert !gi.save
   end
@@ -30,6 +31,7 @@ class InstanceTest < ActiveSupport::TestCase
     gi.duration = Time.now - gi.began
     gi.game = games :rocks
     assert gi.save
+    assert gi.finished?
   end
 
   test "correct players returned" do
@@ -42,4 +44,12 @@ class InstanceTest < ActiveSupport::TestCase
     assert_equal gip.size, 3
     assert_equal players.sort, gip.sort
   end
+
+  test "has players" do
+    snd = instances :second
+    assert_equal snd.players.size, 3
+    trd = instances :third
+    assert_equal trd.players.size, 2
+  end
+
 end

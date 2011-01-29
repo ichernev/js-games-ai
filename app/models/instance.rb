@@ -1,6 +1,8 @@
 class Instance < ActiveRecord::Base
+
   belongs_to :game
   has_many :players, :dependent => :delete_all
+
   validates_presence_of :game_id, :began
 
   # a classmethod that creates a game instance and registers the corresponding
