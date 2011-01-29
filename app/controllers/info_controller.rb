@@ -62,7 +62,7 @@ class InfoController < ApplicationController
     options = {
       :select => select + ', ' + opts[:select],
       :joins => [
-        'JOIN players ON players.player_id = users.id',
+        'JOIN players ON players.user_id = users.id',
         'JOIN instances ON players.instance_id = instances.id'
     ],
       :group => select,
