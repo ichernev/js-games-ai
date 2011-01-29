@@ -115,11 +115,11 @@ class GameController < ApplicationController
           gi.duration = Time.now - gi.began
           gr = game_result.keys.map { |gr| gr.to_i }
           if gi.players.sort == gr.sort then
-            game_result.each do |player_id, val|
+            game_result.each do |user_id, val|
               p = Player.find(
                 :first,
                 :conditions => {
-                  :player_id => player_id,
+                  :user_id => user_id,
                   :instance_id => instance_id
                 })
               # TODO(zori): validate play order and score
@@ -189,8 +189,8 @@ class GameController < ApplicationController
     gp = Player.where :instance_id => sorted.last.id
     res = {}
     gp.each do |p|
-      res[p.player_id.to_s] = {
-        :player_id => p.player_id,
+      res[p.user_id.to_s] = {
+        :player_id => p.user_id,
         :play_order => p.play_order,
         :score => p.score
       }

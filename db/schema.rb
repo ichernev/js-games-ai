@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
 
   create_table "players", :force => true do |t|
     t.integer "instance_id"
-    t.integer "player_id"
+    t.integer "user_id"
     t.integer "play_order"
     t.integer "score",       :default => 0
   end
@@ -40,12 +40,5 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-
-  add_foreign_key "instances", "games", :name => "instances_game_id_fk"
-
-  add_foreign_key "players", "instances", :name => "players_instance_id_fk"
-  add_foreign_key "players", "users", :name => "players_player_id_fk", :column => "player_id"
-
-  add_foreign_key "users", "games", :name => "users_game_id_fk"
 
 end
