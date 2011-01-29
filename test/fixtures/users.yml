@@ -26,7 +26,7 @@ tripio:
   encrypted_password: $2a$10$gJkdtRWG1EsTxmgtsQShW.kPzet/glmwKTC5ZQmezvjk7bfVcJHDe
   password_salt: $2a$10$gJkdtRWG1EsTxmgtsQShW.
 
-hard_tic:
+tic_tac_toe_hard:
   email: tic_tac_toe_hard
   game: tic_tac_toe
   #password: kiborg
