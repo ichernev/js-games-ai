@@ -7,7 +7,11 @@ class GameTest < ActiveSupport::TestCase
   end
 
   test "save valid game" do
-    g = Game.new(:name => "chess")
+    g = Game.new(
+      :name => 'chess',
+      :display_name => 'Chess',
+      :description => 'The classic'
+    )
     assert g.save
   end
 end
