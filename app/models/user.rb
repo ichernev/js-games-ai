@@ -1,12 +1,14 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable and :lockable
-  devise :database_authenticatable, :registerable, :timeoutable
+  validates_presence_of :name
+
+  devise :database_authenticatable, :registerable, :timeoutable, :validatable
 
   attr_accessible :email, :name, :password
   belongs_to :game
   has_many :players
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, :name
 
   def human?
     self.game_id.nil?
