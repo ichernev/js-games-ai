@@ -188,8 +188,9 @@
   U.getCSS = function(url) {
     $("head").append(JSG.Util.HTML.link({
       href: url,
-      type: "test/css",
-      rel: "stylesheet"
+      type: "text/css",
+      rel: "stylesheet",
+      media: "screen"
     }));
   };
 
