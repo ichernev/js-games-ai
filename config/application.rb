@@ -34,6 +34,7 @@ module JsGames
     config.action_view.javascript_expansions[:defaults] = []
     config.action_view.javascript_expansions[:lib] = [
       'lib/jquery-1.4.4.js',
+      'rails.js',  # this is a jquery rails adapter.
       'lib/jquery.log.js',
 
       'lib/jquery-ui-1.8.9.custom.min.js'
