@@ -1,0 +1,51 @@
+diff -r 2f3438189844 app/views/layouts/application.haml
+--- a/app/views/layouts/application.haml	Sat Jan 29 15:07:52 2011 +0200
++++ b/app/views/layouts/application.haml	Sat Jan 29 15:09:56 2011 +0200
+@@ -7,8 +7,8 @@
+     = javascript_include_tag :lib
+     = javascript_include_tag :src
+     -# TODO(zori): Change to the NodeJS domain in production code.
+-    -# = javascript_include_tag "http://iskren.info:50006/socket.io/socket.io.js"
+-    = javascript_include_tag "http://localhost:3006/socket.io/socket.io.js"
++    = javascript_include_tag "http://iskren.info:50006/socket.io/socket.io.js"
++    -# = javascript_include_tag "http://localhost:3006/socket.io/socket.io.js"
+     = csrf_meta_tag
+   %body
+     - if flash[:notice]
+diff -r 2f3438189844 node_js/remote_gateway_server.js
+--- a/node_js/remote_gateway_server.js	Sat Jan 29 15:07:52 2011 +0200
++++ b/node_js/remote_gateway_server.js	Sat Jan 29 15:09:56 2011 +0200
+@@ -5,8 +5,8 @@
+ var Y; require("yui3").YUI().use("*", function(ZZ) { Y = ZZ; });
+ var each = Y.Array.each;
+ 
+-// var JSG = { Data: { DOMAIN: "0.0.0.0", NODE_PORT: 50006 } };
+-var JSG = { Data: { DOMAIN: "localhost", NODE_PORT: 3006 } };
++var JSG = { Data: { DOMAIN: "0.0.0.0", NODE_PORT: 50006 } };
++// var JSG = { Data: { DOMAIN: "localhost", NODE_PORT: 3006 } };
+ 
+ var server = http.createServer(function (req, res) {
+   res.writeHead(200, {'Content-Type': 'text/plain'});
+diff -r 2f3438189844 public/javascripts/src/init.js
+--- a/public/javascripts/src/init.js	Sat Jan 29 15:07:52 2011 +0200
++++ b/public/javascripts/src/init.js	Sat Jan 29 15:09:56 2011 +0200
+@@ -7,13 +7,13 @@
+     Daemons: {}
+   };
+ 
+-  // JSG.Data.DOMAIN = "iskren.info";
+-  // JSG.Data.RAILS = "http://iskren.info:50005/";
+-  // JSG.Data.NODE_PORT = 50006;
++  JSG.Data.DOMAIN = "iskren.info";
++  JSG.Data.RAILS = "http://iskren.info:50005/";
++  JSG.Data.NODE_PORT = 50006;
+   
+-  JSG.Data.DOMAIN = "localhost";
+-  JSG.Data.RAILS = "http://localhost:3000/";
+-  JSG.Data.NODE_PORT = 3006;
++  // JSG.Data.DOMAIN = "localhost";
++  // JSG.Data.RAILS = "http://localhost:3000/";
++  // JSG.Data.NODE_PORT = 3006;
+ 
+   JSG.completeInit = function() {
+     JSG.ev = new JSG.Util.Event();

@@ -119,3 +119,9 @@ JSON in ruby
 
 Install Minitar archive manager gem
   # gem install vendor/archive-tar-minitar-0.5.2.gem
+
+Prepare for production:
+  $ patch -p1 < local_to_remote.patch
+
+Revert changes from patch:
+  $ patch -p1 -R < local_to_remote.patch
