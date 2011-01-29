@@ -41,8 +41,8 @@
 				} catch(e) { }
 			}
 			
-			// catch all; a good old alert box
-			alert(args);
+			// catch all; a good old alert box -- FUCK ALERT BOXES!
+			// alert(args);
 			return false;
 		}
 	}});
