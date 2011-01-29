@@ -109,7 +109,8 @@
 }
 
 % Custom defines:
-\def\js{JsGames}
+\def\js{\texttt{javascript}}
+\def\jsg{JsGames}
 \def\jsurl{http://iskren.info:50005/}
 
 % TODO remove colorlinks before printing
@@ -119,7 +120,7 @@
 
  \begin{document}
 
-\title{\js}
+\title{\jsg}
 \author{
 Зорница Атанасова Костадинова, 4 курс, КН, фн: 80227, \\
 Искрен Ивов Чернев, 4 курс, КН, фн: 80246
@@ -130,7 +131,12 @@
 %\includegraphics[scale=0.1]{drop}
 
 \begin{abstract}
-Настоящият документ е курсова работа към проекта ``\js'' по предмета ``WWW Технологии''. Описали сме задачата която си поставихме с този проект, решението, базата данни (схема, описание на таблиците и релациите между тях), интерфейса и възможностите за разширяване на проекта. Обяснили сме методите и основните архитектурни принципи залегнали в разработката на проекта, както и използваните технологии.
+Настоящият документ е курсова работа към проекта ``\jsg'' по предмета ``WWW
+Технологии''. Описали сме задачата която си поставихме с този проект,
+решението, базата данни (схема, описание на таблиците и релациите между тях),
+интерфейса и възможностите за разширяване на проекта. Обяснили сме методите и
+основните архитектурни принципи залегнали в разработката на проекта, както и
+използваните технологии.
 \end{abstract}
 \newpage
 
@@ -142,35 +148,45 @@
 
 Проект: cайт с javascript игри.\footnote{Проектът се хоства на \jsurl.}
 
-- сайта ще поддържа потребители със следната информация за тях:
--- email;
--- парола;
--- nickname.
+  \begin{itemize}
+    \item сайта ще поддържа потребители със следната информация за тях:
+    \begin{itemize}
+      \item email
+      \item парола
+      \item nickname
+    \end{itemize}
 
-- информация за игра:
--- име;
--- кратко описание;
--- пълно обяснение на правилата.
+    \item информация за игра:
+    \begin{itemize}
+      \item име
+      \item кратко описание
+    \end{itemize} 
+    
+    \item за всяка изиграна игра ще се пази следната информация:
+    \begin{itemize}
+      \item коя е играта
+      \item потребители играли играта (може някой да са компютри, в такъв случай се пази трудността на компютъра)
+      \item резултат
+      \item продължителност на играта
+    \end{itemize} 
 
-- за всяка изиграна игра ще се пази следната информация:
--- коя е играта;
--- потребители играли играта (може някой да са компютри, в такъв случай се пази трудността на компютъра);
--- резултат;
--- продължителност на играта;
--- ако играта не бъде изиграна до 1 ден ще се изтрива информацията за нея.
+    \item възможност за изкарване на класиране:
+    \begin{description}
+      \item най-много изиграни игри \hfill \\ общо за всички игри или за конкретна игра
+      \item най-много изкарани точки \hfill \\ общо точки или средно аритметично, общо и за конкретна игра 
+      \item най-дълго прекарано време в игри \hfill \\ общо време или средно аритметично, общо или за конкретна игра
+    \end{description} 
 
-- възможност за изкарване на класиране:
--- най-много изиграни игри - общо за всички игри или за конкретна игра;
--- най-много изкарани точки - общо точки или средно аритметично, общо и за конкретна игра;
--- най-дълго прекарано време в игри - общо време или средно аритметично, общо или за конкретна игра.
+    \item ще има възможност за динамично добавяне, редактиране, изтриване на горепосочените данни където това има смисъл 
 
-- ще има възможност за динамично добавяне, редактиране, изтриване на горепосочените данни където това има смисъл
-
-- допълнителни пояснения за игрите:
--- игрите ще бъдат имплементирани на javascript;
--- всички игри ще имат изкуствен ителект (имплементиран като javascript клиент) с поне една степен на трудност;
--- сървърът ще поддържа комуникация между различни javascript клиенти (при игра на няколко души) за да се обменят изиграните ходове;
--- ще може да се играе и само от един клиент (браузър) ако единия играч е човек, а другия компютър (изкуствен ителект).
+    \item допълнителни пояснения за игрите:
+    \begin{itemize}
+      \item игрите ще бъдат имплементирани на \js
+      \item всички игри ще имат изкуствен ителект (имплементиран като \js клиент) с поне една степен на трудност
+      \item сървърът ще поддържа комуникация между различни \js клиенти (браузъри) при игра на няколко души за да се обменят изиграните ходове
+      \item ще може да се играе и само от един клиент (браузър) ако единия играч е човек, а другия компютър (изкуствен ителект)
+    \end{itemize} 
+  \end{itemize}
 
 % TODO
 %\texttt{http://drupal.org}.
@@ -178,49 +194,103 @@
 \section{Използвани технологии}
 
   \subsection{Haml}
-  Haml е \cite{haml}
-  Haml is a markup language that’s used to cleanly and simply describe the XHTML of any web document, without the use of inline code. Haml functions as a replacement for inline page templating systems such as PHP, ERB, and ASP. However, Haml avoids the need for explicitly coding XHTML into the template, because it is actually an abstract description of the XHTML, with some code to generate dynamic content.
+  Haml е \cite{haml} маркъп език, с който може чисто и просто да се описва XHTML за всеки онлайн документ, без вграждане на код. Haml е предназначен като алтернатива на други шаблонни езици, който вграждат код, като PHP, ERB и ASP. Също така с Haml избягвате писането на чист XHTML с използването на семантична идентация.
+  % Haml е \cite{haml}
+  % Haml is a markup language that’s used to cleanly and simply describe the XHTML of any web document, without the use of inline code. Haml functions as a replacement for inline page templating systems such as PHP, ERB, and ASP. However, Haml avoids the need for explicitly coding XHTML into the template, because it is actually an abstract description of the XHTML, with some code to generate dynamic content.
 
   \subsection{Sass}
-  Sass \cite{sass} -> Css \cite{css}
-  Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more. It’s translated to well-formatted, standard CSS using the command line tool or a web-framework plugin.
+  Sass \cite{sass} е добавка към CSS3 \cite{css}, в която е добавено влагане на правила, променливи, модули, наследяване на селектори и други. Sass се трансформира до добре форматиран CSS с помощта на конзолна програма или плъгин към уеб фреймуърк.
+  % Sass \cite{sass} -> Css \cite{css}
+  % Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more. It’s translated to well-formatted, standard CSS using the command line tool or a web-framework plugin.
 
-Sass has two syntaxes. The new main syntax (as of Sass 3) is known as “SCSS” (for “Sassy CSS”), and is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. SCSS files use the extension .scss.
+  Sass има два синтаксиса. Новия синтаксис (въведен от Sass 3) още известен като SCSS е надмножество на CSS3. Това означава, че всеки валиден CSS3 файл е също валиден SCSS. SCSS файловете имат разширение \texttt{.scss}.
 
-The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported. Files in the indented syntax use the extension .sass.
+  % Sass has two syntaxes. The new main syntax (as of Sass 3) is known as “SCSS” (for “Sassy CSS”), and is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. SCSS files use the extension .scss.
+
+  Втория, по-стар синтаксис е известен като идентирания синтаксис (или просто ``Sass''). Вдъхновен от краткоста на Haml, той е предназначен за хора, който предпочитат изразителността пред близостта с CSS. Вместо точка и запетая и скоби се използва семантична идентация, за да се обособяват блокове. Въпреки че вече не е основния синтаксис, ще продължи да бъде поддържан. Файловете с идентиран синтаксис имат разширение \texttt{.sass}.
+  % The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported. Files in the indented syntax use the extension .sass.
 
   \subsection{Ruby on Rails Framework}
-    
+  Ruby on Rails, често съкращаван като Rails или Ror, е уеб фреймуърк с отворен код за програмният език Ruby. Той е предназначен за програмиране по Agile методологията, която се използва от уеб програмисти за ускорено програмиране.
+
+  Като много уеб фреймуърци, Ruby on Rails използва Model-View-Controller (MVC) архитектура за организиране на приложението.
+
+  Ruby on Rails включва програмки, който правят често срещани задачи в програмирането по-лесни, като например автоматичното генериране на шаблонен код, за по-бързо стартиране на модел или изглед. Също включен е WEBrick - прост уеб сървър писан на Ruby, както и Rake - система за билдване (като make) която се дистрибутира като gem (пакет за Ruby). Заедно с Ruby on Rails тези програмки предоставят базова среда за програмиране.
+
+  Ruby on Rails разчита на уеб сървър за да работи. Mongrel е предпочитан пред WEBrick, но също може да се ползва Lighttpd \cite{lighttpd}, Abyss \cite{abyss}, Apache \cite{apache}, nginx \cite{nginx} и много други. От 2008 уеб сървърът Passenger \cite{passenger} заменя Mongrel като препоръчителна опция.
+  Ruby on Rails е известен също и с използването на \js библиотеките Prototype \cite{prototype} и Script.aculo.us за Ajax \cite{ajax}. В началото Ruby on Rails използва лек SOAP, но по-късно е заменен от REST. От версия 3 Ruby on Rails използва Unobtrusive \js \cite{unobtrusive} -- техника за разделяне на логиката от изгледа на уеб страницата.
+  % Ruby on Rails, often shortened to Rails or RoR, is an open source web application framework for the Ruby programming language. It is intended to be used with an Agile development methodology that is used by web developers for rapid development.[1]
+   % Like many web frameworks, Ruby on Rails uses the Model-View-Controller (MVC) architecture pattern to organize application programming.
+   % Ruby on Rails includes tools that make common development tasks easier "out of the box", such as scaffolding that can automatically construct some of the models and views needed for a basic website.[16] Also included are WEBrick, a simple Ruby web server that is distributed with Ruby, and Rake, a build system, distributed as a gem. Together with Ruby on Rails these tools provide a basic development environment.
+   % Ruby on Rails relies on a web server to run it. Mongrel was generally preferred over WEBrick at the time of writing[citation needed], but it can also be run by Lighttpd, Abyss, Apache, nginx (either as a module - Passenger for example - or via CGI, FastCGI or mod_ruby), and many others. From 2008 onwards, the Passenger web server replaced Mongrel as the most used web server[17].
+   % Ruby on Rails is also noteworthy for its extensive use of the JavaScript libraries Prototype and Script.aculo.us for Ajax.[18] Ruby on Rails initially utilized lightweight SOAP for web services; this was later replaced by RESTful web services. Ruby on Rails 3.0 uses a technique called Unobtrusive JavaScript to separate the functionality (or logic) from the structure of the web page.
+   % Since version 2.0, Ruby on Rails by default offers both HTML and XML as output formats. The latter is the facility for RESTful web services.
   \subsection{NodeJs}
+  Целта на Node.js \cite{node} е да предостави лесен начин за програмиране скалируеми, работещи в мрежа програми. Node инструктира операционната система да го уведомява за нови клиенти и после заспива. Ако някой се свърже се изпълнява предварително зададена функция (callback). За всяка връзка се използва съвсем малко памет.
+
+  Това е в контраст с по-популярния модел на едновременна работа, в който се използват нишки. Мрежово програмиране имплементирано с нишки е сравнително неефективно и много трудно за използване. Node използва доста по-малко памет при високо натоварване, от колкото системи, които заделят по 2MB за всяка нишка / конекция. Още повече потребителите на Node няма нужда да се притесняват от dead-lock - просто защото няма заключване. Няма функции в Node, която директо изпълнява вход/изход - затова процеса никога не блокира. Поради този факт непрофесионалисти могат да пишат бързи системи.
+  % Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
+
+  % This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use. See: this and this. Node will show much better memory efficiency under high-loads than systems which allocate 2mb thread stacks for each connection. Furthermore, users of Node are free from worries of dead-locking the process—there are no locks. Almost no function in Node directly performs I/O, so the process never blocks. Because nothing blocks, less-than-expert programmers are able to develop fast systems.
     
   \subsection{jQuery}
+  jQuery \cite{jquery} е \js библиотека предвидена да улесни скриптирането на HTML от страна на клиента. Тя е пусната през януари 2006 от Джон Ресиг. Използвана е в 41\% от 10000 най-посещавани сайтове. Това е най-популярната \js библиотека в момента.
 
-  \subsection{Документация}
+  jQuery е безплатна, с отворен код, лицензирана под MIT и GNU v2 лицензите. Синтаксиса на jQuery е предвиден да улесни навигацията в документа, селектирането на DOM обекти, създаването на анимации, обработката на събития и разработването на Ajax приложения. jQuery също предоставя възможност за писане на плъгини. С използването на тези възможности програмиста може да създаде абстракции за анимация и взаимодействие от ниско ниво, сложни ефекти както и компоненти от високо ниво поддържащи теми. Това подпомага за създаването на сложни и динамични уеб страници.
+
+  % Microsoft и Nokia са оповестили плановете си да използват jQuery в техните платформи.
+
+  % jQuery is a cross-browser JavaScript library designed to simplify the client-side scripting of HTML.[1] It was released in January 2006 at BarCamp NYC by John Resig. Used by over 41% of the 10,000 most visited websites, jQuery is the most popular JavaScript library in use today.[2][3]
+  % jQuery is free, open source software, dual-licensed under the MIT License and the GNU General Public License, Version 2.[4] jQuery's syntax is designed to make it easier to navigate a document, select DOM elements, create animations, handle events, and develop Ajax applications. jQuery also provides capabilities for developers to create plugins on top of the JavaScript library. Using these facilities, developers are able to create abstractions for low-level interaction and animation, advanced effects and high-level, theme-able widgets. This contributes to the creation of powerful and dynamic web pages.
+  % Microsoft and Nokia have announced plans to bundle jQuery on their platforms,[5] Microsoft adopting it initially within Visual Studio[6] for use within Microsoft's ASP.NET AJAX framework and ASP.NET MVC Framework while Nokia has integrated it into their Web Run-Time widget development platform.[7] jQuery has also been used in MediaWiki since version 1.16.[8]
+
+  % \subsection{Документация}
   %Документацията на Drupal е автоматично генерирана с помощта на системата Doxygen \cite{doxygen}. Тя директно се извлича от кода, което значително улеснява поддържането й.
 
   \subsection{Yui3 library}
+  YUI \cite{yui} е \js библиотека разработвана от Yahoo!. Тя има добре развита модулна система, която позволява да се сваля само кода от библиотеката, който реално се използа. Системата ѝ за събити надгражда тази дефинирана в браузъра и позволява по-лесна обработка и добавяне на специализирани събития.
 
   \subsection{Mercurial}
+  Mercurial \cite{mercurial} е дистрибутирана система за управление на сорс код.
 
-  \subsection{Zero CSS}
+  Традиционните системи за управление на сорс като Subversion са с типични клиент-сървър архитектури. Те имат централен сървър който пази информацията за различните ревизии на проекта. В контраст Mercurial е напълно дистрибутирана, позволявайки на всеки програмист да има локално копие на цялата история на проекта. Това означава, че програмистите са независими от връзката си с интернет или централния сървър. Добавянето, разклоняването и сливането в проекта са лесни и бързи операции.
+  % Traditional version control systems such as Subversion are typical client-server architectures with a central server to store the revisions of a project. In contrast, Mercurial is truly distributed, giving each developer a local copy of the entire development history. This way it works independent of network access or a central server. Committing, branching and merging are fast and cheap.
 
-  \subsection{Ruby Gems}
+  \subsection{RubyGems}
+  RubyGems \cite{rubygems} е пакетен мениджър за програмният език Ruby, който предоставя стандартен формат за разпространението на Ruby програми и библиотеки във самодостатъчен файлов формат \texttt{.gem}. Той предоставя конзолен интерфейс за лесна инсталация и управление на гемове, както и сървър за тяхното разпространение. RubyGems е аналогичен на EasyInstall за програмният език Python. В момента RubyGems е част от стандартната библиотека на Ruby версия 1.9.
+  % RubyGems is a package manager for the Ruby programming language that provides a standard format for distributing Ruby programs and libraries (in a self-contained format called a "gem"), a tool designed to easily manage the installation of gems, and a server for distributing them. It is analogous to EasyInstall for the Python programming language. RubyGems is now part of the standard library from Ruby version 1.9.
 
   \subsubsection{База от данни}
-  PostgreSQL \cite{postgresql}
+  PostgreSQL \cite{postgresql} е обектно-релационна система за управление на база от данни. Тя е лицензирана под MIT лиценз и следователно е безплатна и с отворен код. Както други системи с отворен код PostgreSQL не се контролира от нито една единствена компания -- интернационална група от програмисти и компании разработват продукта.
+  % PostgreSQL \cite{postgresql} often simply Postgres, is an object-relational database management system (ORDBMS).[5] It is released under an MIT-style license and is thus free and open source software. As with many other open-source programs, PostgreSQL is not controlled by any single company — a global community of developers and companies develops the system.
 
   \subsection{Статистика за проекта}
   \begin{itemize}
-    \item Използвани езици за програмиране \\
+    \item Използвани езици за програмиране
+    \begin{itemize}
+      \item \js
+      \item Ruby
+      \item SQL
+      \item html (генериран чрез haml)
+      \item css (генериран чрез sass)
+    \end{itemize}
     
-    \item Редове код от началото на проекта \\
+    \item Редове код от началото на проекта - \texttt{5000}
+    \begin{itemize}
+      \item Ruby \quad 1200
+      \item \js \quad 3200
+    \end{itemize}
 
     % TODO: this is how to add IMAGES: 
     % \includegraphics[scale=0.65]{lines_of_code} \\
 
-    \item Брой тестове \\
+    \item Брой тестове
+    \begin{itemize}
+      \item Ruby \quad 14
+      \item \js \quad 30
+    \end{itemize}
 
-    \item Брой commits в системата за контрол на версиите \\
+    \item Брой commits в системата за контрол на версиите - \texttt{130}
   \end{itemize}
 
   \subsection{Цел}
@@ -253,7 +323,7 @@ It is used by the Ruby on Rails framework to test applications in a development 
 Спазени са основните принципи на Обектно Ориентираното Програмиране \cite{oop} - капсулиране, полиморфизъм, наследяване, абстракция, обекти.
 
 \subsubsection{Шаблони за дизайн}
-Следните шаблони за дизайн (design patterns) са използвани в \js: 
+Следните шаблони за дизайн (design patterns) са използвани в \jsg: 
 
 \begin{itemize}
   \item \texttt{singleton} - Ако разглеждаме модулите и темите като обекти, то всички те реализират the singleton pattern. 
@@ -263,7 +333,7 @@ It is used by the Ruby on Rails framework to test applications in a development 
 
 % TODO: Routing
 
-\paragraph{NodeJs}
+\paragraph{Nodejsg}
 Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
 
 This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use.
@@ -276,7 +346,7 @@ This is in contrast to today's more common concurrency model where OS threads ar
 
 \subsection{Инсталиране на зависимости}
 
-За да разработим \js си инсталирахме:
+За да разработим \jsg си инсталирахме:
 \begin{enumerate}
   \item ruby
   \item rails
@@ -299,7 +369,20 @@ This is in contrast to today's more common concurrency model where OS threads ar
   \bibitem{sass} \url{http://sass-lang.com/}
   \bibitem{css} \url{http://en.wikipedia.org/wiki/Css}
   \bibitem{webServer} \url{http://en.wikipedia.org/wiki/Web\_server}
+  \bibitem{lighttpd} \url{http://www.lighttpd.net/}
+  \bibitem{abyss} \url{http://www.aprelium.com/}
+  \bibitem{apache} \url{http://www.apache.org/}
+  \bibitem{nginx} \url{http://nginx.org/}
+  \bibitem{passenger} \url{http://www.modrails.com/}
+  \bibitem{prototype} \url{http://www.prototypejs.org/}
   %\bibitem{apache} \url{http://httpd.apache.org/}
+  \bibitem{ajax} \url{http://en.wikipedia.org/wiki/Ajax\_(programming)}
+  \bibitem{unobtrusive} \url{http://en.wikipedia.org/wiki/Unobtrusive\_JavaScript}
+  \bibitem{jquery} \url{http://jquery.com}
+  \bibitem{yui} \url{http://developer.yahoo.com/yui/}
+  \bibitem{mercurial} \url{http://mercurial.selenic.com/}
+  \bibitem{rubygems} \url{http://rubygems.org/}
+  % \bibitem{} \url{}
   \bibitem{ruby} \url{http://www.ruby-lang.org/en/}
   \bibitem{javascript} \url{http://en.wikipedia.org/wiki/ECMAScript}
   \bibitem{webrick} \url{http://en.wikipedia.org/wiki/WEBrick}
