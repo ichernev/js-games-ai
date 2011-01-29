@@ -4,7 +4,7 @@
 
   var NS = JSG.Games.TicTacToe = JSG.Games.TicTacToe || {};
   var css_pref = "tictactoe_";
-  var img_root = "/images/TicTacToe/";
+  var img_root = "/games/TicTacToe/images/";
 
   NS.BoardUI = function() {
     this.ma3x = new JSG.Widgets.Ma3x(NS.Game.rows, NS.Game.cols);

@@ -8,6 +8,6 @@ tmp
 
 syntax: regexp
 
-^public/stylesheets/.*\.css$ # these were auto generated from sass (I hope)
+^public/.*\.css$ # these were auto generated from sass (I hope)
 ^log/.*\.log$
 ^db/.*\.sqlite3$

@@ -4,7 +4,7 @@
 
   var NS = JSG.Games.Rocks = JSG.Games.Rocks || {};
   var css_pref = "rocks_";
-  var img_root = "/images/Rocks/";
+  var img_root = "/games/Rocks/images/";
 
   NS.BoardUI = function() {
     this.ma3x = new JSG.Widgets.Ma3x(1, NS.Game.rocks);
