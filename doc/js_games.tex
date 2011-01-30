@@ -153,7 +153,7 @@
     \begin{itemize}
       \item email
       \item парола
-      \item nickname
+      \item име
     \end{itemize}
 
     \item информация за игра:
@@ -182,9 +182,9 @@
     \item допълнителни пояснения за игрите:
     \begin{itemize}
       \item игрите ще бъдат имплементирани на \js
-      \item всички игри ще имат изкуствен ителект (имплементиран като \js\ клиент) с поне една степен на трудност
+      \item всички игри ще имат изкуствен интелект (имплементиран като \js\ клиент) с поне една степен на трудност
       \item сървърът ще поддържа комуникация между различни \js\ клиенти (браузъри) при игра на няколко души за да се обменят изиграните ходове
-      \item ще може да се играе и само от един клиент (браузър) ако единия играч е човек, а другия компютър (изкуствен ителект)
+      \item ще може да се играе и само от един клиент (браузър) ако единия играч е човек, а другият компютър (изкуствен интелект)
     \end{itemize} 
   \end{itemize}
 
@@ -194,7 +194,7 @@
 \section{Използвани технологии}
 
   \subsection{Haml}
-  Haml е \cite{haml} маркъп език, с който може чисто и просто да се описва XHTML за всеки онлайн документ, без вграждане на код. Haml е предназначен като алтернатива на други шаблонни езици, който вграждат код, като PHP, ERB и ASP. Също така с Haml избягвате писането на чист XHTML с използването на семантична идентация.
+  Haml е \cite{haml} маркъп език, с който може чисто и просто да се описва XHTML за всеки онлайн документ, без вграждане на код. Haml е предназначен като алтернатива на други шаблонни езици които вграждат код като PHP, ERB и ASP. Също така с Haml избягвате писането на чист XHTML с използването на семантична идентация.
   % Haml е \cite{haml}
   % Haml is a markup language that’s used to cleanly and simply describe the XHTML of any web document, without the use of inline code. Haml functions as a replacement for inline page templating systems such as PHP, ERB, and ASP. However, Haml avoids the need for explicitly coding XHTML into the template, because it is actually an abstract description of the XHTML, with some code to generate dynamic content.
 
@@ -211,7 +211,7 @@
   % The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported. Files in the indented syntax use the extension .sass.
 
   \subsection{Ruby on Rails Framework}
-  Ruby on Rails, често съкращаван като Rails или Ror, е уеб фреймуърк с отворен код за програмният език Ruby. Той е предназначен за програмиране по Agile методологията, която се използва от уеб програмисти за ускорено програмиране.
+  Ruby on Rails, често съкращаван като Rails или RoR, е уеб фреймуърк с отворен код за програмният език Ruby. Той е предназначен за програмиране по Agile методологията, която се използва от уеб програмисти за ускорено програмиране.
 
   Като много уеб фреймуърци, Ruby on Rails използва Model-View-Controller (MVC) архитектура за организиране на приложението.
 
@@ -239,13 +239,6 @@
   jQuery е безплатна, с отворен код, лицензирана под MIT и GNU v2 лицензите. Синтаксиса на jQuery е предвиден да улесни навигацията в документа, селектирането на DOM обекти, създаването на анимации, обработката на събития и разработването на Ajax приложения. jQuery също предоставя възможност за писане на плъгини. С използването на тези възможности програмиста може да създаде абстракции за анимация и взаимодействие от ниско ниво, сложни ефекти както и компоненти от високо ниво поддържащи теми. Това подпомага за създаването на сложни и динамични уеб страници.
 
   % Microsoft и Nokia са оповестили плановете си да използват jQuery в техните платформи.
-
-  % jQuery is a cross-browser JavaScript library designed to simplify the client-side scripting of HTML.[1] It was released in January 2006 at BarCamp NYC by John Resig. Used by over 41% of the 10,000 most visited websites, jQuery is the most popular JavaScript library in use today.[2][3]
-  % jQuery is free, open source software, dual-licensed under the MIT License and the GNU General Public License, Version 2.[4] jQuery's syntax is designed to make it easier to navigate a document, select DOM elements, create animations, handle events, and develop Ajax applications. jQuery also provides capabilities for developers to create plugins on top of the JavaScript library. Using these facilities, developers are able to create abstractions for low-level interaction and animation, advanced effects and high-level, theme-able widgets. This contributes to the creation of powerful and dynamic web pages.
-  % Microsoft and Nokia have announced plans to bundle jQuery on their platforms,[5] Microsoft adopting it initially within Visual Studio[6] for use within Microsoft's ASP.NET AJAX framework and ASP.NET MVC Framework while Nokia has integrated it into their Web Run-Time widget development platform.[7] jQuery has also been used in MediaWiki since version 1.16.[8]
-
-  % \subsection{Документация}
-  %Документацията на Drupal е автоматично генерирана с помощта на системата Doxygen \cite{doxygen}. Тя директно се извлича от кода, което значително улеснява поддържането й.
 
   \subsection{Yui3 library}
   YUI \cite{yui} е \js\ библиотека разработвана от Yahoo!. Тя има добре развита модулна система, която позволява да се сваля само кода от библиотеката, който реално се използа. Системата ѝ за събити надгражда тази дефинирана в браузъра и позволява по-лесна обработка и добавяне на специализирани събития.
@@ -286,14 +279,14 @@
 
     \item Брой тестове
     \begin{itemize}
-      \item Ruby \quad 14
+      \item Ruby \quad 21
       \item \js \quad 30
     \end{itemize}
 
     \item Брой commits в системата за контрол на версиите - \texttt{130}
   \end{itemize}
 
-  \subsection{Цел}
+%  \subsection{Цел}
 
 \section{Реализация}
 
@@ -322,7 +315,63 @@ Ruby is a dynamic, open source programming language with a focus on simplicity a
 
 \subsubsection{База от данни}
 
-За коректна работа, Drupal се нуждае от релационна база от данни. Връзката с БД става чрез модул който имплементира определено API. Това позволява независимост на избора на БД от останалите компоненти на продукта. В момента се поддържат две от най-известните бази с отворен код - PostgreSQL \cite{postgresql}.
+Използваната база от данни в проекта е PostgreSQL \cite{postgresql}.
+Схемата използва 4 таблици:
+
+\begin{tabular} { | l | l | l | }
+\multicolumn{3}{c}{Table "games"} \\
+\hline
+Column & Type & Modifiers \\
+\hline
+id & integer & not null default \\
+name & character varying(255) & not null \\
+display\_name & character varying(255) & \\
+description & text & \\
+\hline
+\end{tabular}
+
+\vspace{10 pt}
+
+\begin{tabular} { | l | l | l | }
+\multicolumn{3}{c}{Table "users"} \\
+\hline
+Column & Type & Modifiers \\
+\hline
+id & integer & not null default \\
+game\_id & integer & \\
+email & character varying(255) & not null default \\
+encrypted\_password & character varying(128) & not null default \\
+password\_salt & character varying(255) & not null default \\
+name & character varying(255) & \\ 
+\hline
+\end{tabular}
+
+\vspace{10 pt}
+
+\begin{tabular} { | l | l | l | }
+\multicolumn{3}{c}{Table "instances"} \\
+\hline
+Column & Type & Modifiers \\
+\hline
+id & integer & not null default \\
+game\_id  & integer                     & \\
+began    & timestamp without time zone & not null \\
+duration & integer                     & default 0 \\
+\hline
+\end{tabular}
+
+\begin{tabular} { | l | l | l | }
+\multicolumn{3}{c}{Table "players"} \\
+\hline
+Column & Type & Modifiers \\
+\hline
+id & integer & not null default \\
+instance\_id & integer & \\
+user\_id     & integer & \\
+play\_order  & integer & \\
+score       & integer & default 0 \\
+\hline
+\end{tabular}
 
 \subsection{Дизайн} 
 Спазени са основните принципи на Обектно Ориентираното Програмиране \cite{oop} - капсулиране, полиморфизъм, наследяване, абстракция, обекти.
@@ -368,10 +417,6 @@ Node's goal is to provide an easy way to build scalable network programs. In the
 
 This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use.
 
-\paragraph{User}
-
-\paragraph{View}
-
 \section{Инсталация}
 
 \subsection{Инсталиране на зависимости}
@@ -399,8 +444,6 @@ This is in contrast to today's more common concurrency model where OS threads ar
   \item[node:json] Плъгин за Node. Инсталира се през npm.
   \item[node:yui3] Плъгин за Node. Инсталира се през npm.
 \end{itemize}
-
-\subsection{Заключение}
 
 \newpage
 
