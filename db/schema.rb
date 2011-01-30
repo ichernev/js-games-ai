@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(:version => 20110121155824) do
 
   create_table "games", :force => true do |t|
     t.string "name",         :null => false
-    t.string "display_name"
-    t.text   "description"
+    t.string "display_name", :null => false
+    t.text   "description",  :null => false
   end
 
   create_table "instances", :force => true do |t|

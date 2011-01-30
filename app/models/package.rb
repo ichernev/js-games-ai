@@ -50,17 +50,22 @@ class Package < ActiveRecord::Base
       end
 
       # Create one AI for the game
+      ai_res = true
       ai = User.find(
         :first,
         :conditions => {
           :game_id => game.id
       })
       if ai.nil? then
-        ai = User.new :email => (basename + 'Computer'), :password => basename
+        ai = User.new(
+          :email => (basename + 'Computer'),
+          :name => basename,
+          :password => basename
+        )
         ai.game = game
-        ai.save
+        ai_res = ai.save
       end
-      return res
+      return (res and ai_res)
     rescue
       return false
     end
