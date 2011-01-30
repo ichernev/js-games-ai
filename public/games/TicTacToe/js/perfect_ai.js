@@ -1,6 +1,6 @@
 (function() {
   var U = JSG.Util;
-  var NS = JSG.Games.TicTacToe;
+  var NS = JSG.Games.TicTacToe = JSG.Games.TicTacToe || {};
 
   // Helper methods.
   var encode = function(arr_state) {

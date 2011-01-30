@@ -1,6 +1,6 @@
 (function() {
   var U = JSG.Util;
-  var NS = JSG.Games.Rocks;
+  var NS = JSG.Games.Rocks = JSG.Games.Rocks || {};
 
   var find_win = function(len, other, sgs) {
     var k, j, p2, cxor;
