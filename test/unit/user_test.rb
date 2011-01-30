@@ -25,7 +25,7 @@ class UserTest < ActiveSupport::TestCase
     u = User.new(
       :name => 'human',
       :email => 'my@mail.com',
-      :password => 'pass'
+      :password => 'passpass'
     )
     assert_nil u.game_id
     assert u.human?
@@ -35,7 +35,7 @@ class UserTest < ActiveSupport::TestCase
   test "intelligent agents know their game_id" do
     u = User.new(
       :name => 'bot',
-      :email => 'placeholder',
+      :email => 'placeholder@google.com',
       :password => 'dummy_pass'
     )
     u.game = games :tic_tac_toe
@@ -48,7 +48,7 @@ class UserTest < ActiveSupport::TestCase
     inna = users :inna
     assert_equal inna.display_name, inna.name
     tripio = users :tripio
-    assert_equal tripio.display_name, tripio.email
+    assert_equal tripio.display_name, tripio.name
   end
   
 end

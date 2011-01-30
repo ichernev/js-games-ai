@@ -58,9 +58,9 @@ class Package < ActiveRecord::Base
       })
       if ai.nil? then
         ai = User.new(
-          :email => (basename + 'Computer'),
-          :name => basename,
-          :password => basename
+          :email => (basename + '@bot.org'),
+          :name => (basename + ' computer'),
+          :password => (basename + 'a long salty pass')
         )
         ai.game = game
         ai_res = ai.save
