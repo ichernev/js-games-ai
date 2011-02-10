@@ -1,0 +1,5 @@
+{
+"name": "Nim",
+"display_name": "Nim",
+"description": "The two players take turns picking stones from distinct heaps. On each turn, a player must remove at least one stone, and may remove any number of stones from the same heap. The last person to be able to make a valid move wins the game."
+}
