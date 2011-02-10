@@ -133,9 +133,11 @@
 \begin{abstract}
 Настоящият документ е курсова работа към проекта ``\jsg'' по предмета
 ``Изкуствен Интелект''. Описали сме задачата която си поставихме с този проект
-и решението ѝ
+и решението ѝ. Обяснени са алгоритмите по които агентите вземат решения за
+следващ ход във всяка от игрите.Освен това сме представили програматичната
+реализация на сайта - база данни, интерфейс, архитектура, използвани
+технологии. Накрая говорим за възможностите за разширяване на проекта.
 
-% , базата данни (схема, описание на таблиците и релациите между тях), интерфейса и възможностите за разширяване на проекта. Обяснили сме методите и основните архитектурни принципи залегнали в разработката на проекта, както и използваните технологии.
 \end{abstract}
 \newpage
 
@@ -158,7 +160,7 @@
 
 \section{Описание на проекта}
 
-Проект: cайт с javascript игри.\footnote{Проектът се хоства на \jsurl.}
+Проект: cайт с javascript игри с изкуствен интелект.\footnote{Проектът се хоства на \jsurl.}
 
   \begin{itemize}
     \item сайта ще поддържа потребители със следната информация за тях:
@@ -199,14 +201,6 @@
       \item ще може да се играе и само от един клиент (браузър) ако единия играч е човек, а другият компютър (изкуствен интелект)
     \end{itemize} 
   \end{itemize}
-
-% TODO
-%\texttt{http://drupal.org}.
-
-\section{Декларация за липса на плагиатство}
-Тази курсова работа е наше дело, като всички изречения, илюстрации и програми от други хора са изрично цитирани.
-Тази курсова работа или нейна версия не са представени в друг университет или друга учебна институция.
-Разбираме, че ако се установи плагиатство в работата ни ще получим оценка “Слаб”.
 
 \section{Използвани технологии}
 
@@ -319,16 +313,6 @@ Ruby is a dynamic, open source programming language with a focus on simplicity a
     \item[WEBrick] \hfill \\ е стандартния web server за малки проекти при Ruby. Използваме го за да сервира страниците и статичното съдържание (картинки, javascript, css).
     \item[Node.js] \hfill \\ отговаря за комуникацията между различни клиенти посредством \texttt{socket.io}. Тази библиотека имплементира 6 различни протокола за двупосочна комуникация на \js\ клиент и произволен уеб сървър (стандартния ajax може да се използва само за поискване на информация - ако сървъра иска да каже нещо на клиента в произволно време трябва да се иползва нещо по-сложно). В момента имплементацията поддържа регистриране на потребителите в произволен брой канали, като всяко съобщение изпратено в канал се препраща на всички участници в канала без промяна. В бъдеще може да се имплементира цялата логиката на играта, за да има централизирано място, което да валидира ходовете и резултата преди да бъде изпратен към главния сървър.
   \end{description}
-% За работата на продукта е нужен web server \cite{webServer}.
-% 
-% Използваме:
-% \begin{itemize}
-%   \item \texttt{Webrick \cite{webrick}} - web server който се ...
-%   WEBrick is a Ruby library providing simple HTTP web server services. The server also provides code for simple server services other than HTTP.
-% It is used by the Ruby on Rails framework to test applications in a development environment.
-%   \item \texttt{NodeJs \cite{node}} - web server ...
-% \end{itemize}
-
 
 \subsubsection{База от данни}
 
@@ -438,7 +422,6 @@ This is in contrast to today's more common concurrency model where OS threads ar
 
 \subsection{Инсталиране на зависимости}
 
-% TODO: use dev_preps to fill this in:
 За да разработим \jsg си инсталирахме:
 \begin{itemize}
   \item[mercurial] Изтегля се от официалния сайт или през пакетен мениджър. Чрез него се изтегля сорса на проекта от \texttt{http://iskren.info:3001}.
@@ -464,6 +447,13 @@ This is in contrast to today's more common concurrency model where OS threads ar
 
 \newpage
 
+\section{Декларация за липса на плагиатство}
+Тази курсова работа е наше дело, като всички изречения, илюстрации и програми от други хора са изрично цитирани.
+Тази курсова работа или нейна версия не са представени в друг университет или друга учебна институция.
+Разбираме, че ако се установи плагиатство в работата ни ще получим оценка “Слаб”.
+
+\newpage
+
 \begin{thebibliography}{99}
   \bibitem{haml} \url{http://haml-lang.com/}
   \bibitem{sass} \url{http://sass-lang.com/}
@@ -475,23 +465,18 @@ This is in contrast to today's more common concurrency model where OS threads ar
   \bibitem{nginx} \url{http://nginx.org/}
   \bibitem{passenger} \url{http://www.modrails.com/}
   \bibitem{prototype} \url{http://www.prototypejs.org/}
-  %\bibitem{apache} \url{http://httpd.apache.org/}
   \bibitem{ajax} \url{http://en.wikipedia.org/wiki/Ajax\_(programming)}
   \bibitem{unobtrusive} \url{http://en.wikipedia.org/wiki/Unobtrusive\_JavaScript}
   \bibitem{jquery} \url{http://jquery.com}
   \bibitem{yui} \url{http://developer.yahoo.com/yui/}
   \bibitem{mercurial} \url{http://mercurial.selenic.com/}
   \bibitem{rubygems} \url{http://rubygems.org/}
-  % \bibitem{} \url{}
   \bibitem{ruby} \url{http://www.ruby-lang.org/en/}
   \bibitem{javascript} \url{http://en.wikipedia.org/wiki/ECMAScript}
   \bibitem{webrick} \url{http://en.wikipedia.org/wiki/WEBrick}
   \bibitem{node} \url{http://nodejs.org/}
   \bibitem{postgresql} \url{http://www.postgresql.org/}
-  %\bibitem{doxygen} \url{http://www.stack.nl/~dimitri/doxygen/}
   \bibitem{oop} \url{http://en.wikipedia.org/wiki/Object-oriented\_programming}
-  %\bibitem{htmlTags} \url{http://www.w3schools.com/html/html\_primary.asp}
-  %\bibitem{routing} \url{http://acquia.com/node/693074}
 \end{thebibliography}
 
 \end{document}
