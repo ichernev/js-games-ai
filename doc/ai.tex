@@ -1,0 +1,497 @@
+
+\documentclass[a4paper]{article}
+\usepackage{ucs}  % unicode
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[bulgarian]{babel}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage[usenames,dvipsnames]{color}
+\setlength{\headheight}{12.51453pt}
+
+%%%%%%%%%%%%%% Pygments header.
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\def\PY@tok@gd{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\def\PY@tok@gu{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\def\PY@tok@gt{\def\PY@tc##1{\textcolor[rgb]{0.00,0.25,0.82}{##1}}}
+\def\PY@tok@gs{\let\PY@bf=\textbf}
+\def\PY@tok@gr{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\def\PY@tok@cm{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\def\PY@tok@vg{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@m{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@mh{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@go{\def\PY@tc##1{\textcolor[rgb]{0.50,0.50,0.50}{##1}}}
+\def\PY@tok@ge{\let\PY@it=\textit}
+\def\PY@tok@vc{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@il{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@cs{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\def\PY@tok@cp{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\def\PY@tok@gi{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\def\PY@tok@gh{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\def\PY@tok@ni{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\def\PY@tok@nl{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\def\PY@tok@nn{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\def\PY@tok@no{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\def\PY@tok@na{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\def\PY@tok@nb{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@nc{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\def\PY@tok@nd{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\def\PY@tok@ne{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\def\PY@tok@nf{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\def\PY@tok@si{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\def\PY@tok@s2{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@vi{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@nt{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@nv{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@s1{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@sh{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@sc{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@sx{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@bp{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@c1{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\def\PY@tok@kc{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@c{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\def\PY@tok@mf{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@err{\def\PY@bc##1{\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{##1}}}
+\def\PY@tok@kd{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@ss{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\def\PY@tok@sr{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\def\PY@tok@mo{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@kn{\let\PY@bf=\textbf\dthod of a LatexFormatter returns a string containing \def commands ef\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@mi{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@gp{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\def\PY@tok@o{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\def\PY@tok@kr{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@s{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@kp{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@w{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\def\PY@tok@kt{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\def\PY@tok@ow{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\def\PY@tok@sb{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\def\PY@tok@k{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\def\PY@tok@se{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\def\PY@tok@sd{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+%%%%%%%%%%%%%% Pygments header end.
+
+
+\pagestyle{fancy}
+%\fancyhead{}
+\fancyfoot{}
+
+\cfoot{\thepage\ от \pageref{LastPage}}
+
+\addto\captionsbulgarian{%
+  \def\abstractname{%
+    Цел на проекта} %\cyr\CYRA\cyrs\cyrt\cyrr\cyra\cyrk\cyrt}}%
+}
+
+% Custom defines:
+\def\js{\texttt{javascript}}
+\def\jsg{JsGames}
+\def\jsurl{http://iskren.info:50005/}
+
+% TODO remove colorlinks before printing
+\usepackage[unicode,colorlinks]{hyperref}   % this has to be the _last_ command in the preambule, or else - no work
+\hypersetup{urlcolor=blue}
+\hypersetup{citecolor=PineGreen}
+
+ \begin{document}
+
+\title{\jsg}
+\author{
+Зорница Атанасова Костадинова, 4 курс, КН, фн: 80227, ФМИ, \\
+Искрен Ивов Чернев, 4 курс, КН, фн: 80246, ФМИ
+}
+\date{\today}
+\maketitle
+
+%\includegraphics[scale=0.1]{drop}
+
+\begin{abstract}
+Настоящият документ е курсова работа към проекта ``\jsg'' по предмета
+``Изкуствен Интелект''. Описали сме задачата която си поставихме с този проект
+и решението ѝ
+
+% , базата данни (схема, описание на таблиците и релациите между тях), интерфейса и възможностите за разширяване на проекта. Обяснили сме методите и основните архитектурни принципи залегнали в разработката на проекта, както и използваните технологии.
+\end{abstract}
+\newpage
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+\newpage
+
+% TODO
+% Мотивация, Задача на курсовата работа
+% Кратък обзор
+% Извършвана ли и някаква работа в тази област преди и ако да, каква? 
+% Какви методи могат да се използват за решаването на задачата?
+% Вашето решение
+% Програмна реализация
+% Резултати от експерименти (ако има)
+% Заключение 
+% Какво сте направили 
+% и какво още може да се направи
+% Литература – цитирате всички използвани източници
+
+\section{Описание на проекта}
+
+Проект: cайт с javascript игри.\footnote{Проектът се хоства на \jsurl.}
+
+  \begin{itemize}
+    \item сайта ще поддържа потребители със следната информация за тях:
+    \begin{itemize}
+      \item email
+      \item парола
+      \item име
+    \end{itemize}
+
+    \item информация за игра:
+    \begin{itemize}
+      \item име
+      \item кратко описание
+    \end{itemize} 
+    
+    \item за всяка изиграна игра ще се пази следната информация:
+    \begin{itemize}
+      \item коя е играта
+      \item потребители играли играта (може някой да са компютри, в такъв случай се пази трудността на компютъра)
+      \item резултат
+      \item продължителност на играта
+    \end{itemize} 
+
+    \item възможност за изкарване на класиране:
+    \begin{description}
+      \item най-много изиграни игри \hfill \\ общо за всички игри или за конкретна игра
+      \item най-много изкарани точки \hfill \\ общо точки или средно аритметично, общо и за конкретна игра 
+      \item най-дълго прекарано време в игри \hfill \\ общо време или средно аритметично, общо или за конкретна игра
+    \end{description} 
+
+    \item ще има възможност за динамично добавяне, редактиране, изтриване на горепосочените данни където това има смисъл 
+
+    \item допълнителни пояснения за игрите:
+    \begin{itemize}
+      \item игрите ще бъдат имплементирани на \js
+      \item всички игри ще имат изкуствен интелект (имплементиран като \js\ клиент) с поне една степен на трудност
+      \item сървърът ще поддържа комуникация между различни \js\ клиенти (браузъри) при игра на няколко души за да се обменят изиграните ходове
+      \item ще може да се играе и само от един клиент (браузър) ако единия играч е човек, а другият компютър (изкуствен интелект)
+    \end{itemize} 
+  \end{itemize}
+
+% TODO
+%\texttt{http://drupal.org}.
+
+\section{Декларация за липса на плагиатство}
+Тази курсова работа е наше дело, като всички изречения, илюстрации и програми от други хора са изрично цитирани.
+Тази курсова работа или нейна версия не са представени в друг университет или друга учебна институция.
+Разбираме, че ако се установи плагиатство в работата ни ще получим оценка “Слаб”.
+
+\section{Използвани технологии}
+
+  \subsection{Haml}
+  Haml е \cite{haml} маркъп език, с който може чисто и просто да се описва XHTML за всеки онлайн документ, без вграждане на код. Haml е предназначен като алтернатива на други шаблонни езици които вграждат код като PHP, ERB и ASP. Също така с Haml избягвате писането на чист XHTML с използването на семантична идентация.
+  % Haml е \cite{haml}
+  % Haml is a markup language that’s used to cleanly and simply describe the XHTML of any web document, without the use of inline code. Haml functions as a replacement for inline page templating systems such as PHP, ERB, and ASP. However, Haml avoids the need for explicitly coding XHTML into the template, because it is actually an abstract description of the XHTML, with some code to generate dynamic content.
+
+  \subsection{Sass}
+  Sass \cite{sass} е добавка към CSS3 \cite{css}, в която е добавено влагане на правила, променливи, модули, наследяване на селектори и други. Sass се трансформира до добре форматиран CSS с помощта на конзолна програма или плъгин към уеб фреймуърк.
+  % Sass \cite{sass} -> Css \cite{css}
+  % Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more. It’s translated to well-formatted, standard CSS using the command line tool or a web-framework plugin.
+
+  Sass има два синтаксиса. Новия синтаксис (въведен от Sass 3) още известен като SCSS е надмножество на CSS3. Това означава, че всеки валиден CSS3 файл е също валиден SCSS. SCSS файловете имат разширение \texttt{.scss}.
+
+  % Sass has two syntaxes. The new main syntax (as of Sass 3) is known as “SCSS” (for “Sassy CSS”), and is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. SCSS files use the extension .scss.
+
+  Втория, по-стар синтаксис е известен като идентирания синтаксис (или просто ``Sass''). Вдъхновен от краткоста на Haml, той е предназначен за хора, който предпочитат изразителността пред близостта с CSS. Вместо точка и запетая и скоби се използва семантична идентация, за да се обособяват блокове. Въпреки че вече не е основния синтаксис, ще продължи да бъде поддържан. Файловете с идентиран синтаксис имат разширение \texttt{.sass}.
+  % The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported. Files in the indented syntax use the extension .sass.
+
+  \subsection{Ruby on Rails Framework}
+  Ruby on Rails, често съкращаван като Rails или RoR, е уеб фреймуърк с отворен код за програмният език Ruby. Той е предназначен за програмиране по Agile методологията, която се използва от уеб програмисти за ускорено програмиране.
+
+  Като много уеб фреймуърци, Ruby on Rails използва Model-View-Controller (MVC) архитектура за организиране на приложението.
+
+  Ruby on Rails включва програмки, който правят често срещани задачи в програмирането по-лесни, като например автоматичното генериране на шаблонен код, за по-бързо стартиране на модел или изглед. Също включен е WEBrick - прост уеб сървър писан на Ruby, както и Rake - система за билдване (като make) която се дистрибутира като gem (пакет за Ruby). Заедно с Ruby on Rails тези програмки предоставят базова среда за програмиране.
+
+  Ruby on Rails разчита на уеб сървър за да работи. Mongrel е предпочитан пред WEBrick, но също може да се ползва Lighttpd \cite{lighttpd}, Abyss \cite{abyss}, Apache \cite{apache}, nginx \cite{nginx} и много други. От 2008 уеб сървърът Passenger \cite{passenger} заменя Mongrel като препоръчителна опция.
+  Ruby on Rails е известен също и с използването на \js\ библиотеките Prototype \cite{prototype} и Script.aculo.us за Ajax \cite{ajax}. В началото Ruby on Rails използва лек SOAP, но по-късно е заменен от REST. От версия 3 Ruby on Rails използва Unobtrusive \js\ \cite{unobtrusive} -- техника за разделяне на логиката от изгледа на уеб страницата.
+  % Ruby on Rails, often shortened to Rails or RoR, is an open source web application framework for the Ruby programming language. It is intended to be used with an Agile development methodology that is used by web developers for rapid development.[1]
+   % Like many web frameworks, Ruby on Rails uses the Model-View-Controller (MVC) architecture pattern to organize application programming.
+   % Ruby on Rails includes tools that make common development tasks easier "out of the box", such as scaffolding that can automatically construct some of the models and views needed for a basic website.[16] Also included are WEBrick, a simple Ruby web server that is distributed with Ruby, and Rake, a build system, distributed as a gem. Together with Ruby on Rails these tools provide a basic development environment.
+   % Ruby on Rails relies on a web server to run it. Mongrel was generally preferred over WEBrick at the time of writing[citation needed], but it can also be run by Lighttpd, Abyss, Apache, nginx (either as a module - Passenger for example - or via CGI, FastCGI or mod_ruby), and many others. From 2008 onwards, the Passenger web server replaced Mongrel as the most used web server[17].
+   % Ruby on Rails is also noteworthy for its extensive use of the JavaScript libraries Prototype and Script.aculo.us for Ajax.[18] Ruby on Rails initially utilized lightweight SOAP for web services; this was later replaced by RESTful web services. Ruby on Rails 3.0 uses a technique called Unobtrusive JavaScript to separate the functionality (or logic) from the structure of the web page.
+   % Since version 2.0, Ruby on Rails by default offers both HTML and XML as output formats. The latter is the facility for RESTful web services.
+  \subsection{NodeJs}
+  Целта на Node.js \cite{node} е да предостави лесен начин за програмиране скалируеми, работещи в мрежа програми. Node инструктира операционната система да го уведомява за нови клиенти и после заспива. Ако някой се свърже се изпълнява предварително зададена функция (callback). За всяка връзка се използва съвсем малко памет.
+
+  Това е в контраст с по-популярния модел на едновременна работа, в който се използват нишки. Мрежово програмиране имплементирано с нишки е сравнително неефективно и много трудно за използване. Node използва доста по-малко памет при високо натоварване, от колкото системи, които заделят по 2MB за всяка нишка / конекция. Още повече потребителите на Node няма нужда да се притесняват от dead-lock - просто защото няма заключване. Няма функции в Node, която директо изпълнява вход/изход - затова процеса никога не блокира. Поради този факт непрофесионалисти могат да пишат бързи системи.
+  % Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
+
+  % This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use. See: this and this. Node will show much better memory efficiency under high-loads than systems which allocate 2mb thread stacks for each connection. Furthermore, users of Node are free from worries of dead-locking the process—there are no locks. Almost no function in Node directly performs I/O, so the process never blocks. Because nothing blocks, less-than-expert programmers are able to develop fast systems.
+    
+  \subsection{jQuery}
+  jQuery \cite{jquery} е \js\ библиотека предвидена да улесни скриптирането на HTML от страна на клиента. Тя е пусната през януари 2006 от Джон Ресиг. Използвана е в 41\% от 10000 най-посещавани сайтове. Това е най-популярната \js\ библиотека в момента.
+
+  jQuery е безплатна, с отворен код, лицензирана под MIT и GNU v2 лицензите. Синтаксиса на jQuery е предвиден да улесни навигацията в документа, селектирането на DOM обекти, създаването на анимации, обработката на събития и разработването на Ajax приложения. jQuery също предоставя възможност за писане на плъгини. С използването на тези възможности програмиста може да създаде абстракции за анимация и взаимодействие от ниско ниво, сложни ефекти както и компоненти от високо ниво поддържащи теми. Това подпомага за създаването на сложни и динамични уеб страници.
+
+  % Microsoft и Nokia са оповестили плановете си да използват jQuery в техните платформи.
+
+  \subsection{Yui3 library}
+  YUI \cite{yui} е \js\ библиотека разработвана от Yahoo!. Тя има добре развита модулна система, която позволява да се сваля само кода от библиотеката, който реално се използа. Системата ѝ за събити надгражда тази дефинирана в браузъра и позволява по-лесна обработка и добавяне на специализирани събития.
+
+  \subsection{Mercurial}
+  Mercurial \cite{mercurial} е дистрибутирана система за управление на сорс код.
+
+  Традиционните системи за управление на сорс като Subversion са с типични клиент-сървър архитектури. Те имат централен сървър който пази информацията за различните ревизии на проекта. В контраст Mercurial е напълно дистрибутирана, позволявайки на всеки програмист да има локално копие на цялата история на проекта. Това означава, че програмистите са независими от връзката си с интернет или централния сървър. Добавянето, разклоняването и сливането в проекта са лесни и бързи операции.
+  % Traditional version control systems such as Subversion are typical client-server architectures with a central server to store the revisions of a project. In contrast, Mercurial is truly distributed, giving each developer a local copy of the entire development history. This way it works independent of network access or a central server. Committing, branching and merging are fast and cheap.
+
+  \subsection{RubyGems}
+  RubyGems \cite{rubygems} е пакетен мениджър за програмният език Ruby, който предоставя стандартен формат за разпространението на Ruby програми и библиотеки във самодостатъчен файлов формат \texttt{.gem}. Той предоставя конзолен интерфейс за лесна инсталация и управление на гемове, както и сървър за тяхното разпространение. RubyGems е аналогичен на EasyInstall за програмният език Python. В момента RubyGems е част от стандартната библиотека на Ruby версия 1.9.
+  % RubyGems is a package manager for the Ruby programming language that provides a standard format for distributing Ruby programs and libraries (in a self-contained format called a "gem"), a tool designed to easily manage the installation of gems, and a server for distributing them. It is analogous to EasyInstall for the Python programming language. RubyGems is now part of the standard library from Ruby version 1.9.
+
+  \subsubsection{База от данни}
+  PostgreSQL \cite{postgresql} е обектно-релационна система за управление на база от данни. Тя е лицензирана под MIT лиценз и следователно е безплатна и с отворен код. Както други системи с отворен код PostgreSQL не се контролира от нито една единствена компания -- интернационална група от програмисти и компании разработват продукта.
+  % PostgreSQL \cite{postgresql} often simply Postgres, is an object-relational database management system (ORDBMS).[5] It is released under an MIT-style license and is thus free and open source software. As with many other open-source programs, PostgreSQL is not controlled by any single company — a global community of developers and companies develops the system.
+
+  \subsection{Статистика за проекта}
+  \begin{itemize}
+    \item Използвани езици за програмиране
+    \begin{itemize}
+      \item \js
+      \item Ruby
+      \item SQL
+      \item html (генериран чрез haml)
+      \item css (генериран чрез sass)
+    \end{itemize}
+    
+    \item Редове код от началото на проекта - \texttt{5000}
+    \begin{itemize}
+      \item Ruby \quad 1200
+      \item \js \quad 3200
+    \end{itemize}
+
+    % TODO: this is how to add IMAGES: 
+    % \includegraphics[scale=0.65]{lines_of_code} \\
+
+    \item Брой тестове
+    \begin{itemize}
+      \item Ruby \quad 21
+      \item \js \quad 30
+    \end{itemize}
+
+    \item Брой commits в системата за контрол на версиите - \texttt{130}
+  \end{itemize}
+
+%  \subsection{Цел}
+
+\section{Реализация}
+
+\subsection{Програмен език}
+
+Ruby \cite{ruby} and Javascript \cite{javascript}.
+Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
+
+\subsubsection{Уеб сървъри}
+
+  В проекта използваме два уеб сървъра:
+  \begin{description}
+    \item[WEBrick] \hfill \\ е стандартния web server за малки проекти при Ruby. Използваме го за да сервира страниците и статичното съдържание (картинки, javascript, css).
+    \item[Node.js] \hfill \\ отговаря за комуникацията между различни клиенти посредством \texttt{socket.io}. Тази библиотека имплементира 6 различни протокола за двупосочна комуникация на \js\ клиент и произволен уеб сървър (стандартния ajax може да се използва само за поискване на информация - ако сървъра иска да каже нещо на клиента в произволно време трябва да се иползва нещо по-сложно). В момента имплементацията поддържа регистриране на потребителите в произволен брой канали, като всяко съобщение изпратено в канал се препраща на всички участници в канала без промяна. В бъдеще може да се имплементира цялата логиката на играта, за да има централизирано място, което да валидира ходовете и резултата преди да бъде изпратен към главния сървър.
+  \end{description}
+% За работата на продукта е нужен web server \cite{webServer}.
+% 
+% Използваме:
+% \begin{itemize}
+%   \item \texttt{Webrick \cite{webrick}} - web server който се ...
+%   WEBrick is a Ruby library providing simple HTTP web server services. The server also provides code for simple server services other than HTTP.
+% It is used by the Ruby on Rails framework to test applications in a development environment.
+%   \item \texttt{NodeJs \cite{node}} - web server ...
+% \end{itemize}
+
+
+\subsubsection{База от данни}
+
+Използваната база от данни в проекта е PostgreSQL \cite{postgresql}.
+Схемата използва 4 таблици:
+
+\begin{tabular} { | l | l | l | }
+\multicolumn{3}{c}{Table "games"} \\
+\hline
+Column & Type & Modifiers \\
+\hline
+id & integer & not null default \\
+name & character varying(255) & not null \\
+display\_name & character varying(255) & \\
+description & text & \\
+\hline
+\end{tabular}
+
+\vspace{10 pt}
+
+\begin{tabular} { | l | l | l | }
+\multicolumn{3}{c}{Table "users"} \\
+\hline
+Column & Type & Modifiers \\
+\hline
+id & integer & not null default \\
+game\_id & integer & \\
+email & character varying(255) & not null default \\
+encrypted\_password & character varying(128) & not null default \\
+password\_salt & character varying(255) & not null default \\
+name & character varying(255) & \\ 
+\hline
+\end{tabular}
+
+\vspace{10 pt}
+
+\begin{tabular} { | l | l | l | }
+\multicolumn{3}{c}{Table "instances"} \\
+\hline
+Column & Type & Modifiers \\
+\hline
+id & integer & not null default \\
+game\_id  & integer                     & \\
+began    & timestamp without time zone & not null \\
+duration & integer                     & default 0 \\
+\hline
+\end{tabular}
+
+\begin{tabular} { | l | l | l | }
+\multicolumn{3}{c}{Table "players"} \\
+\hline
+Column & Type & Modifiers \\
+\hline
+id & integer & not null default \\
+instance\_id & integer & \\
+user\_id     & integer & \\
+play\_order  & integer & \\
+score       & integer & default 0 \\
+\hline
+\end{tabular}
+
+\subsection{Дизайн} 
+Спазени са основните принципи на Обектно Ориентираното Програмиране \cite{oop} - капсулиране, полиморфизъм, наследяване, абстракция, обекти.
+
+  \subsubsection{Дизайн на игрите}
+  
+    \begin{description}
+      \item[JSG.GameCore.BaseGame] Това е базовият клас за всички игри. В него е имплементирана логиката са създаване на играчи. Подготвяне на информацията за реда на игра, спазване на реда на игра, съобщаването на резултата на сървъра. В повечето случай е досатъчно само да се имплементират методи за валидация на ход и детектор за край на играта. Този клас създава събития за това какъв ход е игран и кой играч е на ход за да може обектите играчи да са наясно с текущото състояние на играта.
+      \item[JSG.GameCore.LocalUser] Представлява локално играещ потребител. Той трябва да слуша за събитията свързани с избиране на ход от дъската и да ги предава на обекта игра, който продължава тяхната обработка. Не е предвидено да се наследява.
+      \item[JSG.GameCore.RemoteGateway] Свързващо звено при игри на отдалечени клиенти. Работата е да слуша за събития, касаещи потребители на отдалечени машини (например игра на локални потребители), и да ги препраща към отдалечените потребители посредством уникален канал за тази конкретна играта. Също слуша за действията на отдалечените играчи и съобщава на текущата игра.
+      \item[JSG.Games.*.Game] Всяка игра трябва да имплементира този клас. Той е отговорен за дооформянето на базовия клас като имплементира методи за валидация и детектор за финални състояния.
+      \item[JSG.Games.*.Board] Отговаря за логическото представяне на визуалната част на играта. Класът създава събития за всеки ход, който локалния потребител направи - например избор на поле в таблица. Също дава удобен интерфейс, за да може играта да отразява действията на отдалечените играчи без да се интересува от точната имплементация на визуалните елементи.
+      \item[JSG.Games.*.BoardUI] Отговаря за визуалното представяне на играта. Този клас е от по-ниско ниво от Board -- методите му отговарят за пряка манипулация на DOM обекти, макар да представят по-удобен интерфейс, докато Board класа отговаря за отразяването и създаването на ходове. Например може кликването в няколко полета на дъската да създава един ход -- BoardUI класа изпраща събитие за всеки клик, докато в Board се решава кога група събития е ход.
+      \item[JSG.Games.*.loader] Отговаря за зареждането на цялата игра динамично. Тъй като зареждането на всяка игра става от самата нея това намалява връзката между базовата библиотека и имплементатора на играта, което означава, че даже игри, изискващи по-сложно зареждане ще работи без да се променя базовия код на сайта.
+      \item[JSG.GameCore.gameManager] Отговаря за подготовката преди стартирането на игра. Това включва взимане на детайлни данни относно играта и потребителите които участват. Също кода на играта се сваля динамично, в случай ве вече не е наличен. В случая с отдалечени потребители -- намира и свърза други потребители, който са изявили желание да играят същата игра. Когато необходимият брой потребители е налице се избира един активен, който регистрира играта на основния сървър и разпраща уникалния идентификатор на останалите потребители. Посредством този уникален идентификатор се осъществява връзка за обмен на ходове по време на играта.
+    \end{description}
+
+  \subsubsection{Дизайн на Потребителския интерфейс}
+  \begin{description}
+    \item[JSG.UI.mainUI] Отговаря за построяването на целия графичен интефейс. Това включва създаването на табулярния интерфейс и използването на останалите UI компоненти за да го попълни.
+    \item[JSG.UI.GameList] Отговаря за показване на списък с игри. Този клас се използва както и в списъка за игра, така и в страницата със статистиките.
+  \end{description}
+
+  \begin{description}
+    \item[JSG.Util] Този модул включва голямо число помощни функции. Те надграждат стандартната библиотека на \js\ и се използват във всички останали класове. Включват функции улесняващи обектно-ориентираното програмиране, работата с масиви и хешове, динамично сваляне на съдържание.
+    \item[JSG.Util.Event] Този модул съдържа елементарна имплементация за създаване и слушане на събития. Използва се от почти всички модули, тъй като подобрява преизползването на код чрез намаляване на връзката между създаващия и слушащия събитието.
+    \item[JSG.Util.HTML] Този модул съдържа група функции за лесно и бързо създаване на DOM обекти чрез \js. Чрез него динамичното създаване на HTML е бързо и лесно. Възможно е и слушането на събития произлизащи от DOM обектите.
+  \end{description}
+
+\subsubsection{Шаблони за дизайн}
+Следните шаблони за дизайн (design patterns) са използвани в \jsg: 
+
+\begin{itemize}
+  \item \texttt{singleton} - Ако разглеждаме модулите и темите като обекти, то всички те реализират the singleton pattern. 
+  \item \texttt{model-view-controller} - ...
+  \item \texttt{event-driven approach} - ...
+\end{itemize}
+
+% TODO: Routing
+
+\paragraph{Nodejsg}
+Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
+
+This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use.
+
+\section{Инсталация}
+
+\subsection{Инсталиране на зависимости}
+
+% TODO: use dev_preps to fill this in:
+За да разработим \jsg си инсталирахме:
+\begin{itemize}
+  \item[mercurial] Изтегля се от официалния сайт или през пакетен мениджър. Чрез него се изтегля сорса на проекта от \texttt{http://iskren.info:3001}.
+  \item[PostgreSQL] Изтегля се от официалния сайт или през пакетен мениджър. \\
+    След инсталацията трябва да се създаде потребител с пълни права както и 3 бази, който му принадлежат.
+  \item[jsl] Изтегля се от официалния сайт и се настройва текстовия редактор да го използва при запазване на \js\ файлове. Показва възможни грешки за да помогне на по-ранното им отстраняване.
+  \item[jquery] Изтегля се от официалния сайт.
+  \item[jquery.log] Плъгин за jquery за печатане на съобщения в дебъг конзолите.
+  \item[qunit] Плъгин за jquery за писане на unit test-ове.
+  \item[ruby] Програмният език - от официалния сайт или през пакетен мениджър.
+  \item[ruby:minitar] Плъгин за поддръжка на \texttt{tar} архиви от Ruby. Инсталира се с \texttt{gem} след като е свален от официалния сайт.
+  \item[ruby:rails] Може да се инсталира с \texttt{gem}.
+  \item[rails:jquery] Адаптер на rails.js използващ jQuery. Това е необходимо, тъй като Prototype и jQuery не могат да бъдат използвани едновременно. Инсталира се от официалния сайт \footnote{https://github.com/rails/jquery-ujs}.
+  \item[rails:devise] Плъгин за потребители в rails. Инсталира се с \texttt{gem}.
+  \item[rails:haml] Плъгин за haml и sass. Инсталира се с \texttt{gem}.
+  \item[rails:foreigner] Плъгин за добавяне на foreign key в базата данни чрез миграция. Инсталира се с \texttt{gem}.
+  \item[node] От официални сайт се сваля и компилира. Препоръчително е да се инсталира в директория, в която user-а има права.
+  \item[node:npm] От официалния сайт се сваля и инсталира. Чрез него се инсталират всички плъгини за Node.
+  \item[node:socket.io] Плъгин за Node. Инсталира се през npm.
+  \item[node:json] Плъгин за Node. Инсталира се през npm.
+  \item[node:yui3] Плъгин за Node. Инсталира се през npm.
+\end{itemize}
+
+\newpage
+
+\begin{thebibliography}{99}
+  \bibitem{haml} \url{http://haml-lang.com/}
+  \bibitem{sass} \url{http://sass-lang.com/}
+  \bibitem{css} \url{http://en.wikipedia.org/wiki/Css}
+  \bibitem{webServer} \url{http://en.wikipedia.org/wiki/Web\_server}
+  \bibitem{lighttpd} \url{http://www.lighttpd.net/}
+  \bibitem{abyss} \url{http://www.aprelium.com/}
+  \bibitem{apache} \url{http://www.apache.org/}
+  \bibitem{nginx} \url{http://nginx.org/}
+  \bibitem{passenger} \url{http://www.modrails.com/}
+  \bibitem{prototype} \url{http://www.prototypejs.org/}
+  %\bibitem{apache} \url{http://httpd.apache.org/}
+  \bibitem{ajax} \url{http://en.wikipedia.org/wiki/Ajax\_(programming)}
+  \bibitem{unobtrusive} \url{http://en.wikipedia.org/wiki/Unobtrusive\_JavaScript}
+  \bibitem{jquery} \url{http://jquery.com}
+  \bibitem{yui} \url{http://developer.yahoo.com/yui/}
+  \bibitem{mercurial} \url{http://mercurial.selenic.com/}
+  \bibitem{rubygems} \url{http://rubygems.org/}
+  % \bibitem{} \url{}
+  \bibitem{ruby} \url{http://www.ruby-lang.org/en/}
+  \bibitem{javascript} \url{http://en.wikipedia.org/wiki/ECMAScript}
+  \bibitem{webrick} \url{http://en.wikipedia.org/wiki/WEBrick}
+  \bibitem{node} \url{http://nodejs.org/}
+  \bibitem{postgresql} \url{http://www.postgresql.org/}
+  %\bibitem{doxygen} \url{http://www.stack.nl/~dimitri/doxygen/}
+  \bibitem{oop} \url{http://en.wikipedia.org/wiki/Object-oriented\_programming}
+  %\bibitem{htmlTags} \url{http://www.w3schools.com/html/html\_primary.asp}
+  %\bibitem{routing} \url{http://acquia.com/node/693074}
+\end{thebibliography}
+
+\end{document}
