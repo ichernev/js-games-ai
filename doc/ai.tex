@@ -402,21 +402,137 @@ score       & integer & default 0 \\
     \item[JSG.Util.HTML] Този модул съдържа група функции за лесно и бързо създаване на DOM обекти чрез \js. Чрез него динамичното създаване на HTML е бързо и лесно. Възможно е и слушането на събития произлизащи от DOM обектите.
   \end{description}
 
-\subsubsection{Шаблони за дизайн}
-Следните шаблони за дизайн (design patterns) са използвани в \jsg: 
+\section{Изкуствен интелект}
+  \subsection{SG теория}
+  SG теорията е мощен механизъм за решаване на игри, състоящи се от съвкупност
+  от под-игри независими по между си.
+  
+    \subsubsection{Изисквания}
+    Изисквания за игра, която искаме да решим чрез SG теория:
+    \begin{itemize}
+      \item игра $G$
+      \item дваме играчи $A$ и $B$
+      \item играта $G$ е съставена от подигри $g_1, g_2, \dots,
+      g_n$\footnote{допустимо е подигрите да се създават и завършват в хода на
+      играта}
+      \item $g_i \quad i \in \overline{1,n}$  е игра за двама играчи
+      \item всеки играч на ход има право да избере една подигра $g_i \quad i \in
+      \overline{1,n}$ и да направи ход в нея. След това другия играч е на ход,
+      без да има каквито и да е ограничения за това в коя игра ще играе
+      \item победител е играча победил в последната останала игра.
+    \end{itemize}
+  
+    \subsubsection{Теория}
+    Всяка игра протича като последователност от \em състояния \em. След хода на
+    всеки играч играта преминава в друго състояние. В стандартната теория на
+    игрите всяко състояние бива определено като:
+    \begin{itemize}
+      \item \em печелившо \em -- играча на ход има печеливша стратегия
+      \item \em губещо \em -- за всеки ход на текущия играч, другия има
+      печеливша стратегия
+      \item \em реми \em -- съществуват ходове само към губещи състояния
+      и други реми състояния
+    \end{itemize}
+    Реми състоянията се различават от губещите по това, че ``следвайки'' реми
+    състояния се достига до \em финално \em реми състояние -- т.е. такова
+    състояние, което според правилата на играта е реми -- никой не печели,
+    а губещо състояние ще доведе до финално губещо -- т.е. другия печели по
+    правилата на играта.
 
-\begin{itemize}
-  \item \texttt{singleton} - Ако разглеждаме модулите и темите като обекти, то всички те реализират the singleton pattern. 
-  \item \texttt{model-view-controller} - ...
-  \item \texttt{event-driven approach} - ...
-\end{itemize}
+    \paragraph{sg стойности}
+    При игрите разглеждани от SG  теорията, няма реми състояния. При тях всяко
+    състояние получава неотрицателна челочислена \em sg стойност\em. sg
+    стойност $0$ означава губещо състояние, sg стойност $\neq 0$ означава
+    печелившо състояние.
 
-% TODO: Routing
+    Губещите състояния получават sg стойност $0$. Ако на дадено състояние $s$
+    са известни sg стойностите на всичките му наследници (състоянията в които
+    може да се стигне) $s_1, s_2, \dots, s_p$ -- съответно $sg[s_1], sg[s_2],
+    \dots, sg[s_p]$, то sg стойността на $s$ се пресмята по формулата
+    $$
+      sg[s] = \mathrm{mex}(sg[s_1], sg[s_2], \dots, sg[s_p])
+    $$
+    където $mex$ -- \em{}minimal excludant\em е дефинирано като:
+    $$
+      \mathrm{mex}(a_1, \dots, a_n) = \min \{ 0, 1, 2, \dots \} \setminus \{ a_1, \dots, a_n \}
+    $$
 
-\paragraph{Nodejsg}
-Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
+    От дефиницията на sg стойности лесно се вижда, че губещите състояния имат
+    само ходове към печеливши, а печелившите състояния имат поне един ход към
+    губещо. Това, което прави sg стойностите полезни е възможността за
+    \em{}събиране\em на игри. От изискванията по-горе: игрите $g_1, g_2, \dots,
+    g_n$ са сумирани за да се получи $G$. Ще записваме $g_1 \oplus g_2 \oplus
+    \dots \oplus g_n = G$. Приятното свойство е, че $$sg[G] = sg[g_1] \oplus
+    sg[g_2] \oplus \dots \oplus sg[g_n]$$ където $\oplus$ е операцията побитово
+    XOR (изключващо или).
 
-This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use.
+    \paragraph{доказателство на сумирането на игри}
+    За да докажем горното твърдение е достатъчно да покажем, че ако дадени $n$
+    числа имат XOR $s$ -- $a_1 \oplus a_2 \oplus \dots \oplus a_n = s$, то за
+    всяко $0 \le p \le s$ съществува $i \in [1, n]$, и $0 \le a_i' \le a_i$,
+    такива че $a_1 \oplus a_2 \oplus \dots \oplus a_i' \oplus \dots \oplus a_n
+    = p$.
+
+    За целта ще изразим $a_1 \oplus a_2 \oplus \dots a_{i-1} \oplus a_{i+1}
+    \oplus \dots \oplus a_n = s \oplus a_1$. Сега заместваме във второто
+    равенство и получаваме $a_i' \oplus s \oplus a_i = p$. От тук тривиално
+    $a_i' = (p \oplus s) \oplus a_i$. Сега остава да докажем, че съществува $i$
+    за което $a_i' < a_i$.
+
+    Първо ще покажем, че при $p < s \quad p \oplus s$ има най-висок бит, който
+    е $1$ в $s$ с други думи най-високия бит на $p \oplus s$ идва от $s$.
+    Понеже $p < s$ то в двоичен запис гледано от старши към младши битове $p$
+    и $s$ съвпадат до един момент, след което се различават -- като
+    задължително в най-старшия бит в който се различават $s$ е $1$ (а $p$
+    e $0$, иначе $p > s$). Така в $p \oplus s$ старшите битове, в които $p$
+    и $s$ съвпадат ще бъдат $0$, а първия бит в който се различават ще бъде от
+    $s$.
+
+    Сега остава да забележим, че за всеки бит $1$ в $s$ съществува $i$ за което
+    $a_i$ има този бит $1$. Това е така, защото $s = a_1 \oplus a_2 \oplus
+    \dots \oplus a_n$ и за всеки бит $1$ в $s$ има нечетен брой индекси, чиито
+    $a$-та имат $1$ в този бит.
+
+    \paragraph{оптимална стратегия}
+    В случай, че $sg[G] \ne 0$ използвайки идеята от горното доказателство
+    намираме подигра $g_i$ в която може да направим ход, който да намали sg
+    стойността ѝ по такъв начин, че $sg[G] \oplus sg[g_i] \oplus sg[g_i'] = 0$.
+    Т.е. това ни позволява във всяка игра с ненулева sg стойност да изберем
+    подигра и да направим валиден ход в нея, така че новополученото състояние
+    в $G'$ да има sg стойност $0$ -- губеща за опонента.
+
+    \subsubsection{Nim}
+    Nim е математическа стратегическа игра, произхождаща от дълбока древност.
+    \paragraph{Правила}
+    Състои се от $n$ купчинки в които има камъчета. На всеки ход играчът избира
+    произволна купчинка и маха произволен брой камъчета от нея (може
+    и всичките). Печели играча взел последния камък.
+    
+    \paragraph{Решение}
+    Всяка купчинка е независима от останалите. Освен това може лесно да бъдат
+    пресметнати sg стойностите на купчинка с $p$ камъка -- $sg[h_p] = p$.
+    Доказва се индуктивно. Сега по формулата може да пресметнем и sg стойността
+    на цялата игра -- просто XOR-ваме броя камъни във всички купчинки -- нека
+    резултата е $t$. Намираме най-високия вдигнат бит в $t$ и купчинка $h_r$,
+    чиито брой камъни $r$ има този бит вдигнат. От тук лесно $r \oplus t$
+    е новия брой камъни които трябва да останат в купчината -- т.е. вадим $r
+    - r \oplus t$ камъка.
+
+% \subsubsection{Шаблони за дизайн}
+% Следните шаблони за дизайн (design patterns) са използвани в \jsg: 
+% 
+% \begin{itemize}
+%   \item \texttt{singleton} - Ако разглеждаме модулите и темите като обекти, то всички те реализират the singleton pattern. 
+%   \item \texttt{model-view-controller} - ...
+%   \item \texttt{event-driven approach} - ...
+% \end{itemize}
+% 
+% % TODO: Routing
+% 
+% \paragraph{Nodejsg}
+% Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
+% 
+% This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use.
 
 \section{Инсталация}
 
