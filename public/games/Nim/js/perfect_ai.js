@@ -2,54 +2,16 @@
   var U = JSG.Util;
   var NS = JSG.Games.Nim = JSG.Games.Nim || {};
 
-  var find_win = function(len, other, sgs) {
-    var k, j, p2, cxor;
-    for (k = 1; k <= 2; ++k) {
-      for (j = 0; j + k <= len; ++j) {
-        p2 = len - j - k;
-        cxor = sgs[j] ^ sgs[p2] ^ other;
-        if (cxor === 0) {
-          return j * 2 + (k - 1);
-        }
-      }
-    }
-    return -1;
-  };
-
   NS.PerfectAI = function(player_id, game) {
     this.player_id = player_id;
     this.game = game;
     this.subscribe(this.game);
-
-    this.precompute();
   };
 
 
   U.mix(NS.PerfectAI.prototype, U.EventTarget);
   U.mix(NS.PerfectAI.prototype, {
     
-    precompute: function() {
-      var N = NS.Game.nim;
-      var sgs = new Array(N + 1);
-      var used = new Array(N + 1);
-      sgs[0] = 0;
-      var i, j, k, p2, cxor, csg;
-      for (i = 1; i <= N; ++i) {
-        for (k = 1; k <= 2; ++k) {
-          for (j = 0; j + k <= i; ++j) {
-            p2 = i - j - k;
-            cxor = sgs[j] ^ sgs[p2];
-            used[cxor] = i;
-          }
-        }
-        for (csg = 0; used[csg] === i; ++csg) { $.noop(); }
-        // $.log("%d -> %d", i, csg);
-        sgs[i] = csg;
-      }
-      this.sgs = sgs;
-      this.N = N;
-    },
-
     playerTurn: function(player) {
       if (player.player_id === this.player_id) {
         var move = this.move(this.game.state);
@@ -57,41 +19,52 @@
       }
     },
 
+    getStones: function(row) {
+      return U.count(row, 1);
+    },
+
+    amountToMove: function(row, amount) {
+      var zeroIx = U.foreach(this.game.state[row], function(val, i) {
+        if (val === 1) {
+          return i;
+        }
+      });
+      if (this.game.current_player_idx === 0) {
+        return [row, zeroIx + amount - 1];
+      } else {
+        // ix is 1
+        return [row, zeroIx + this.getStones(this.game.state[row]) - amount];
+      }
+    },
+
     move: function(state) {
-      state = state.concat([0]);
-      var N = this.N;
-      var sgs = this.sgs;
-
-      var segs = [];
-      var tot_sg = 0;
-      var beg = 0;
-      var i, len, move;
-      for (i = 1; i <= N; ++i) {
-        if (state[i] === 0 && state[i-1] === 1) {
-          len = i - beg;
-          segs.push([beg, len]);
-          tot_sg ^= sgs[len];
-        } else if (state[i-1] === 0 && state[i] === 1) {
-          beg = i;
+      var rows = [];
+      var noZeroIx;
+      U.foreach(state, function(row, i) {
+        var stones = this.getStones(row);
+        rows.push(stones);
+        if (stones !== 0) {
+          noZeroIx = i;
         }
-      }
+      }, this);
 
-      var k, j;
-      var res;
-      for (i = 0; i < segs.length; ++i) {
-        move = find_win(segs[i][1], tot_sg ^ sgs[segs[i][1]], sgs);
-        if (move >= 0) {
-          k = move % 2 + 1;
-          j = U.div(move, 2);
-          res = [segs[i][0] + j];
-          if (k === 2) {
-            res.push(segs[i][0] + j + 1);
+      var res = 0;
+      U.foreach(rows, function(num) {
+        res ^= num;
+      });
+
+      if (res === 0) {
+        $.log("Result is 0, we are losing.");
+        var amount = 1;
+        return this.amountToMove(noZeroIx, amount);
+      } else {
+        var ix = U.foreach(rows, function(row, i) {
+          if ((row ^ res) < row) {
+            return i;
           }
-          return res;
-        }
+        });
+        return this.amountToMove(ix, rows[ix] - (rows[ix] ^ res));
       }
-      $.log("losing");
-      return [segs[0][0]];
     }
 
   });

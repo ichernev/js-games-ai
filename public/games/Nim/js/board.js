@@ -72,7 +72,12 @@
     },
 
     displayMove: function(_, move) {
-      this.toggleStones(move, "no_stone");
+      var i, j;
+      for (i = 0; i < NS.Game.stones; ++i) {
+        for (j = 0; j < NS.Game.stones; ++j) {
+          this.ui.setImg([i, j], this.game.state[i][j] === 0 ? "no_stone" : "unselected_stone");
+        }
+      }
     }
 
   });
