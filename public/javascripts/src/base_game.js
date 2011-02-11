@@ -141,6 +141,18 @@
       if (!this.validMove(move)) {
         throw "Bad move!";
       }
+      if (this.players_info[player_id].type == "AI") {
+        // Make some delay for AI players.
+        var that = this;
+        window.setTimeout(function() {
+          that.doPlayMove(player_id, move);
+        }, 2000);
+      } else {
+        this.doPlayMove(player_id, move);
+      }
+    },
+
+    doPlayMove: function(player_id, move) {
       this.applyMove(move);
       this.board.displayMove(this.currentPlayer().player_id, move);
       this.ev.fire("playerMove", this.currentPlayer(), move);

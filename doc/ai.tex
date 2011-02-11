@@ -134,7 +134,7 @@
 Настоящият документ е курсова работа към проекта ``\jsg'' по предмета
 ``Изкуствен Интелект''. Описали сме задачата която си поставихме с този проект
 и решението ѝ. Обяснени са алгоритмите по които агентите вземат решения за
-следващ ход във всяка от игрите.Освен това сме представили програматичната
+следващ ход във всяка от игрите. Освен това сме представили програматичната
 реализация на сайта - база данни, интерфейс, архитектура, използвани
 технологии. Накрая говорим за възможностите за разширяване на проекта.
 
@@ -206,20 +206,13 @@
 
   \subsection{Haml}
   Haml е \cite{haml} маркъп език, с който може чисто и просто да се описва XHTML за всеки онлайн документ, без вграждане на код. Haml е предназначен като алтернатива на други шаблонни езици които вграждат код като PHP, ERB и ASP. Също така с Haml избягвате писането на чист XHTML с използването на семантична идентация.
-  % Haml е \cite{haml}
-  % Haml is a markup language that’s used to cleanly and simply describe the XHTML of any web document, without the use of inline code. Haml functions as a replacement for inline page templating systems such as PHP, ERB, and ASP. However, Haml avoids the need for explicitly coding XHTML into the template, because it is actually an abstract description of the XHTML, with some code to generate dynamic content.
 
   \subsection{Sass}
   Sass \cite{sass} е добавка към CSS3 \cite{css}, в която е добавено влагане на правила, променливи, модули, наследяване на селектори и други. Sass се трансформира до добре форматиран CSS с помощта на конзолна програма или плъгин към уеб фреймуърк.
-  % Sass \cite{sass} -> Css \cite{css}
-  % Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more. It’s translated to well-formatted, standard CSS using the command line tool or a web-framework plugin.
 
   Sass има два синтаксиса. Новия синтаксис (въведен от Sass 3) още известен като SCSS е надмножество на CSS3. Това означава, че всеки валиден CSS3 файл е също валиден SCSS. SCSS файловете имат разширение \texttt{.scss}.
 
-  % Sass has two syntaxes. The new main syntax (as of Sass 3) is known as “SCSS” (for “Sassy CSS”), and is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. SCSS files use the extension .scss.
-
   Втория, по-стар синтаксис е известен като идентирания синтаксис (или просто ``Sass''). Вдъхновен от краткоста на Haml, той е предназначен за хора, който предпочитат изразителността пред близостта с CSS. Вместо точка и запетая и скоби се използва семантична идентация, за да се обособяват блокове. Въпреки че вече не е основния синтаксис, ще продължи да бъде поддържан. Файловете с идентиран синтаксис имат разширение \texttt{.sass}.
-  % The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported. Files in the indented syntax use the extension .sass.
 
   \subsection{Ruby on Rails Framework}
   Ruby on Rails, често съкращаван като Rails или RoR, е уеб фреймуърк с отворен код за програмният език Ruby. Той е предназначен за програмиране по Agile методологията, която се използва от уеб програмисти за ускорено програмиране.
@@ -230,26 +223,16 @@
 
   Ruby on Rails разчита на уеб сървър за да работи. Mongrel е предпочитан пред WEBrick, но също може да се ползва Lighttpd \cite{lighttpd}, Abyss \cite{abyss}, Apache \cite{apache}, nginx \cite{nginx} и много други. От 2008 уеб сървърът Passenger \cite{passenger} заменя Mongrel като препоръчителна опция.
   Ruby on Rails е известен също и с използването на \js\ библиотеките Prototype \cite{prototype} и Script.aculo.us за Ajax \cite{ajax}. В началото Ruby on Rails използва лек SOAP, но по-късно е заменен от REST. От версия 3 Ruby on Rails използва Unobtrusive \js\ \cite{unobtrusive} -- техника за разделяне на логиката от изгледа на уеб страницата.
-  % Ruby on Rails, often shortened to Rails or RoR, is an open source web application framework for the Ruby programming language. It is intended to be used with an Agile development methodology that is used by web developers for rapid development.[1]
-   % Like many web frameworks, Ruby on Rails uses the Model-View-Controller (MVC) architecture pattern to organize application programming.
-   % Ruby on Rails includes tools that make common development tasks easier "out of the box", such as scaffolding that can automatically construct some of the models and views needed for a basic website.[16] Also included are WEBrick, a simple Ruby web server that is distributed with Ruby, and Rake, a build system, distributed as a gem. Together with Ruby on Rails these tools provide a basic development environment.
-   % Ruby on Rails relies on a web server to run it. Mongrel was generally preferred over WEBrick at the time of writing[citation needed], but it can also be run by Lighttpd, Abyss, Apache, nginx (either as a module - Passenger for example - or via CGI, FastCGI or mod_ruby), and many others. From 2008 onwards, the Passenger web server replaced Mongrel as the most used web server[17].
-   % Ruby on Rails is also noteworthy for its extensive use of the JavaScript libraries Prototype and Script.aculo.us for Ajax.[18] Ruby on Rails initially utilized lightweight SOAP for web services; this was later replaced by RESTful web services. Ruby on Rails 3.0 uses a technique called Unobtrusive JavaScript to separate the functionality (or logic) from the structure of the web page.
-   % Since version 2.0, Ruby on Rails by default offers both HTML and XML as output formats. The latter is the facility for RESTful web services.
+
   \subsection{NodeJs}
   Целта на Node.js \cite{node} е да предостави лесен начин за програмиране скалируеми, работещи в мрежа програми. Node инструктира операционната система да го уведомява за нови клиенти и после заспива. Ако някой се свърже се изпълнява предварително зададена функция (callback). За всяка връзка се използва съвсем малко памет.
 
   Това е в контраст с по-популярния модел на едновременна работа, в който се използват нишки. Мрежово програмиране имплементирано с нишки е сравнително неефективно и много трудно за използване. Node използва доста по-малко памет при високо натоварване, от колкото системи, които заделят по 2MB за всяка нишка / конекция. Още повече потребителите на Node няма нужда да се притесняват от dead-lock - просто защото няма заключване. Няма функции в Node, която директо изпълнява вход/изход - затова процеса никога не блокира. Поради този факт непрофесионалисти могат да пишат бързи системи.
-  % Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
-
-  % This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use. See: this and this. Node will show much better memory efficiency under high-loads than systems which allocate 2mb thread stacks for each connection. Furthermore, users of Node are free from worries of dead-locking the process—there are no locks. Almost no function in Node directly performs I/O, so the process never blocks. Because nothing blocks, less-than-expert programmers are able to develop fast systems.
     
   \subsection{jQuery}
   jQuery \cite{jquery} е \js\ библиотека предвидена да улесни скриптирането на HTML от страна на клиента. Тя е пусната през януари 2006 от Джон Ресиг. Използвана е в 41\% от 10000 най-посещавани сайтове. Това е най-популярната \js\ библиотека в момента.
 
   jQuery е безплатна, с отворен код, лицензирана под MIT и GNU v2 лицензите. Синтаксиса на jQuery е предвиден да улесни навигацията в документа, селектирането на DOM обекти, създаването на анимации, обработката на събития и разработването на Ajax приложения. jQuery също предоставя възможност за писане на плъгини. С използването на тези възможности програмиста може да създаде абстракции за анимация и взаимодействие от ниско ниво, сложни ефекти както и компоненти от високо ниво поддържащи теми. Това подпомага за създаването на сложни и динамични уеб страници.
-
-  % Microsoft и Nokia са оповестили плановете си да използват jQuery в техните платформи.
 
   \subsection{Yui3 library}
   YUI \cite{yui} е \js\ библиотека разработвана от Yahoo!. Тя има добре развита модулна система, която позволява да се сваля само кода от библиотеката, който реално се използа. Системата ѝ за събити надгражда тази дефинирана в браузъра и позволява по-лесна обработка и добавяне на специализирани събития.
@@ -258,15 +241,12 @@
   Mercurial \cite{mercurial} е дистрибутирана система за управление на сорс код.
 
   Традиционните системи за управление на сорс като Subversion са с типични клиент-сървър архитектури. Те имат централен сървър който пази информацията за различните ревизии на проекта. В контраст Mercurial е напълно дистрибутирана, позволявайки на всеки програмист да има локално копие на цялата история на проекта. Това означава, че програмистите са независими от връзката си с интернет или централния сървър. Добавянето, разклоняването и сливането в проекта са лесни и бързи операции.
-  % Traditional version control systems such as Subversion are typical client-server architectures with a central server to store the revisions of a project. In contrast, Mercurial is truly distributed, giving each developer a local copy of the entire development history. This way it works independent of network access or a central server. Committing, branching and merging are fast and cheap.
 
   \subsection{RubyGems}
   RubyGems \cite{rubygems} е пакетен мениджър за програмният език Ruby, който предоставя стандартен формат за разпространението на Ruby програми и библиотеки във самодостатъчен файлов формат \texttt{.gem}. Той предоставя конзолен интерфейс за лесна инсталация и управление на гемове, както и сървър за тяхното разпространение. RubyGems е аналогичен на EasyInstall за програмният език Python. В момента RubyGems е част от стандартната библиотека на Ruby версия 1.9.
-  % RubyGems is a package manager for the Ruby programming language that provides a standard format for distributing Ruby programs and libraries (in a self-contained format called a "gem"), a tool designed to easily manage the installation of gems, and a server for distributing them. It is analogous to EasyInstall for the Python programming language. RubyGems is now part of the standard library from Ruby version 1.9.
 
   \subsubsection{База от данни}
   PostgreSQL \cite{postgresql} е обектно-релационна система за управление на база от данни. Тя е лицензирана под MIT лиценз и следователно е безплатна и с отворен код. Както други системи с отворен код PostgreSQL не се контролира от нито една единствена компания -- интернационална група от програмисти и компании разработват продукта.
-  % PostgreSQL \cite{postgresql} often simply Postgres, is an object-relational database management system (ORDBMS).[5] It is released under an MIT-style license and is thus free and open source software. As with many other open-source programs, PostgreSQL is not controlled by any single company — a global community of developers and companies develops the system.
 
   \subsection{Статистика за проекта}
   \begin{itemize}
@@ -285,9 +265,6 @@
       \item \js \quad 3200
     \end{itemize}
 
-    % TODO: this is how to add IMAGES: 
-    % \includegraphics[scale=0.65]{lines_of_code} \\
-
     \item Брой тестове
     \begin{itemize}
       \item Ruby \quad 21
@@ -296,8 +273,6 @@
 
     \item Брой commits в системата за контрол на версиите - \texttt{130}
   \end{itemize}
-
-%  \subsection{Цел}
 
 \section{Реализация}
 
@@ -402,21 +377,121 @@ score       & integer & default 0 \\
     \item[JSG.Util.HTML] Този модул съдържа група функции за лесно и бързо създаване на DOM обекти чрез \js. Чрез него динамичното създаване на HTML е бързо и лесно. Възможно е и слушането на събития произлизащи от DOM обектите.
   \end{description}
 
-\subsubsection{Шаблони за дизайн}
-Следните шаблони за дизайн (design patterns) са използвани в \jsg: 
+\section{Изкуствен интелект}
+  \subsection{SG теория}
+  SG теорията е мощен механизъм за решаване на игри, състоящи се от съвкупност
+  от под-игри независими по между си.
+  
+    \subsubsection{Изисквания}
+    Изисквания за игра, която искаме да решим чрез SG теория:
+    \begin{itemize}
+      \item игра $G$
+      \item дваме играчи $A$ и $B$
+      \item играта $G$ е съставена от подигри $g_1, g_2, \dots,
+      g_n$\footnote{допустимо е подигрите да се създават и завършват в хода на
+      играта}
+      \item $g_i \quad i \in \overline{1,n}$  е игра за двама играчи
+      \item всеки играч на ход има право да избере една подигра $g_i \quad i \in
+      \overline{1,n}$ и да направи ход в нея. След това другия играч е на ход,
+      без да има каквито и да е ограничения за това в коя игра ще играе
+      \item победител е играча победил в последната останала игра.
+    \end{itemize}
+  
+    \subsubsection{Теория}
+    Всяка игра протича като последователност от \em състояния \em. След хода на
+    всеки играч играта преминава в друго състояние. В стандартната теория на
+    игрите всяко състояние бива определено като:
+    \begin{itemize}
+      \item \em печелившо \em -- играча на ход има печеливша стратегия
+      \item \em губещо \em -- за всеки ход на текущия играч, другия има
+      печеливша стратегия
+      \item \em реми \em -- съществуват ходове само към губещи състояния
+      и други реми състояния
+    \end{itemize}
+    Реми състоянията се различават от губещите по това, че ``следвайки'' реми
+    състояния се достига до \em финално \em реми състояние -- т.е. такова
+    състояние, което според правилата на играта е реми -- никой не печели,
+    а губещо състояние ще доведе до финално губещо -- т.е. другия печели по
+    правилата на играта.
 
-\begin{itemize}
-  \item \texttt{singleton} - Ако разглеждаме модулите и темите като обекти, то всички те реализират the singleton pattern. 
-  \item \texttt{model-view-controller} - ...
-  \item \texttt{event-driven approach} - ...
-\end{itemize}
+    \paragraph{sg стойности}
+    При игрите разглеждани от SG  теорията, няма реми състояния. При тях всяко
+    състояние получава неотрицателна челочислена \em sg стойност\em. sg
+    стойност $0$ означава губещо състояние, sg стойност $\neq 0$ означава
+    печелившо състояние.
 
-% TODO: Routing
+    Губещите състояния получават sg стойност $0$. Ако на дадено състояние $s$
+    са известни sg стойностите на всичките му наследници (състоянията в които
+    може да се стигне) $s_1, s_2, \dots, s_p$ -- съответно $sg[s_1], sg[s_2],
+    \dots, sg[s_p]$, то sg стойността на $s$ се пресмята по формулата
+    $$
+      sg[s] = \mathrm{mex}(sg[s_1], sg[s_2], \dots, sg[s_p])
+    $$
+    където $mex$ -- \em{}minimal excludant\em е дефинирано като:
+    $$
+      \mathrm{mex}(a_1, \dots, a_n) = \min \{ 0, 1, 2, \dots \} \setminus \{ a_1, \dots, a_n \}
+    $$
 
-\paragraph{Nodejsg}
-Node's goal is to provide an easy way to build scalable network programs. In the "hello world" web server example above, many client connections can be handled concurrently. Node tells the operating system (through epoll, kqueue, /dev/poll, or select) that it should be notified when a new connection is made, and then it goes to sleep. If someone new connects, then it executes the callback. Each connection is only a small heap allocation.
+    От дефиницията на sg стойности лесно се вижда, че губещите състояния имат
+    само ходове към печеливши, а печелившите състояния имат поне един ход към
+    губещо. Това, което прави sg стойностите полезни е възможността за
+    \em{}събиране\em на игри. От изискванията по-горе: игрите $g_1, g_2, \dots,
+    g_n$ са сумирани за да се получи $G$. Ще записваме $g_1 \oplus g_2 \oplus
+    \dots \oplus g_n = G$. Приятното свойство е, че $$sg[G] = sg[g_1] \oplus
+    sg[g_2] \oplus \dots \oplus sg[g_n]$$ където $\oplus$ е операцията побитово
+    XOR (изключващо или).
 
-This is in contrast to today's more common concurrency model where OS threads are employed. Thread-based networking is relatively inefficient and very difficult to use.
+    \paragraph{доказателство на сумирането на игри}
+    За да докажем горното твърдение е достатъчно да покажем, че ако дадени $n$
+    числа имат XOR $s$ -- $a_1 \oplus a_2 \oplus \dots \oplus a_n = s$, то за
+    всяко $0 \le p \le s$ съществува $i \in [1, n]$, и $0 \le a_i' \le a_i$,
+    такива че $a_1 \oplus a_2 \oplus \dots \oplus a_i' \oplus \dots \oplus a_n
+    = p$.
+
+    За целта ще изразим $a_1 \oplus a_2 \oplus \dots a_{i-1} \oplus a_{i+1}
+    \oplus \dots \oplus a_n = s \oplus a_1$. Сега заместваме във второто
+    равенство и получаваме $a_i' \oplus s \oplus a_i = p$. От тук тривиално
+    $a_i' = (p \oplus s) \oplus a_i$. Сега остава да докажем, че съществува $i$
+    за което $a_i' < a_i$.
+
+    Първо ще покажем, че при $p < s \quad p \oplus s$ има най-висок бит, който
+    е $1$ в $s$ с други думи най-високия бит на $p \oplus s$ идва от $s$.
+    Понеже $p < s$ то в двоичен запис гледано от старши към младши битове $p$
+    и $s$ съвпадат до един момент, след което се различават -- като
+    задължително в най-старшия бит в който се различават $s$ е $1$ (а $p$
+    e $0$, иначе $p > s$). Така в $p \oplus s$ старшите битове, в които $p$
+    и $s$ съвпадат ще бъдат $0$, а първия бит в който се различават ще бъде от
+    $s$.
+
+    Сега остава да забележим, че за всеки бит $1$ в $s$ съществува $i$ за което
+    $a_i$ има този бит $1$. Това е така, защото $s = a_1 \oplus a_2 \oplus
+    \dots \oplus a_n$ и за всеки бит $1$ в $s$ има нечетен брой индекси, чиито
+    $a$-та имат $1$ в този бит.
+
+    \paragraph{оптимална стратегия}
+    В случай, че $sg[G] \ne 0$ използвайки идеята от горното доказателство
+    намираме подигра $g_i$ в която може да направим ход, който да намали sg
+    стойността ѝ по такъв начин, че $sg[G] \oplus sg[g_i] \oplus sg[g_i'] = 0$.
+    Т.е. това ни позволява във всяка игра с ненулева sg стойност да изберем
+    подигра и да направим валиден ход в нея, така че новополученото състояние
+    в $G'$ да има sg стойност $0$ -- губеща за опонента.
+
+    \subsubsection{Nim}
+    Nim е математическа стратегическа игра, произхождаща от дълбока древност.
+    \paragraph{Правила}
+    Състои се от $n$ купчинки в които има камъчета. На всеки ход играчът избира
+    произволна купчинка и маха произволен брой камъчета от нея (може
+    и всичките). Печели играча взел последния камък.
+    
+    \paragraph{Решение}
+    Всяка купчинка е независима от останалите. Освен това може лесно да бъдат
+    пресметнати sg стойностите на купчинка с $p$ камъка -- $sg[h_p] = p$.
+    Доказва се индуктивно. Сега по формулата може да пресметнем и sg стойността
+    на цялата игра -- просто XOR-ваме броя камъни във всички купчинки -- нека
+    резултата е $t$. Намираме най-високия вдигнат бит в $t$ и купчинка $h_r$,
+    чиито брой камъни $r$ има този бит вдигнат. От тук лесно $r \oplus t$
+    е новия брой камъни които трябва да останат в купчината -- т.е. вадим $r
+    - r \oplus t$ камъка.
 
 \section{Инсталация}
 
@@ -451,6 +526,12 @@ This is in contrast to today's more common concurrency model where OS threads ar
 Тази курсова работа е наше дело, като всички изречения, илюстрации и програми от други хора са изрично цитирани.
 Тази курсова работа или нейна версия не са представени в друг университет или друга учебна институция.
 Разбираме, че ако се установи плагиатство в работата ни ще получим оценка “Слаб”.
+
+\vspace{2cm}
+Зорница Атанасова Костадинова
+
+\vspace{2cm}
+Искрен Ивов Чернев
 
 \newpage
 
