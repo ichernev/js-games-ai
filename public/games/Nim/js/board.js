@@ -4,8 +4,9 @@
   
   var NS = JSG.Games.Nim = JSG.Games.Nim || {};
 
-  NS.Board = function() {
-    this.ui = new NS.BoardUI();
+  NS.Board = function(game) {
+    this.game = game;
+    this.ui = new NS.BoardUI(this.game.conf.piles, this.game.conf.max_pile);
     this.subscribe(this.ui);
 
     this.locked = true;
@@ -13,6 +14,9 @@
     this.ui.button.disabled = true;
 
     this.ev = new U.Event();
+
+    // This will take the initial game state and display it on the board.
+    this.displayMove();
   };
 
   U.mix(NS.Board.prototype, U.EventTarget);
@@ -33,13 +37,11 @@
         return;
       }
       // discard clicking within selected buttons
-      if (this.move === undefined) {
-        this.move = pos;
-        this.toggleStones(pos, "selected_stone");
-      } else if (this.move[0] === pos[0] && this.move[1] === pos[1]) {
-        this.move = undefined;
-        this.toggleStones(pos, "unselected_stone");
+      if (this.move !== undefined) {
+        this.toggleStones(this.move, "unselected_stone");
       }
+      this.move = pos;
+      this.toggleStones(pos, "selected_stone");
       this.recalcButtonState();
     },
 
@@ -64,7 +66,7 @@
         }
       } else {
         for (i = move[1];
-             this.game.state[move[0]][i] === 1 && i < NS.Game.stones;
+             this.game.state[move[0]][i] === 1 && i < this.game.conf.max_pile;
              ++i) {
           this.ui.setImg([move[0], i], pic);
         }
@@ -73,8 +75,8 @@
 
     displayMove: function(_, move) {
       var i, j;
-      for (i = 0; i < NS.Game.stones; ++i) {
-        for (j = 0; j < NS.Game.stones; ++j) {
+      for (i = 0; i < this.game.conf.piles; ++i) {
+        for (j = 0; j < this.game.conf.max_pile; ++j) {
           this.ui.setImg([i, j], this.game.state[i][j] === 0 ? "no_stone" : "unselected_stone");
         }
       }

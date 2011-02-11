@@ -9,10 +9,6 @@
     this.board.game = this;
   };
 
-  // TODO(zori): get #rocks from user
-  NS.Game.rocks = 8;
-  NS.Game.players = 2;
-
   U.extend(NS.Game, JSG.GameCore.BaseGame);
   U.mix(NS.Game.prototype, {
     boardConstructor: function() { return NS.Board; },
@@ -42,11 +38,18 @@
       };
     },
 
+    initGameConf: function() {
+      this.conf = {
+        rocks: U.randInt(5, 15),
+        players: 2
+      };
+    },
+
     initGameState: function() {
-      this.rocksLeft = NS.Game.rocks;
+      this.rocksLeft = this.conf.rocks;
       this.state = [];
       var i;
-      for (i = 0; i < NS.Game.rocks; ++i) {
+      for (i = 0; i < this.conf.rocks; ++i) {
         this.state.push(1);
       }
     },
@@ -68,8 +71,8 @@
       if (0 === this.rocksLeft) {
         this.recordScore({
           type: "binary",
-          winner_idx: (this.current_player_idx + NS.Game.players - 1) %
-              NS.Game.players,
+          winner_idx: (this.current_player_idx + this.conf.players - 1) %
+              this.conf.players,
           score: 1
         });
         return true;

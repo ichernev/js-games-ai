@@ -57,14 +57,18 @@ module JsGames
       'src/local_user.js',
       'src/remote_gateway.js',
 
-      'src/finish_init.js',
+      'src/finish_init.js'
       # 'src/game_test.js',
 
-      '../games/Nim/js/game.js',
-      '../games/Nim/js/board.js',
-      '../games/Nim/js/board_ui.js',
-      '../games/Nim/js/perfect_ai.js'
+      # '../games/Nim/js/game.js',
+      # '../games/Nim/js/board.js',
+      # '../games/Nim/js/board_ui.js',
+      # '../games/Nim/js/perfect_ai.js'
 
+      # '../games/Rocks/js/game.js',
+      # '../games/Rocks/js/board.js',
+      # '../games/Rocks/js/board_ui.js',
+      # '../games/Rocks/js/perfect_ai.js'
       # 'src/games/Rocks/game.js',
       # 'src/games/Rocks/perfect_ai.js',
       # 'src/games/Rocks/board.js',

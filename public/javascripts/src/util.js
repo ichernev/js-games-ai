@@ -142,8 +142,18 @@
     return (nom - (nom % den)) / den;
   };
 
+  // randInt(5) in [0, 5)
+  // randInt(5, 10) in [5, 10)
+  U.randInt = function(a, b) {
+    if (b === undefined) {
+      return Math.floor(Math.random() * a);
+    } else {
+      return a + U.randInt(b - a);
+    }
+  };
+
   U.randElement = function(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+    return arr[U.randInt(arr.length)];
   };
 
   U.fill = function(arr, el, len) {

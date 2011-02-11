@@ -127,4 +127,22 @@
     H.empty(dom);
     dom.appendChild(H.txtNode(text));
   };
+
+  H.updateTdImage = function(td, img_src, size) {
+    if (!img_src) {
+      H.empty(td);
+      return;
+    }
+    var img_dom = td.firstChild;
+    if (!img_dom) {
+      img_dom = H.img({
+        src: img_src,
+        width: size[0],
+        height: size[1]
+      });
+      td.appendChild(img_dom);
+    } else if (!(new RegExp(img_src)).test(img_dom.src)) {
+      img_dom.src = img_src;
+    }
+  };
 }());

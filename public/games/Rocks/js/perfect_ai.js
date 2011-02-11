@@ -29,7 +29,7 @@
   U.mix(NS.PerfectAI.prototype, {
     
     precompute: function() {
-      var N = NS.Game.rocks;
+      var N = this.game.conf.rocks;
       var sgs = new Array(N + 1);
       var used = new Array(N + 1);
       sgs[0] = 0;

@@ -4,8 +4,9 @@
   
   var NS = JSG.Games.Rocks = JSG.Games.Rocks || {};
 
-  NS.Board = function() {
-    this.ui = new NS.BoardUI();
+  NS.Board = function(game) {
+    this.game = game;
+    this.ui = new NS.BoardUI(this.game.conf.rocks);
     this.subscribe(this.ui);
 
     this.locked = true;

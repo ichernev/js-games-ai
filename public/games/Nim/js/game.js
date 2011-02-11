@@ -9,10 +9,6 @@
     this.board.game = this;
   };
 
-  // TODO(zori): get #stones from user
-  NS.Game.stones = 5;
-  NS.Game.players = 2;
-
   U.extend(NS.Game, JSG.GameCore.BaseGame);
   U.mix(NS.Game.prototype, {
     boardConstructor: function() { return NS.Board; },
@@ -42,17 +38,35 @@
       };
     },
 
+    initGameConf: function() {
+      this.conf = {
+        piles: U.randInt(5, 10),
+        max_pile: U.randInt(5, 12),
+        players: 2
+      };
+    },
+
     initGameState: function() {
-      this.stonesLeft = NS.Game.stones * NS.Game.stones;
+      this.stonesLeft = 0;
       this.state = [];
       var i, j;
       var row;
-      for (i = 0; i < NS.Game.stones; ++i) {
+      // Create empty state matrix.
+      for (i = 0; i < this.conf.piles; ++i) {
         row = [];
-        for (j = 0; j < NS.Game.stones; ++j) {
-          row.push(1);
+        for (j = 0; j < this.conf.max_pile; ++j) {
+          row.push(0);
         }
         this.state.push(row);
+      }
+      var pile_size, pile_off;
+      for (i = 0; i < this.conf.piles; ++i) {
+        pile_size = U.randInt(1, this.conf.max_pile + 1);
+        pile_off = U.div(this.conf.max_pile - pile_size, 2);
+        for (j = 0; j < pile_size; ++j) {
+          this.state[i][j + pile_off] = 1;
+        }
+        this.stonesLeft += pile_size;
       }
     },
     
@@ -74,7 +88,7 @@
       } else {
         // this.current_player_idx === 1
         for (i = move[1];
-             this.state[move[0]][i] === 1 && i < NS.Game.stones;
+             this.state[move[0]][i] === 1 && i < this.conf.max_pile;
              ++i) {
           this.state[move[0]][i] = 0;
           --this.stonesLeft;
@@ -86,8 +100,8 @@
       if (this.stonesLeft <= 0) {
         this.recordScore({
           type: "binary",
-          winner_idx: (this.current_player_idx + NS.Game.players - 1) %
-              NS.Game.players,
+          winner_idx: (this.current_player_idx + this.conf.players - 1) %
+              this.conf.players,
           score: 1
         });
         return true;

@@ -10,7 +10,9 @@
       cls: "game-main"
     });
     this.ev = new U.Event();
-    this.board = new (this.boardConstructor())();
+    this.initGameConf();
+    this.initGameState();
+    this.board = new (this.boardConstructor())(this);
     this.name = game_data.game_name;
 
     this.instance_id = game_data.instance_id;
@@ -42,7 +44,6 @@
       this.remote_gateway = new NS.RemoteGateway(this.players_info, this);
     }
 
-    this.initGameState();
 
     this.fillDom();
   };
@@ -205,6 +206,10 @@
     // TODO: Implement sorter functions.
     playOrderSorter: function(last_game_info) {
       throw "override";
+    },
+
+    initGameConf: function() {
+      $.log("should not be called!!");
     },
 
     initGameState: function() {
