@@ -42,6 +42,7 @@ module JsGames
     config.action_view.javascript_expansions[:src] = [
       'src/init.js',
       'src/util.js',
+      'src/rand_gen.js',
       'src/event.js',
       'src/html.js',
 

@@ -39,8 +39,9 @@
     },
 
     initGameConf: function() {
+      var rng = new U.RandGen(this.instance_id);
       this.conf = {
-        rocks: U.randInt(5, 15),
+        rocks: rng.randInt(5, 15),
         players: 2
       };
     },

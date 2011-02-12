@@ -11,7 +11,7 @@
     this.ma3x = new JSG.Widgets.Ma3x(1, this.rocks);
     this.subscribe(this.ma3x);
     this.dom = H.div(this.ma3x.dom);
-    $(this.dom).addClass(css_pref + "board");
+    $(this.dom).addClass(css_pref + "board").css("width", 30 * rocks + "px");
     // Put rocks in every cell.
     var i;
     for (i = 0; i < this.rocks; ++i) {

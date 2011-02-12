@@ -39,9 +39,10 @@
     },
 
     initGameConf: function() {
+      this.rng = new U.RandGen(this.instance_id);
       this.conf = {
-        piles: U.randInt(5, 10),
-        max_pile: U.randInt(5, 12),
+        piles: this.rng.randInt(5, 10),
+        max_pile: this.rng.randInt(5, 12),
         players: 2
       };
     },
@@ -61,7 +62,7 @@
       }
       var pile_size, pile_off;
       for (i = 0; i < this.conf.piles; ++i) {
-        pile_size = U.randInt(1, this.conf.max_pile + 1);
+        pile_size = this.rng.randInt(1, this.conf.max_pile + 1);
         pile_off = U.div(this.conf.max_pile - pile_size, 2);
         for (j = 0; j < pile_size; ++j) {
           this.state[i][j + pile_off] = 1;
