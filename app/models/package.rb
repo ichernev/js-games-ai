@@ -48,6 +48,7 @@ class Package < ActiveRecord::Base
       else
         res = game.update_attributes game_data
       end
+      # puts "RES: " + res.to_s
 
       # Create one AI for the game
       ai_res = true
@@ -60,10 +61,11 @@ class Package < ActiveRecord::Base
         ai = User.new(
           :email => (basename + '@bot.org'),
           :name => (basename + ' computer'),
-          :password => (basename + 'a long salty pass')
+          :password => (basename + 'salt')
         )
         ai.game = game
         ai_res = ai.save
+        # puts "AI RES: " + ai_res.to_s
       end
       return (res and ai_res)
     rescue
