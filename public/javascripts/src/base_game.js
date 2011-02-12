@@ -10,12 +10,12 @@
       cls: "game-main"
     });
     this.ev = new U.Event();
+    this.instance_id = game_data.instance_id;
     this.initGameConf();
     this.initGameState();
     this.board = new (this.boardConstructor())(this);
     this.name = game_data.game_name;
 
-    this.instance_id = game_data.instance_id;
     this.players_info = game_data.players;
     this.computePlayOrder(game_data);
 
